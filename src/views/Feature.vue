@@ -1,10 +1,10 @@
 
 <script setup>
-import Nav from '../components/Nav.vue'
+import MK from '../components/MakeRequest.vue'
 </script>
 
 <template>
-    <Nav/>
+    <MK/>
 
 </template>
 
