@@ -1,0 +1,43 @@
+@import './base.css';
+
+.footer {
+    background-image: url('footer_bg.jpg');
+    background-size: cover; /* covers whole viewport */
+    background-position: center center;
+    background-repeat: no-repeat;   /* prevents the img from repeating */
+    height: 250px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-content {
+    width: 80%;
+    display: flex;
+    flex-direction: column; /* stack items vertically */
+    align-items: center; /* center items */
+    gap: 10px; /* space height between items */
+}
+
+.footer-address, .footer-copyright {
+    text-align: center;
+}
+
+.footer-address {
+    margin-top: 60px; 
+}
+
+.footer-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* space width between the dots */
+}
+
+.dot {
+    width: 27px;
+    height: 27px;
+    background-color: white;
+    border-radius: 50%;
+}
