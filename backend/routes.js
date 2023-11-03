@@ -18,7 +18,7 @@ router.post("/v1/user", async(req, res) => {
 
     try{
         await newUser.save();
-    
+        
         res.status(201).json(newUser);
     }
     catch(err){
