@@ -1,1 +1,83 @@
 @import './base.css';
+
+#top-nav {
+    overflow: hidden;
+    background-color: white;
+    border-top: 15px solid #018647;
+ }
+ 
+ #top-nav a {
+    float: left;
+    align-items: center;
+    display: block;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+ }
+ 
+ #top-nav a:hover {
+    background-color: #018647;
+    color: white;
+ }
+
+ ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+ }
+ 
+ li {
+    float: left;
+ }
+
+ li a {
+    display: block;
+    padding: 10px;
+ }
+ 
+ .logsign {
+    padding: 20px;
+ }
+
+.login, .signup {
+    float: right;
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    padding: 20px 16px;
+    border-radius: .18rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    width: auto;
+    margin-left: 30px;
+ }
+ 
+ .login {
+    align-items: center;
+    background: white;
+    border: solid #018647;
+    color: #018647;
+ }
+
+ .signup {
+    align-items: center;
+    background-color: #018647;
+    color: white;
+    border: solid #018647;
+ }
+
+ .login:hover {
+    background-color: #018647;
+    color: white;
+ }
+
+ .signup:hover {
+    background-color: white;
+    color: #018647
+ }
+ 
+ #top-nav .logo {
+    float: left;
+ }
