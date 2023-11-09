@@ -5,8 +5,8 @@
                 <img src="/src/assets/images/webdock-logo-full-whitebg.png" alt="Webdock.io logo">
             </div>
             <ul class="navigation">
-             <li><a href="#Feature">Feature request</a></li>
-             <li><a href="#Roadmap">Roadmap</a></li>
+             <li><router-link :to="{ name: 'Feature' }">Feature request</router-link></li>
+             <li><router-link :to="{ name: 'Roadmap' }">Roadmap</router-link></li>
              </ul>
                 <ul class="logsign">
                     <button type="button" class="login">Login</button>
