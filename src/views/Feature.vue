@@ -27,9 +27,12 @@ export default {
     return {
       hardcodedPost: {
         title: "Feature request 1",
-        description: "Dette er en beskrivelse af min post.",
+        status: "Planned",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
         user: "John Doe",
         date: "2023-11-02",
+        commentCount:3,
+        upvoteCount:1,
       },
     };
   },
