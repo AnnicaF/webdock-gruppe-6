@@ -1,25 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const User = require("./models");
+const Request = require("./models");
 
-router.get("/v1/user", async(req, res) => {
-    const users = await User.findAll();
+router.get("/v1/request", async(req, res) => {
+    const users = await Request.findAll();
 
     res.status(200).json(users);
 });
 
-router.post("/v1/user", async(req, res) => {
-    const {name, email} = req.body;
+router.post("/v1/request", async(req, res) => {
+    const {title, bodyText} = req.body;
 
-    const newUser = User.build({
-        "name": name,
-        "email": email
+    const newRequest = Request.build({
+        "title": title,
+        "bodyText": bodyText
     });
 
     try{
-        await newUser.save();
+        await newRequest.save();
         
-        res.status(201).json(newUser);
+        res.status(201).json(newRequest);
     }
     catch(err){
         res.json(err);
@@ -27,44 +27,44 @@ router.post("/v1/user", async(req, res) => {
     
 });
 
-router.get("/v1/user/:id", async(req, res) => {
-    const user = await User.findOne({
+router.get("/v1/request/:id", async(req, res) => {
+    const request = await Request.findOne({
         where: {
             id: req.params.id
         }
     });
-    res.status(200).json(user);
+    res.status(200).json(request);
 });
 
-router.patch("/v1/user/:id", async(req, res) => {
-    const user = await User.findOne({
+router.patch("/v1/request/:id", async(req, res) => {
+    const request = await Request.findOne({
         where: {
             id: req.params.id
         }
     });
-    const {email} = req.body;
+    const {bodyText} = req.body;
 
-    await user.set({
-        email:email
+    await request.set({
+        bodyText:bodyText
     })
-    await user.save();
-    res.status(200).json(user);
+    await request.save();
+    res.status(200).json(request);
 });
 
-router.put("/v1/user/:id", async(req, res) => {
-    const user = await User.findOne({
+router.put("/v1/request/:id", async(req, res) => {
+    const request = await Request.findOne({
         where: {
             id: req.params.id
         }
     });
-    const {email,name} = req.body;
+    const {bodyText,title} = req.body;
 
-    await user.set({
-        email:email,
-        name:name
+    await request.set({
+        bodyText:bodyText,
+        title:title
     })
-    await user.save();
-    res.status(200).json(user);
+    await request.save();
+    res.status(200).json(request);
 });
 
 module.exports = router;

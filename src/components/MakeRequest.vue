@@ -7,8 +7,8 @@
 <script setup>
     function submitData(){
         let data = {
-            name: document.getElementById("input").value,
-            email: document.getElementById("input").value
+            title: document.getElementById("input").value,
+            bodyText: document.getElementById("input").value
         }; 
 
         fetch('http://localhost:3000/api/v1/user', {
