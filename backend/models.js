@@ -10,5 +10,5 @@ const Request = sequelize.define('Request', {
     }
 });
 
-module.exports = User;
+module.exports = Request;
 
