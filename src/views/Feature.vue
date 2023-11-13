@@ -1,10 +1,17 @@
 <script setup>
-import Nav from '../components/Nav.vue'
+import FilterBar from "../components/FilterBar.vue";
+import Nav from "../components/Nav.vue";
+import Post from "../components/Post.vue";
+import Footer from "../components/Footer.vue";
 </script>
 
 <template>
-    <Nav/>
-
+  <Nav />
+  <FilterBar />
+  <div>
+    <Post :post="hardcodedPost" />
+  </div>
+  <Footer />
 </template>
 
 
