@@ -1,13 +1,14 @@
+
 import { createRouter, createWebHistory } from 'vue-router'
 import Feature        from '../views/Feature.vue'
-  import Roadmap from '@/views/Roadmap.vue'
+import Roadmap from '@/views/Roadmap.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'Feature',
+      path: "/",
+      name: "Feature",
       component: Feature,
     },
     {
@@ -17,5 +18,7 @@ const router = createRouter({
     },
   ]
 })
+  ],
+});
 
-export default router
+export default router;

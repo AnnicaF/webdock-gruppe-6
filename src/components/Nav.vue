@@ -13,15 +13,12 @@
                     <button type="button" class="signup">Sign up</button>
                  </ul>
         </nav>
-
     </header>
-
 </template>
 
 <script>
-
 </script>
 
 <style>
-@import '@/assets/nav.css';
+@import "@/assets/nav.css";
 </style>
