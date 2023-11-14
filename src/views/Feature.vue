@@ -1,5 +1,6 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
+import MK from '../components/MakeRequest.vue'
 import Nav from "../components/Nav.vue";
 import Post from "../components/Post.vue";
 import Footer from "../components/Footer.vue";
@@ -11,6 +12,7 @@ import Footer from "../components/Footer.vue";
   <div>
     <Post :post="hardcodedPost" />
   </div>
+      <MK/>
   <Footer />
 </template>
 
