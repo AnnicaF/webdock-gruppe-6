@@ -24,9 +24,10 @@ axios.get('http://localhost:3000/api/v1/request')
   <Nav />
   <FilterBar />
   <div>
-    <Post v-for="request in requests" :key="request.id"
+    <Post v-for="(request, index) in requests" :key="request.id"
         :postTitle = "request.title"
-        :postDescription = "request.bodyText" />
+        :postDescription = "request.bodyText"
+        :postIndex = "index" />
   </div>
   <Footer />
 </template>

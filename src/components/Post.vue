@@ -1,5 +1,5 @@
 <template>
-  <div class="post-container">
+  <div class="post-container" :class="getIndexClass(postIndex)">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
@@ -39,6 +39,7 @@ export default {
   props: {
     postTitle: String,
     postDescription: String,
+    postIndex: Number,
   },
   methods: {
     getStatusClass(status) {
@@ -49,6 +50,11 @@ export default {
         "in progress": "in-progress-color",
       };
       return statusColorMap[status.toLowerCase()] || "default-color";
+    },
+
+    getIndexClass(index) {
+      let i = index % 2;
+      return "iswhite-"+i
     },
 
     handleUpvote() {
@@ -65,6 +71,9 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+}
+.iswhite-1 {
+  background-color: var(--white);
 }
 .post {
   max-height: 200px;
