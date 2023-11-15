@@ -5,28 +5,28 @@
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
         </button>
-        <span class="upvote-count">{{ post.upvoteCount }}</span>
+        <span class="upvote-count">0</span>
       </div>
     </div>
     <div class="post">
       <div class="post-content">
-        <h2 class="title">{{ post.title }}</h2>
+        <h2 class="title">{{ postTitle }}</h2>
         <div class="status-container">
-          <div class="status-label" :class="getStatusClass(post.status)">
-            {{ post.status }}
+          <div class="status-label">
+            Planned
           </div>
         </div>
-        <p class="description">{{ post.description }}</p>
+        <p class="description">{{ postDescription }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{ post.user }}</p>
-          <p class="small-text">{{ post.date }}</p>
+          <p class="small-text">BOB</p>
+          <p class="small-text">2023</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ post.commentCount }}</span>
+            <span class="comment-count">3</span>
           </div>
         </div>
       </div>
@@ -37,10 +37,8 @@
   <script>
 export default {
   props: {
-    post: {
-      type: Object,
-      required: true,
-    },
+    postTitle: String,
+    postDescription: String,
   },
   methods: {
     getStatusClass(status) {
