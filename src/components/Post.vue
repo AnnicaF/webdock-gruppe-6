@@ -1,32 +1,32 @@
 <template>
-  <div class="post-container" :class="getIndexClass(postIndex)">
+  <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
         </button>
-        <span class="upvote-count">0</span>
+        <span class="upvote-count">{{upvoteCount}}</span>
       </div>
     </div>
     <div class="post">
       <div class="post-content">
-        <h2 class="title">{{ postTitle }}</h2>
+        <h2 class="title">{{ title }}</h2>
         <div class="status-container">
-          <div class="status-label" :class="getStatusClass('Planned')">
-            Planned
+          <div class="status-label" :class="getStatusClass(status)">
+            {{status}}
           </div>
         </div>
-        <p class="description">{{ postDescription }}</p>
+        <p class="description">{{ description }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">BOB</p>
-          <p class="small-text">2023</p>
+          <p class="small-text">{{user}}</p>
+          <p class="small-text">{{date}}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">3</span>
+            <span class="comment-count">{{ commentCount }}</span>
           </div>
         </div>
       </div>
@@ -37,9 +37,14 @@
   <script>
 export default {
   props: {
-    postTitle: String,
-    postDescription: String,
-    postIndex: Number,
+    title: String,
+    description: String,
+    upvoteCount: Number,
+    commentCount: Number,
+    user: String,
+    status:String,
+    date: Date,
+    index: Number,
   },
   methods: {
     getStatusClass(status) {
