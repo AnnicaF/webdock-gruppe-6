@@ -18,6 +18,9 @@ import Footer from "../components/Footer.vue";
 
 <script>
 export default {
+  components: {
+    Post,
+  },
   data() {
     return {
       hardcodedPost: {
