@@ -1,0 +1,48 @@
+@import "./base.css";
+
+.footer {
+  background-image: url("footer_bg.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 250px;
+  color: white;
+  display: flex;
+  margin-top: auto;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-address,
+.footer-copyright {
+  text-align: center;
+}
+
+.footer-address {
+  margin-top: 60px;
+}
+
+.footer-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.dot {
+  width: 27px;
+  height: 27px;
+  background-color: white;
+  border-radius: 50%;
+}

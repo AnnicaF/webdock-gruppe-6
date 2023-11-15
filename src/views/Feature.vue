@@ -1,5 +1,5 @@
-
 <script setup>
+import FilterBar from "../components/FilterBar.vue";
 import MK from '../components/MakeRequest.vue'
 import Nav from "../components/Nav.vue";
 import Post from "../components/Post.vue";
