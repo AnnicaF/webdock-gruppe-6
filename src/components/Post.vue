@@ -12,7 +12,7 @@
       <div class="post-content">
         <h2 class="title">{{ postTitle }}</h2>
         <div class="status-container">
-          <div class="status-label">
+          <div class="status-label" :class="getStatusClass('Planned')">
             Planned
           </div>
         </div>
