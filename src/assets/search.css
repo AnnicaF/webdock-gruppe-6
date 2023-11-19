@@ -1,0 +1,38 @@
+@import "./base.css";
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 1.2em;
+  border-radius: 25px; /* Makes the input rounded */
+  border: 2px solid #007bff;
+  outline: none;
+  transition: box-shadow 0.3s;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px; /* Adjust as necessary */
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px; /* Adjust as necessary */
+  width: 20px; /* Adjust as necessary */
+}
+
+.search-input {
+  padding-left: 40px; /* Adjust the padding to make room for the icon */
+  /* ... Other styles remain the same */
+}

@@ -1,15 +1,13 @@
-
 <script setup>
-import Nav from '../components/Nav.vue'
-import Footer from '../components/Footer.vue'
+import Nav from "../components/Nav.vue";
+import Footer from "../components/Footer.vue";
+import Search from "../components/Search.vue";
 </script>
 
 <template>
-    <Nav/>
-    <Footer/>
+  <Nav />
+  <Search />
+  <Footer />
 </template>
 
-<script>
-
-
-</script>
+<script></script>
