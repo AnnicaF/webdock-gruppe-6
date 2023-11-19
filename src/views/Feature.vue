@@ -3,27 +3,27 @@ import FilterBar from "../components/FilterBar.vue";
 import MK from "../components/MakeRequest.vue";
 import Nav from "../components/Nav.vue";
 import FeaturePost from "../components/FeaturePost.vue";
-import Footer from "../components/Footer.vue";
 </script>
 
 <template>
   <Nav />
   <FilterBar />
-  <div>
-    <FeaturePost :post="hardcodedPost" />
+  <div class="box">
+    <button @click="navigateToDetail">
+      <FeaturePost :post="hardcodedPost" />
+    </button>
   </div>
-  <Footer />
 </template>
-
 
 <script>
 export default {
   components: {
-    Post,
+    FeaturePost,
   },
   data() {
     return {
       hardcodedPost: {
+        id: 1,
         title: "Feature request 1",
         status: "Planned",
         description:
@@ -35,5 +35,29 @@ export default {
       },
     };
   },
+  methods: {
+    navigateToDetail() {
+      this.$router.push({
+        name: "featurePostDetail",
+        params: { id: this.hardcodedPost.id },
+      });
+    },
+  },
 };
 </script>
+
+
+<style scoped>
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+}
+</style>

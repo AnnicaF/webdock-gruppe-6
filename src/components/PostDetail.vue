@@ -11,11 +11,6 @@
     <div class="post">
       <div class="post-content">
         <h2 class="title">{{ post.title }}</h2>
-        <div class="status-container">
-          <div class="status-label" :class="getStatusClass(post.status)">
-            {{ post.status }}
-          </div>
-        </div>
         <p class="description">{{ post.description }}</p>
         <hr />
         <div class="user_date_box">
@@ -33,8 +28,8 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
   props: {
     post: {
@@ -43,28 +38,17 @@ export default {
     },
   },
   methods: {
-    getStatusClass(status) {
-      const statusColorMap = {
-        planned: "planned-color",
-        "under review": "under-review-color",
-        completed: "completed-color",
-        "in progress": "in-progress-color",
-      };
-      return statusColorMap[status.toLowerCase()] || "default-color";
-    },
-
-    handleUpvote() {
-      this.post.upvoteCount += 1;
+    upvotePost() {
+      console.log("Upvoting post:", this.post.id);
     },
   },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .post-container {
   display: flex;
   justify-content: center;
-  background-color: var(--grey-mid);
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -91,6 +75,7 @@ hr {
   margin-bottom: 15px;
   width: 170px;
   border: 1px solid var(--green-primary);
+  margin-left: 0;
 }
 
 .user_date_box {
