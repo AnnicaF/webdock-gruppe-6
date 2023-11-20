@@ -47,7 +47,7 @@ export default {
     index: Number,
   },
   methods: {
-    getStatusClass(status) {
+    getStatusClass(status) { /* status functionen fungere ikke, skal fixes */
       const statusColorMap = {
         planned: "planned-color",
         "under review": "under-review-color",
@@ -128,7 +128,7 @@ hr {
 }
 
 .default-color {
-  background: #ffa500;
+  background: #ffa500; 
 }
 .comment_icon {
   color: grey;
