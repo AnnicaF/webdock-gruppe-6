@@ -9,9 +9,9 @@
       </div>
       <ul class="navigation">
         <li>
-          <router-link :to="{ name: '' }">Feature request</router-link>
+          <router-link :to="{ name: 'Feature' }">Feature request</router-link>
         </li>
-        <li><router-link :to="{ name: '' }">Roadmap</router-link></li>
+        <li><router-link :to="{ name: 'RoadMap' }">Roadmap</router-link></li>
       </ul>
       <ul class="logsign">
         <button type="button" class="login">Login</button>
@@ -21,8 +21,7 @@
   </header>
 </template>
 
-<script>
-</script>
+<script></script>
 
 <style>
 @import "@/assets/nav.css";
