@@ -1,5 +1,4 @@
 <script setup>
-import Search from "../components/Search.vue";
 import FilterBar from "../components/FilterBar.vue";
 import MK from "../components/MakeRequest.vue";
 import Nav from "../components/Nav.vue";
@@ -9,7 +8,7 @@ import Footer from "../components/Footer.vue";
 
 <template>
   <Nav />
-  <Search />
+  <!--  <Search />  searchbar fjernet & flyttet til nav.vue -->
 
   <FilterBar />
   <div>
@@ -20,9 +19,6 @@ import Footer from "../components/Footer.vue";
 
 <script>
 export default {
-  components: {
-    Post,
-  },
   data() {
     return {
       hardcodedPost: {

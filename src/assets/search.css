@@ -6,11 +6,11 @@
 }
 
 .search-input {
-  width: 100%;
-  padding: 15px 20px;
+  width: 200%;
+  padding: 16px 16px;
   font-size: 1.2em;
   border-radius: 25px; /* Makes the input rounded */
-  border: 2px solid #007bff;
+  border: 2px solid #018647;
   outline: none;
   transition: box-shadow 0.3s;
 }
@@ -25,14 +25,13 @@
 
 .search-icon {
   position: absolute;
-  left: 10px; /* Adjust as necessary */
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  height: 20px; /* Adjust as necessary */
-  width: 20px; /* Adjust as necessary */
+  height: 20px;
+  width: 20px;
 }
 
 .search-input {
   padding-left: 40px; /* Adjust the padding to make room for the icon */
-  /* ... Other styles remain the same */
 }
