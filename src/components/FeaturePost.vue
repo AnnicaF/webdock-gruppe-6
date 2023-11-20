@@ -77,6 +77,10 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
+
+.post{
+  width: 100%;
+}
 .iswhite-1 {
   background-color: var(--white);
 }
@@ -95,6 +99,7 @@ hr {
   margin-bottom: 15px;
   width: 170px;
   border: 1px solid var(--green-primary);
+  margin-left: 0px;
 }
 
 .user_date_box {
@@ -123,7 +128,7 @@ hr {
 }
 
 .default-color {
-  background: #000000;
+  background: #ffa500;
 }
 .comment_icon {
   color: grey;
