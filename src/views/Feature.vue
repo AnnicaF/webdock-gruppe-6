@@ -15,11 +15,10 @@ import Footer from "../components/Footer.vue";
   <Footer />
 </template>
 
-
 <script>
 export default {
   components: {
-    Post,
+    FeaturePost,
   },
   data() {
     return {
