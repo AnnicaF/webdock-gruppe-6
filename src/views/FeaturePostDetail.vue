@@ -1,4 +1,5 @@
-<template>
+<template></template>
+<!--<template>
   <div>
     <PostDetail :post="selectedPost" />
     <CommentSection
@@ -75,3 +76,4 @@ export default {
 };
 </script>
 
+-->
