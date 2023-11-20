@@ -4,8 +4,8 @@
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
+          <span class="upvote-count">{{upvoteCount}}</span>
         </button>
-        <span class="upvote-count">{{upvoteCount}}</span>
       </div>
     </div>
     <div class="post">
