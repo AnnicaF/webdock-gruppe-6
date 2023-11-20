@@ -15,15 +15,11 @@
                 <div v-for="(post, index) in posts" :key="index">
                   <div class="postContainer">
                     <div class="upvoteContainer">
-                      <p class="upvoteCount">{{ post.upvoteCount }}</p>
-                      <button
-                        @click="upvote(post)"
-                        class="upvote-button"
-                      ></button>
-                      <font-awesome-icon
-                        class="fa-lg"
-                        icon="fa-solid fa-caret-up"
-                      />
+                      
+                      <button @click="upvote(post)" class="upvote-button">
+                        <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
+                        <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                      </button>  
                     </div>
                     <h3>{{ post.title }}</h3>
                   </div>
@@ -46,15 +42,10 @@
                 <div v-for="(post, index) in posts" :key="index">
                   <div class="postContainer">
                     <div class="upvoteContainer">
-                      <p class="upvoteCount">{{ post.upvoteCount }}</p>
-                      <button
-                        @click="upvote(post)"
-                        class="upvote-button"
-                      ></button>
-                      <font-awesome-icon
-                        class="fa-lg"
-                        icon="fa-solid fa-caret-up"
-                      />
+                      <button @click="upvote(post)" class="upvote-button">
+                        <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
+                        <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                      </button>
                     </div>
                     <h3>{{ post.title }}</h3>
                   </div>
@@ -77,15 +68,10 @@
                 <div v-for="(post, index) in posts" :key="index">
                   <div class="postContainer">
                     <div class="upvoteContainer">
-                      <p class="upvoteCount">{{ post.upvoteCount }}</p>
-                      <button
-                        @click="upvote(post)"
-                        class="upvote-button"
-                      ></button>
-                      <font-awesome-icon
-                        class="fa-lg"
-                        icon="fa-solid fa-caret-up"
-                      />
+                      <button @click="upvote(post)" class="upvote-button">
+                        <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
+                        <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                      </button>
                     </div>
                     <h3>{{ post.title }}</h3>
                   </div>
