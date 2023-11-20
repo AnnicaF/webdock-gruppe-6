@@ -121,8 +121,9 @@ export default {
 }
 
 .columnContainer {
-  flex: 1;
-  margin: 10px;
+  flex: 2;
+  margin: 5px;
+  align-items: center;
 }
 
 .roadmapSpacer {
@@ -132,9 +133,10 @@ export default {
 .roadmapContainer {
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1lfr);
   grid-auto-rows: auto;
-  padding: 10px;
+  grid-gap: 10px;
+  padding: 5px;
   justify-content: center;
   align-content: center;
 }
@@ -142,9 +144,9 @@ export default {
 .roadmapColumn {
   border: 1px solid gray;
   border-radius: 10px;
+  width: 100%;
 }
 .scrollContainer {
-  width: 100%;
   overflow-y: auto;
   height: 500px;
 }
