@@ -23,6 +23,10 @@ axios
 <template>
   <Nav />
   <FilterBar />
+  <div class="box">
+    <button @click="navigateToDetail">
+      <FeaturePost :post="hardcodedPost" />
+    </button>
   <div>
     <FeaturePost
       v-for="(request, index) in requests"
@@ -47,7 +51,8 @@ export default {
   data() {
     return {
       hardcodedPost: {
-        title: "Feature Request 1",
+        id: 1,
+        title: "Feature request 1",
         status: "Planned",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
@@ -58,5 +63,29 @@ export default {
       },
     };
   },
+  methods: {
+    navigateToDetail() {
+      this.$router.push({
+        name: "featurePostDetail",
+        params: { id: this.hardcodedPost.id },
+      });
+    },
+  },
 };
 </script>
+
+
+<style scoped>
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+}
+</style>
