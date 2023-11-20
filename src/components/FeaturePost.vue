@@ -4,6 +4,7 @@
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
+          <span class="upvote-count">{{upvoteCount}}</span>
         </button>
         <span class="upvote-count">{{ upvoteCount }}</span>
       </div>
@@ -54,7 +55,7 @@ export default {
         completed: "completed-color",
         "in progress": "in-progress-color",
       };
-      return statusColorMap[status.toLowerCase()] || "default-color";
+      return statusColorMap[status] || "default-color";
     },
 
     getIndexClass(index) {
@@ -72,7 +73,6 @@ export default {
   <style scoped>
 .post-container {
   display: flex;
-  justify-content: center;
   background-color: var(--grey-mid);
   max-width: 600px;
   margin: 0 auto;
@@ -80,13 +80,6 @@ export default {
 }
 .iswhite-1 {
   background-color: var(--white);
-}
-.post {
-  max-height: 200px;
-}
-
-.post-content {
-  padding: 20px;
 }
 
 .title {
