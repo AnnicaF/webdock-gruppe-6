@@ -54,7 +54,7 @@ export default {
         completed: "completed-color",
         "in progress": "in-progress-color",
       };
-      return statusColorMap[status.toLowerCase()] || "default-color";
+      return statusColorMap[status] || "default-color";
     },
 
     getIndexClass(index) {
@@ -72,7 +72,6 @@ export default {
   <style scoped>
 .post-container {
   display: flex;
-  justify-content: center;
   background-color: var(--grey-mid);
   max-width: 600px;
   margin: 0 auto;
@@ -80,13 +79,6 @@ export default {
 }
 .iswhite-1 {
   background-color: var(--white);
-}
-.post {
-  max-height: 200px;
-}
-
-.post-content {
-  padding: 20px;
 }
 
 .title {
