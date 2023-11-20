@@ -40,18 +40,7 @@ axios
       <FeaturePost :post="hardcodedPost" />
     </button>
   <div> -->
-  <FeaturePost
-    v-for="(request, index) in requests"
-    :key="request.id"
-    :title="request.title"
-    :description="request.bodyText"
-    :status="hardcodedPost.status"
-    :user="hardcodedPost.user"
-    :date="hardcodedPost.date"
-    :upvoteCount="hardcodedPost.upvoteCount"
-    :commentCount="hardcodedPost.commentCount"
-    :index="index"
-  />
+  
 </template>
 
 <script>
