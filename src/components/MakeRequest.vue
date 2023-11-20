@@ -46,6 +46,7 @@
     axios.get('http://localhost:3000/api/v1/request')
         
         .then(response => requests.value = response.data)
+        .then(console.log(requests))
 
         .catch(err => {
             console.log("error: " + err);

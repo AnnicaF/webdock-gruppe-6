@@ -1,32 +1,32 @@
 <template>
-  <div class="post-container">
+  <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
         </button>
-        <span class="upvote-count">{{ post.upvoteCount }}</span>
+        <span class="upvote-count">{{upvoteCount}}</span>
       </div>
     </div>
     <div class="post">
       <div class="post-content">
-        <h2 class="title">{{ post.title }}</h2>
+        <h2 class="title">{{ title }}</h2>
         <div class="status-container">
-          <div class="status-label" :class="getStatusClass(post.status)">
-            {{ post.status }}
+          <div class="status-label" :class="getStatusClass(status)">
+            {{status}}
           </div>
         </div>
-        <p class="description">{{ post.description }}</p>
+        <p class="description">{{ description }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{ post.user }}</p>
-          <p class="small-text">{{ post.date }}</p>
+          <p class="small-text">{{user}}</p>
+          <p class="small-text">{{date}}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ post.commentCount }}</span>
+            <span class="comment-count">{{ commentCount }}</span>
           </div>
         </div>
       </div>
@@ -37,10 +37,14 @@
   <script>
 export default {
   props: {
-    post: {
-      type: Object,
-      required: true,
-    },
+    title: String,
+    description: String,
+    upvoteCount: Number,
+    commentCount: Number,
+    user: String,
+    status:String,
+    date: Date,
+    index: Number,
   },
   methods: {
     getStatusClass(status) {
@@ -53,8 +57,13 @@ export default {
       return statusColorMap[status.toLowerCase()] || "default-color";
     },
 
+    getIndexClass(index) {
+      let i = index % 2;
+      return "iswhite-"+i
+    },
+
     handleUpvote() {
-      this.post.upvoteCount += 1;
+      this.upvoteCount += 1;
     },
   },
 };
@@ -67,6 +76,9 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+}
+.iswhite-1 {
+  background-color: var(--white);
 }
 .post {
   max-height: 200px;
