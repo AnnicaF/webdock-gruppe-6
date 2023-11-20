@@ -6,6 +6,7 @@
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
           <span class="upvote-count">{{upvoteCount}}</span>
         </button>
+        <span class="upvote-count">{{ upvoteCount }}</span>
       </div>
     </div>
     <div class="post">
@@ -13,14 +14,14 @@
         <h2 class="title">{{ title }}</h2>
         <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
-            {{status}}
+            {{ status }}
           </div>
         </div>
         <p class="description">{{ description }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{user}}</p>
-          <p class="small-text">{{date}}</p>
+          <p class="small-text">{{ user }}</p>
+          <p class="small-text">{{ date }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
@@ -42,7 +43,7 @@ export default {
     upvoteCount: Number,
     commentCount: Number,
     user: String,
-    status:String,
+    status: String,
     date: Date,
     index: Number,
   },
@@ -59,7 +60,7 @@ export default {
 
     getIndexClass(index) {
       let i = index % 2;
-      return "iswhite-"+i
+      return "iswhite-" + i;
     },
 
     handleUpvote() {
