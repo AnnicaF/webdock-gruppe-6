@@ -18,7 +18,7 @@
                       
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
-                        <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                        {{ post.upvoteCount }}
                       </button>  
                     </div>
                     <h3>{{ post.title }}</h3>
@@ -44,7 +44,7 @@
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
-                        <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                        {{ post.upvoteCount }}
                       </button>
                     </div>
                     <h3>{{ post.title }}</h3>
@@ -70,7 +70,7 @@
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
-                        <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                        {{ post.upvoteCount }}
                       </button>
                     </div>
                     <h3>{{ post.title }}</h3>
@@ -116,10 +116,7 @@ export default {
 }
 
 .roadmapContainer {
-  display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: auto;
   padding: 10px;
   justify-content: center;
   align-content: center;
