@@ -187,4 +187,8 @@ export default {
 .fa-lg {
   color: grey;
 }
+
+h3{
+  margin-left: 10px;
+}
 </style>
