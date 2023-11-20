@@ -1,9 +1,9 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import MK from '../components/MakeRequest.vue'
+import MK from '../components/MakeRequest.vue';
 import Nav from "../components/Nav.vue";
 import Post from "../components/Post.vue";
-import Footer from "../components/Footer.vue";
+//import Footer from "../components/Footer.vue";
 
 import axios from "axios";
 import {ref} from "vue";
@@ -21,7 +21,7 @@ axios.get('http://localhost:3000/api/v1/request')
 </script>
 
 <template>
-  <Nav />
+  <Nav/>
   <FilterBar />
   <div>
     <Post v-for="(request, index) in requests" :key="request.id"
@@ -34,11 +34,8 @@ axios.get('http://localhost:3000/api/v1/request')
         :commentCount = hardcodedPost.commentCount
         :index = "index"/>
   </div>
-  <Footer />
+ 
 </template>
-
-
-
 
 <script>
 export default {

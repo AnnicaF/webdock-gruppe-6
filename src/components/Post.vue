@@ -63,7 +63,7 @@ export default {
     },
 
     handleUpvote() {
-      this.post.upvoteCount += 1;
+      this.upvoteCount += 1;
     },
   },
 };
