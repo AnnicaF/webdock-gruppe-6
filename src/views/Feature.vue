@@ -1,46 +1,48 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import MK from '../components/MakeRequest.vue';
+import MK from "../components/MakeRequest.vue";
 import Nav from "../components/Nav.vue";
-import Post from "../components/Post.vue";
+import FeaturePost from "../components/FeaturePost.vue";
 //import Footer from "../components/Footer.vue";
 
 import axios from "axios";
-import {ref} from "vue";
+import { ref } from "vue";
 
 const requests = ref(null);
 
-axios.get('http://localhost:3000/api/v1/request')
-    .then(response => requests.value = response.data)
-    .then(console.log(requests))
+axios
+  .get("http://localhost:3000/api/v1/request")
+  .then((response) => (requests.value = response.data))
+  .then(console.log(requests))
 
-    .catch(err => {
-        console.log("error: " + err);
-    });
-
+  .catch((err) => {
+    console.log("error: " + err);
+  });
 </script>
 
 <template>
-  <Nav/>
+  <Nav />
   <FilterBar />
   <div>
-    <Post v-for="(request, index) in requests" :key="request.id"
-        :title = "request.title"
-        :description = "request.bodyText"
-        :status = hardcodedPost.status
-        :user = hardcodedPost.user
-        :date = hardcodedPost.date
-        :upvoteCount = hardcodedPost.upvoteCount
-        :commentCount = hardcodedPost.commentCount
-        :index = "index"/>
+    <FeaturePost
+      v-for="(request, index) in requests"
+      :key="request.id"
+      :title="request.title"
+      :description="request.bodyText"
+      :status="hardcodedPost.status"
+      :user="hardcodedPost.user"
+      :date="hardcodedPost.date"
+      :upvoteCount="hardcodedPost.upvoteCount"
+      :commentCount="hardcodedPost.commentCount"
+      :index="index"
+    />
   </div>
- 
 </template>
 
 <script>
 export default {
   components: {
-    Post,
+    FeaturePost,
   },
   data() {
     return {
