@@ -1,97 +1,50 @@
-
 <script setup>
-import Nav from '../components/Nav.vue'
+import Nav from "../components/Nav.vue";
+import RoadMapPost from "../components/RoadmapPost.vue";
 </script>
 
 <template>
-    <Nav/>
-    <div class="roadmapSpacer">
-    </div>
-    <div class="contentContainer">
-        <div class="contentInnerContainer">
-            <div class="roadmapContainer">
-        <div class="roadmapColumn">
-            <div class="roadmapHeader">
-            <h3>Planned</h3>
-        </div>
-            <div class="scrollContainer">
-                <div class="postList">
-                <p>link to post will appear here</p>
-                </div>
-            </div>
-        </div>
-            </div>
-        </div>
-    </div>
-    
+  <Nav />
+  <div>
+    <RoadMapPost :posts="hardcodedPosts" />
+  </div>
+  <Footer />
 </template>
 
-<style>
-
-.contentContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.contentInnerContainer {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-}
-
-.roadmapSpacer {
-    padding: 50px;
-}
-
-.roadmapContainer {
-    display: grid;
-    justify-items: start;
-    align-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
-    grid-auto-rows: auto;
-    padding: 10px;
-    justify-content: center;
-    align-content: center;
-}
-
-.postList {
-    padding: 20px;
-}
-
-.roadmapColumn {
-    border: 1px solid gray;
-    background-color: E5E5E5;
-    border-radius: 10px;
-}
-.scrollContainer {
-    width: 100%;
-    overflow-y: auto;
-}
-
-.postList {
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
-}
-
-.roadmapHeader {
-    padding: 20px;
-    font-weight: bold;
-    background-color: rgb(89, 134, 198);
-    color: white;
-    text-align: left;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border: 1px solid rgb(89, 134, 198);
-}
-
-
-</style>
-
 <script>
-
-
+export default {
+  components: {
+    RoadMapPost,
+  },
+  data() {
+    return {
+      hardcodedPosts: [
+        { title: "White label panel", upvoteCount: 1 },
+        { title: "Bandwidth usage", upvoteCount: 1 },
+        { title: "Support for OpenLiteSpeed in stacks", upvoteCount: 1 },
+        { title: "Bitcoin/Monero Payments", upvoteCount: 1 },
+        { title: "Support for security keys", upvoteCount: 1 },
+        { title: "Pull requests for documentation", upvoteCount: 1 },
+        { title: "Object Storage", upvoteCount: 1 },
+        { title: "Reset password function for Shell Users", upvoteCount: 1 },
+        {
+          title: "Ability to remove the default webdock.cloud URL/Alias",
+          upvoteCount: 1,
+        },
+        {
+          title: "Purchase Domains at Webdock and easy DNS management",
+          upvoteCount: 1,
+        },
+        {
+          title: "Basic Authentication Management to password protect URL's",
+          upvoteCount: 1,
+        },
+        {
+          title: "1-click installation of Docker Applications",
+          upvoteCount: 1,
+        },
+      ],
+    };
+  },
+};
 </script>

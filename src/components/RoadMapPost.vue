@@ -1,28 +1,94 @@
 <template>
   <div>
     <div class="roadmapSpacer"></div>
+
+    <!-- Planned section -->
     <div class="contentContainer">
-      <div class="contentInnerContainer">
-        <div class="roadmapContainer">
-          <div class="roadmapColumn">
-            <div class="roadmapHeader">
-              <h3 class="roadmapTitle">Planned</h3>
-            </div>
-            <div class="scrollContainer">
-              <div v-for="(post, index) in posts" :key="index">
-                <div class="postContainer">
-                  <div class="upvoteContainer">
-                    <p class="upvoteCount">{{ post.upvoteCount }}</p>
-                    <button
-                      @click="upvote(post)"
-                      class="upvote-button"
-                    ></button>
-                    <font-awesome-icon
-                      class="fa-lg"
-                      icon="fa-solid fa-caret-up"
-                    />
+      <div class="columnContainer">
+        <div class="contentInnerContainer">
+          <div class="roadmapContainer">
+            <div class="roadmapColumn">
+              <div class="roadmapHeader">
+                <h3 class="roadmapTitle">Planned</h3>
+              </div>
+              <div class="scrollContainer">
+                <div v-for="(post, index) in posts" :key="index">
+                  <div class="postContainer">
+                    <div class="upvoteContainer">
+                      <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                      <button
+                        @click="upvote(post)"
+                        class="upvote-button"
+                      ></button>
+                      <font-awesome-icon
+                        class="fa-lg"
+                        icon="fa-solid fa-caret-up"
+                      />
+                    </div>
+                    <h3>{{ post.title }}</h3>
                   </div>
-                  <h3>{{ post.title }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In progress section -->
+      <div class="columnContainer">
+        <div class="contentInnerContainer">
+          <div class="roadmapContainer">
+            <div class="roadmapColumn">
+              <div class="roadmapHeader">
+                <h3 class="roadmapTitle">In progress</h3>
+              </div>
+              <div class="scrollContainer">
+                <div v-for="(post, index) in posts" :key="index">
+                  <div class="postContainer">
+                    <div class="upvoteContainer">
+                      <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                      <button
+                        @click="upvote(post)"
+                        class="upvote-button"
+                      ></button>
+                      <font-awesome-icon
+                        class="fa-lg"
+                        icon="fa-solid fa-caret-up"
+                      />
+                    </div>
+                    <h3>{{ post.title }}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete section-->
+      <div class="columnContainer">
+        <div class="contentInnerContainer">
+          <div class="roadmapContainer">
+            <div class="roadmapColumn">
+              <div class="roadmapHeader">
+                <h3 class="roadmapTitle">Complete</h3>
+              </div>
+              <div class="scrollContainer">
+                <div v-for="(post, index) in posts" :key="index">
+                  <div class="postContainer">
+                    <div class="upvoteContainer">
+                      <p class="upvoteCount">{{ post.upvoteCount }}</p>
+                      <button
+                        @click="upvote(post)"
+                        class="upvote-button"
+                      ></button>
+                      <font-awesome-icon
+                        class="fa-lg"
+                        icon="fa-solid fa-caret-up"
+                      />
+                    </div>
+                    <h3>{{ post.title }}</h3>
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,15 +115,14 @@ export default {
 <style scoped>
 .contentContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   width: 100%;
 }
 
-.contentInnerContainer {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
+.columnContainer {
+  flex: 1;
+  margin: 10px;
 }
 
 .roadmapSpacer {
@@ -66,10 +131,8 @@ export default {
 
 .roadmapContainer {
   display: grid;
-  justify-items: start;
   align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
   grid-auto-rows: auto;
   padding: 10px;
   justify-content: center;
