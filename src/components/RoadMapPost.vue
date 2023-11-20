@@ -8,7 +8,7 @@
         <div class="contentInnerContainer">
           <div class="roadmapContainer">
             <div class="roadmapColumn">
-              <div class="roadmapHeader">
+              <div class="roadmapHeader planned">
                 <h3 class="roadmapTitle">Planned</h3>
               </div>
               <div class="scrollContainer">
@@ -35,7 +35,7 @@
         <div class="contentInnerContainer">
           <div class="roadmapContainer">
             <div class="roadmapColumn">
-              <div class="roadmapHeader">
+              <div class="roadmapHeader progress">
                 <h3 class="roadmapTitle">In progress</h3>
               </div>
               <div class="scrollContainer">
@@ -61,7 +61,7 @@
         <div class="contentInnerContainer">
           <div class="roadmapContainer">
             <div class="roadmapColumn">
-              <div class="roadmapHeader">
+              <div class="roadmapHeader complete">
                 <h3 class="roadmapTitle">Complete</h3>
               </div>
               <div class="scrollContainer">
@@ -138,6 +138,16 @@ export default {
   text-align: left;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.planned{
+  background-color: #0076C5;
+}
+.progress{
+  background-color: #A259FF;
+}
+.complete{
+  background-color: var(--green-primary);
 }
 
 .roadmapTitle {
