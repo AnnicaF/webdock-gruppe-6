@@ -44,7 +44,7 @@ export default {
     commentCount: Number,
     user: String,
     status: String,
-    date: Date,
+    date: String,
     index: Number,
   },
   methods: {
