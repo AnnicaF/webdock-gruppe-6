@@ -42,7 +42,6 @@ get();
       <FeaturePost :post="hardcodedPost" />
     </button>
   <div> -->
-  <button @click="get">get</button>
 
 </template>
 
