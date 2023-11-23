@@ -13,6 +13,9 @@
         </li>
         <li><router-link :to="{ name: '' }">Roadmap</router-link></li>
       </ul>
+
+      <Search />
+
       <ul class="logsign">
         <button type="button" class="login">Login</button>
         <button type="button" class="signup">Sign up</button>
@@ -22,6 +25,13 @@
 </template>
 
 <script>
+import Search from "./Search.vue";
+
+export default {
+  components: {
+    Search, //  registers the Search component for use in this template
+  },
+};
 </script>
 
 <style>
