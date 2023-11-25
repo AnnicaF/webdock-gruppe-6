@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -61,6 +63,23 @@ export default {
     hide() {
       const modal = document.getElementById("modal");
       modal.classList.remove("show");
+    },
+
+    createPost() {
+      let data = {
+        title: document.getElementById("title"),
+        bodyText: document.getElementById("description")
+      };
+
+      axios.post('http://localhost:3000/api/v1/request', data)
+        .then(response => {
+          // Handle the success response
+          console.log('Response:', response.data);
+        })
+        .catch(error => {
+          // Handle the error
+          console.error('Error:', error);
+        });
     },
   },
 };
@@ -94,8 +113,11 @@ export default {
 }
 
 .modal_content {
-  min-width: 370px;
-  width: 400px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 66%;
+  height: auto;
   background: white;
   margin: auto;
   visibility: hidden;
@@ -146,7 +168,23 @@ textarea {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  resize: none;
 }
+
+textarea{
+  height: 100px;
+}
+
+button {
+  background-color: var(--green-primary);
+  color: var(--white);
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 8px 18px;
+  border: none;
+  cursor: pointer;
+}
+
 select {
   width: 100%;
   padding: 8px;

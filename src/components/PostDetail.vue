@@ -1,88 +1,65 @@
-<template>
-  <div class="post-container" :class="getIndexClass(index)">
+<template></template>
+<!--<template>
+  <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-          <span class="upvote-count">{{upvoteCount}}</span>
         </button>
+        <span class="upvote-count">{{ post.upvoteCount }}</span>
       </div>
     </div>
     <div class="post">
       <div class="post-content">
-        <h2 class="title">{{ title }}</h2>
-        <div class="status-container">
-          <div class="status-label" :class="getStatusClass(status)">
-            {{ status }}
-          </div>
-        </div>
-        <p class="description">{{ description }}</p>
+        <h2 class="title">{{ post.title }}</h2>
+        <p class="description">{{ post.description }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{ user }}</p>
-          <p class="small-text">{{ date }}</p>
+          <p class="small-text">{{ post.user }}</p>
+          <p class="small-text">{{ post.date }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ commentCount }}</span>
+            <span class="comment-count">{{ post.commentCount }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
   props: {
-    title: String,
-    description: String,
-    upvoteCount: Number,
-    commentCount: Number,
-    user: String,
-    status: String,
-    date: Date,
-    index: Number,
+    post: {
+      type: Object,
+      required: true,
+    },
   },
   methods: {
-    getStatusClass(status) { /* status functionen fungere ikke, skal fixes */
-      const statusColorMap = {
-        planned: "planned-color",
-        "under review": "under-review-color",
-        completed: "completed-color",
-        "in progress": "in-progress-color",
-      };
-      return statusColorMap[status] || "default-color";
-    },
-
-    getIndexClass(index) {
-      let i = index % 2;
-      return "iswhite-" + i;
-    },
-
-    handleUpvote() {
-      this.upvoteCount += 1;
+    upvotePost() {
+      console.log("Upvoting post:", this.post.id);
     },
   },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .post-container {
   display: flex;
-  background-color: var(--grey-mid);
+  justify-content: center;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
-
-.post{
-  width: 100%;
+.post {
+  max-height: 200px;
 }
-.iswhite-1 {
-  background-color: var(--white);
+
+.post-content {
+  padding: 20px;
 }
 
 .title {
@@ -99,7 +76,7 @@ hr {
   margin-bottom: 15px;
   width: 170px;
   border: 1px solid var(--green-primary);
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 .user_date_box {
@@ -128,7 +105,7 @@ hr {
 }
 
 .default-color {
-  background: #ffa500; 
+  background: #000000;
 }
 .comment_icon {
   color: grey;
@@ -190,3 +167,4 @@ hr {
   color: grey;
 }
 </style>
+-->
