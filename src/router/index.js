@@ -12,9 +12,12 @@ const router = createRouter({
       component: Feature,
     },
     {
-      path: "/featurePostDetail/:id",
+      path: "/featurePostDetail/:requestId",
       name: "featurePostDetail",
       component: FeaturePostDetail,
+      props: true,
+    },
+    {
       path: "/roadmap",
       name: "RoadMap",
       component: RoadMap,

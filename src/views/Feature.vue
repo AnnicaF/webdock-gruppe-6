@@ -24,22 +24,17 @@ axios
   <Nav />
   <FilterBar />
   <div class="box">
-    <button @click="navigateToDetail">
-      <FeaturePost :post="hardcodedPost" />
-    </button>
-  <div>
-    <FeaturePost
+    <button
       v-for="(request, index) in requests"
-      :key="request.id"
-      :title="request.title"
-      :description="request.bodyText"
-      :status="hardcodedPost.status"
-      :user="hardcodedPost.user"
-      :date="hardcodedPost.date"
-      :upvoteCount="hardcodedPost.upvoteCount"
-      :commentCount="hardcodedPost.commentCount"
-      :index="index"
-    />
+      :key="index"
+      @click="navigateToDetail(request)"
+    >
+      <FeaturePost
+        :title="request.title"
+        :bodyText="request.bodyText"
+        :index="index"
+      />
+    </button>
   </div>
 </template>
 
@@ -48,26 +43,11 @@ export default {
   components: {
     FeaturePost,
   },
-  data() {
-    return {
-      hardcodedPost: {
-        id: 1,
-        title: "Feature request 1",
-        status: "Planned",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-        user: "John Doe",
-        date: "2023-11-02",
-        commentCount: 3,
-        upvoteCount: 1,
-      },
-    };
-  },
   methods: {
-    navigateToDetail() {
+    navigateToDetail(request) {
       this.$router.push({
         name: "featurePostDetail",
-        params: { id: this.hardcodedPost.id },
+        params: { requestId: request.id },
       });
     },
   },

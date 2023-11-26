@@ -11,7 +11,7 @@
     <div class="post">
       <div class="post-content">
         <h2 class="title">{{ post.title }}</h2>
-        <p class="description">{{ post.description }}</p>
+        <p class="description">{{ post.bodyText }}</p>
         <hr />
         <div class="user_date_box">
           <p class="small-text">{{ post.user }}</p>

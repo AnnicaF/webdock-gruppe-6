@@ -1,26 +1,26 @@
 <template>
-  <div class="post-container" :class="getIndexClass(index)">
+  <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
         </button>
-        <span class="upvote-count">{{upvoteCount}}</span>
+        <span class="upvote-count">{{ upvoteCount }}</span>
       </div>
     </div>
     <div class="post">
       <div class="post-content">
         <h2 class="title">{{ title }}</h2>
-        <div class="status-container">
+        <!-- <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
-            {{status}}
+            {{ status }}
           </div>
-        </div>
-        <p class="description">{{ description }}</p>
+        </div> -->
+        <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{user}}</p>
-          <p class="small-text">{{date}}</p>
+          <p class="small-text">{{ user }}</p>
+          <p class="small-text">{{ date }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
@@ -38,30 +38,9 @@
 export default {
   props: {
     title: String,
-    description: String,
-    upvoteCount: Number,
-    commentCount: Number,
-    user: String,
-    status:String,
-    date: Date,
-    index: Number,
+    bodyText: String,
   },
   methods: {
-    getStatusClass(status) {
-      const statusColorMap = {
-        planned: "planned-color",
-        "under review": "under-review-color",
-        completed: "completed-color",
-        "in progress": "in-progress-color",
-      };
-      return statusColorMap[status.toLowerCase()] || "default-color";
-    },
-
-    getIndexClass(index) {
-      let i = index % 2;
-      return "iswhite-"+i
-    },
-
     handleUpvote() {
       this.upvoteCount += 1;
     },
@@ -94,7 +73,7 @@ export default {
   padding-bottom: 5px;
 }
 
-.description {
+.bodyText {
   font-size: 16px;
 }
 
