@@ -1,14 +1,15 @@
 <template>
   <div>
     <button @click="redirectToWebDock">Redirect</button>
+    <button @click="fetchData">Fetch Data</button>
   </div>
 </template>
   
-  <script>
+<script>
 export default {
   methods: {
     async redirectToWebDock() {
-      const encodedURL = encodeURIComponent("http://localhost:5173/login");
+      const encodedURL = encodeURIComponent("http://localhost:5174/login");
       const redirectURL = `https://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=${encodedURL}`;
       window.location.href = redirectURL;
     },
@@ -17,7 +18,9 @@ export default {
         const urlParams = new URLSearchParams(window.location.search);
         const ssoToken = urlParams.get("ssoToken");
 
-        const response = await fetch("http://localhost:3000/verify", {
+        console.log("Fetching data with ssoToken:", ssoToken);
+
+        const response = await fetch("http://localhost:3001/verify", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -39,4 +42,3 @@ export default {
   },
 };
 </script>
-  

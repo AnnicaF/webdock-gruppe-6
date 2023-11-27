@@ -1,7 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const app = express();
-const port = 3000;
+const port = 3001;
 const cors = require("cors");
 
 app.use(
@@ -18,12 +18,20 @@ app.get("/", (req, res) => {
 });
 
 app.post("/verify", async (req, res) => {
-  const { ssoToken } = req.body;
+  try {
+    const { ssoToken } = req.body;
 
-  const user = jwt.verify(ssoToken, "e389bb7b-dc58-4b0b-8f54-dac159d5a609");
+    if (!ssoToken) {
+      throw new Error("JWT must be provided");
+    }
 
-  console.log(user);
-  res.json(user);
+    const user = jwt.verify(ssoToken, "e389bb7b-dc58-4b0b-8f54-dac159d5a609");
+    console.log(user);
+    res.json(user);
+  } catch (error) {
+    console.error("Error verifying token:", error);
+    res.status(401).json({ error: "Invalid token" });
+  }
 });
 
 app.listen(port, () => {
