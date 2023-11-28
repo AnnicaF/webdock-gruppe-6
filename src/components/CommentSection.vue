@@ -1,4 +1,5 @@
-<template>
+<template></template>
+<!--<template>
   <div class="section">
     <div class="comment-box">
       <textarea v-model="newComment" placeholder="Leave a comment"></textarea>

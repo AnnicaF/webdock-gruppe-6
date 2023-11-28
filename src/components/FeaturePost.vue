@@ -4,8 +4,8 @@
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
+          <span class="upvote-count">{{upvoteCount}}</span>
         </button>
-        <span class="upvote-count">{{ upvoteCount }}</span>
       </div>
     </div>
     <div class="post">
@@ -51,21 +51,17 @@ export default {
   <style scoped>
 .post-container {
   display: flex;
-  justify-content: center;
   background-color: var(--grey-mid);
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
+
+.post{
+  width: 100%;
+}
 .iswhite-1 {
   background-color: var(--white);
-}
-.post {
-  max-height: 200px;
-}
-
-.post-content {
-  padding: 20px;
 }
 
 .title {
@@ -82,6 +78,7 @@ hr {
   margin-bottom: 15px;
   width: 170px;
   border: 1px solid var(--green-primary);
+  margin-left: 0px;
 }
 
 .user_date_box {
@@ -110,7 +107,7 @@ hr {
 }
 
 .default-color {
-  background: #000000;
+  background: #ffa500; 
 }
 .comment_icon {
   color: grey;

@@ -30,6 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
+
   <div>
     <Nav />
     <template v-if="loading">
@@ -132,7 +133,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Your stylesheet here */
-</style>
