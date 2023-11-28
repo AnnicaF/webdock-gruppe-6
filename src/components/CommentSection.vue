@@ -28,8 +28,8 @@
             <button @click="sendReply(comment)">Reply</button>
           </div>
 
-          <ul v-if="comment.replies && comment.replies.length > 0">
-            <li v-for="reply in comment.replies" :key="reply.id">
+          <ul v-if="comment.Replies && comment.Replies.length > 0">
+            <li v-for="reply in comment.Replies" :key="reply.id">
               <div class="comment-content">
                 <p>
                   <strong>{{ reply.user }}</strong>
@@ -46,7 +46,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   props: {
@@ -59,22 +58,17 @@ export default {
   },
   computed: {
     sortedComments() {
-      return [...this.comments].sort(
-        (a, b) => new Date(b.date) - new Date(a.date)
-      );
+      return this.comments
+        ? [...this.comments].sort((a, b) => new Date(b.date) - new Date(a.date))
+        : [];
     },
   },
+
   methods: {
     addComment() {
-      this.comments.unshift({
-        id: this.comments.length + 1,
-        user: "Annica Frederiksen",
-        text: this.newComment,
-        date: new Date().toLocaleDateString(),
-        replyActive: false,
-        replyText: "",
-      });
+      this.$emit("addComment", this.newComment);
 
+      // Clear the input field
       this.newComment = "";
     },
     toggleReply(comment) {
@@ -88,88 +82,23 @@ export default {
       comment.replyText = "";
       comment.replyActive = false;
     },
+    async handleAddComment() {
+      const postId = this.selectedPost.id; // Juster dette baseret på din datastruktur
+      try {
+        const response = await axios.post(
+          `http://localhost:3000/api/v1/request/${requestId}/comments`,
+          {
+            text: this.newComment,
+          }
+        );
+
+        // Opret en ny kopi af kommentarerne for at bevare reaktivitet
+        this.$emit("addComment", response.data); // Dette emitter en begivenhed til forælderen
+        this.newComment = ""; // Nulstil inputfeltet
+      } catch (error) {
+        console.error("Error adding comment:", error);
+      }
+    },
   },
 };
 </script>
-
-
-<style scoped>
-.section {
-  max-width: 600px;
-  margin: 0 auto;
-}
-textarea {
-  margin-bottom: 10px;
-  padding: 5px;
-  resize: vertical;
-}
-
-.button-container {
-  align-self: flex-end;
-}
-
-.comment-box {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-}
-
-button {
-  background-color: var(--green-primary);
-  color: var(--white);
-  border-radius: 10px;
-  font-size: 16px;
-  padding: 8px 18px;
-  border: none;
-  cursor: pointer;
-}
-
-.button-container {
-  margin-left: auto;
-}
-
-.comment-date {
-  font-size: 12px;
-  color: #666;
-}
-
-.reply-text {
-  cursor: pointer;
-  color: black;
-  padding-left: 10px;
-  text-decoration: underline;
-}
-
-.comment-content {
-  padding: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  background-color: #ddd;
-  margin: 0;
-}
-
-li:nth-child(even) {
-  background-color: #f0f0f0;
-}
-
-.reply-box {
-  margin-top: 10px;
-}
-
-.comment-content hr {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  width: 100px;
-  border: 1px solid var(--green-primary);
-  margin-left: 0;
-}
-</style>
--->

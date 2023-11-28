@@ -2,69 +2,67 @@ const express = require("express");
 const router = express.Router();
 const Request = require("./models");
 
-router.get("/v1/request", async(req, res) => {
-    const users = await Request.findAll();
+router.get("/v1/request", async (req, res) => {
+  const users = await Request.findAll();
 
-    res.status(200).json(users);
+  res.status(200).json(users);
 });
 
-router.post("/v1/request", async(req, res) => {
-    const {title, bodyText} = req.body;
+router.post("/v1/request", async (req, res) => {
+  const { title, bodyText } = req.body;
 
-    const newRequest = Request.build({
-        "title": title,
-        "bodyText": bodyText
-    });
+  const newRequest = Request.build({
+    title: title,
+    bodyText: bodyText,
+  });
 
-    try{
-        await newRequest.save();
-        
-        res.status(201).json(newRequest);
-    }
-    catch(err){
-        res.json(err);
-    }
-    
+  try {
+    await newRequest.save();
+
+    res.status(201).json(newRequest);
+  } catch (err) {
+    res.json(err);
+  }
 });
 
-router.get("/v1/request/:id", async(req, res) => {
-    const request = await Request.findOne({
-        where: {
-            id: req.params.id
-        }
-    });
-    res.status(200).json(request);
+router.get("/v1/request/:id", async (req, res) => {
+  const request = await Request.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.status(200).json(request);
 });
 
-router.patch("/v1/request/:id", async(req, res) => {
-    const request = await Request.findOne({
-        where: {
-            id: req.params.id
-        }
-    });
-    const {bodyText} = req.body;
+router.patch("/v1/request/:id", async (req, res) => {
+  const request = await Request.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  const { bodyText } = req.body;
 
-    await request.set({
-        bodyText:bodyText
-    })
-    await request.save();
-    res.status(200).json(request);
+  await request.set({
+    bodyText: bodyText,
+  });
+  await request.save();
+  res.status(200).json(request);
 });
 
-router.put("/v1/request/:id", async(req, res) => {
-    const request = await Request.findOne({
-        where: {
-            id: req.params.id
-        }
-    });
-    const {bodyText,title} = req.body;
+router.put("/v1/request/:id", async (req, res) => {
+  const request = await Request.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  const { bodyText, title } = req.body;
 
-    await request.set({
-        bodyText:bodyText,
-        title:title
-    })
-    await request.save();
-    res.status(200).json(request);
+  await request.set({
+    bodyText: bodyText,
+    title: title,
+  });
+  await request.save();
+  res.status(200).json(request);
 });
 
 module.exports = router;
