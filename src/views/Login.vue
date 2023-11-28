@@ -1,7 +1,6 @@
 <template>
   <div>
     <button @click="redirectToWebDock">Redirect</button>
-    <button @click="fetchData">Fetch Data</button>
   </div>
 </template>
   
@@ -31,6 +30,16 @@ export default {
 
         const userData = await response.json();
         console.log(userData);
+
+      
+        await fetch("http://localhost:3001/insertUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(userData),
+        });
       } catch (error) {
         console.error("Error fetching data:", error);
       }
