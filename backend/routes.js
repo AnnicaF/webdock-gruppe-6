@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Request = require("./models");
+const {Request} = require("./models");
 
 router.get("/v1/request", async (req, res) => {
   const users = await Request.findAll();
@@ -24,6 +24,23 @@ router.post("/v1/request", async (req, res) => {
     res.json(err);
   }
 });
+
+// router.post("/v1/request/:id/comment", async (req, res) => {
+//   const {bodyText} = req.body;
+
+//   const newComment = Comment.build({
+//     bodyText: bodyText,
+//     requestID: req.params.id,
+//   });
+
+//   try {
+//     await newComment.save();
+
+//     res.status(201).json(newComment);
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
 
 router.get("/v1/request/:id", async (req, res) => {
   const request = await Request.findOne({

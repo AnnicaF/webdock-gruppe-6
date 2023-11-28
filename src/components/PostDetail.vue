@@ -1,5 +1,5 @@
-<template></template>
-<!--<template>
+
+<template>
   <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
@@ -167,4 +167,3 @@ hr {
   color: grey;
 }
 </style>
--->

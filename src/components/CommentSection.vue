@@ -1,5 +1,5 @@
-<template></template>
-<!--<template>
+
+<template>
   <div class="section">
     <div class="comment-box">
       <textarea v-model="newComment" placeholder="Leave a comment"></textarea>
@@ -86,7 +86,7 @@ export default {
       const postId = this.selectedPost.id; // Juster dette baseret på din datastruktur
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/v1/request/${requestId}/comments`,
+          `http://localhost:3000/api/v1/request/${requestId}/comment`,
           {
             text: this.newComment,
           }

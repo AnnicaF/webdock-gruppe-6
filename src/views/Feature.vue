@@ -13,7 +13,6 @@ const requests = ref(null);
 axios
   .get("http://localhost:3000/api/v1/request")
   .then((response) => (requests.value = response.data))
-  .then(console.log(requests))
 
   .catch((err) => {
     console.log("error: " + err);
@@ -66,6 +65,7 @@ button {
 
 .box {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 </style>
