@@ -16,13 +16,8 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.6.3",
     "nodemon": "^3.0.1",
-<<<<<<< HEAD
-    "sequelize": "^6.33.0",
-    "sequelize-cli": "^6.6.1",
-    "vue-router": "^4.2.5"
-=======
+    "vue-router": "^4.2.5",
     "sequelize": "^6.35.1",
     "sequelize-cli": "^6.6.1"
->>>>>>> 6315ed8fa924d6ae14e1af5f8f79c72d44cc87ae
   }
 }

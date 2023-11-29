@@ -35,11 +35,6 @@ axios
       />
     </button>
   </div>
-<<<<<<< HEAD
-  <MK />
-  <Footer />
-=======
->>>>>>> 6315ed8fa924d6ae14e1af5f8f79c72d44cc87ae
 </template>
 
 <script>

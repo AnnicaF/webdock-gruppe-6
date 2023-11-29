@@ -31,7 +31,6 @@ export default {
         const userData = await response.json();
         console.log(userData);
 
-      
         await fetch("http://localhost:3001/insertUser", {
           method: "POST",
           headers: {
@@ -46,8 +45,13 @@ export default {
     },
   },
   mounted() {
-    // Hent data, når komponenten er monteret
-    this.fetchData();
+    try {
+      // Kald fetchData ved montering af komponenten
+      this.fetchData();
+    } catch (error) {
+      // Håndter fejl ved komponentmontering ved at logge til konsollen
+      console.error("Error in mounted:", error);
+    }
   },
 };
 </script>

@@ -1,7 +1,7 @@
 // Importer nødvendige moduler og din User-model
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const User = require("./models");
+const { User } = require("./models");
 const app = express();
 const port = 3001;
 const cors = require("cors");
@@ -24,9 +24,7 @@ app.post("/verify", async (req, res) => {
 
     const user = jwt.verify(ssoToken, "e389bb7b-dc58-4b0b-8f54-dac159d5a609");
     console.log(user);
-
-    // Indsæt bruger i databasen
-    await User.findOrCreate({
+    const userInstance = await User.findOrCreate({
       where: { id: user.id },
       defaults: {
         name: user.name,
@@ -35,13 +33,12 @@ app.post("/verify", async (req, res) => {
       },
     });
 
-    res.json(user);
+    res.json(userInstance[0]); // Returner den oprettede bruger
   } catch (error) {
     console.error("Error verifying token or inserting user:", error);
     res.status(401).json({ error: "Invalid token" });
   }
 });
-
 
 app.post("/insertUser", async (req, res) => {
   try {
