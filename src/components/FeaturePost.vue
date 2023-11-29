@@ -1,5 +1,5 @@
 <template>
-  <div class="post-container" :class="getIndexClass(index)">
+  <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
@@ -11,12 +11,12 @@
     <div class="post">
       <div class="post-content">
         <h2 class="title">{{ title }}</h2>
-        <div class="status-container">
+        <!-- <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
             {{ status }}
           </div>
-        </div>
-        <p class="description">{{ description }}</p>
+        </div> -->
+        <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
           <p class="small-text">{{ user }}</p>
@@ -38,30 +38,9 @@
 export default {
   props: {
     title: String,
-    description: String,
-    upvoteCount: Number,
-    commentCount: Number,
-    user: String,
-    status: String,
-    date: Date,
-    index: Number,
+    bodyText: String,
   },
   methods: {
-    getStatusClass(status) { /* status functionen fungere ikke, skal fixes */
-      const statusColorMap = {
-        planned: "planned-color",
-        "under review": "under-review-color",
-        completed: "completed-color",
-        "in progress": "in-progress-color",
-      };
-      return statusColorMap[status] || "default-color";
-    },
-
-    getIndexClass(index) {
-      let i = index % 2;
-      return "iswhite-" + i;
-    },
-
     handleUpvote() {
       this.upvoteCount += 1;
     },
@@ -90,7 +69,7 @@ export default {
   padding-bottom: 5px;
 }
 
-.description {
+.bodyText {
   font-size: 16px;
 }
 
