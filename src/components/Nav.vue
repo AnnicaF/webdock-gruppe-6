@@ -24,7 +24,15 @@
   </header>
 </template>
 
-<script></script>
+<script>
+import Search from "./Search.vue";
+
+export default {
+  components: {
+    Search,
+  },
+};
+</script>
 
 <style>
 @import "@/assets/nav.css";
