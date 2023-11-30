@@ -9,9 +9,9 @@
       </div>
       <ul class="navigation">
         <li>
-          <router-link :to="{ name: '' }">Feature request</router-link>
+          <router-link :to="{ name: 'Feature' }">Feature request</router-link>
         </li>
-        <li><router-link :to="{ name: '' }">Roadmap</router-link></li>
+        <li><router-link :to="{ name: 'RoadMap' }">Roadmap</router-link></li>
       </ul>
 
       <Search />
@@ -24,6 +24,7 @@
   </header>
 </template>
 
+<<<<<<< HEAD
 <script>
 import Search from "./Search.vue";
 
@@ -33,6 +34,9 @@ export default {
   },
 };
 </script>
+=======
+<script></script>
+>>>>>>> main
 
 <style>
 @import "@/assets/nav.css";

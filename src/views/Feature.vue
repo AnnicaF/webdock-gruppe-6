@@ -3,7 +3,20 @@ import FilterBar from "../components/FilterBar.vue";
 import MK from "../components/MakeRequest.vue";
 import Nav from "../components/Nav.vue";
 import FeaturePost from "../components/FeaturePost.vue";
-import Footer from "../components/Footer.vue";
+//import Footer from "../components/Footer.vue";
+
+import axios from "axios";
+import { ref } from "vue";
+
+const requests = ref(null);
+
+axios
+  .get("http://localhost:3000/api/v1/request")
+  .then((response) => (requests.value = response.data))
+
+  .catch((err) => {
+    console.log("error: " + err);
+  });
 </script>
 
 <template>
@@ -11,14 +24,24 @@ import Footer from "../components/Footer.vue";
   <!--  <Search />  searchbar fjernet & flyttet til nav.vue -->
 
   <FilterBar />
-  <div>
-    <FeaturePost :post="hardcodedPost" />
+  <div class="box">
+    <button
+      v-for="(request, index) in requests"
+      :key="index"
+      @click="navigateToDetail(request)"
+    >
+      <FeaturePost
+        :title="request.title"
+        :bodyText="request.bodyText"
+        :index="index"
+      />
+    </button>
   </div>
-  <Footer />
 </template>
 
 <script>
 export default {
+<<<<<<< HEAD
   data() {
     return {
       hardcodedPost: {
@@ -35,3 +58,35 @@ export default {
   },
 };
 </script>
+=======
+  components: {
+    FeaturePost,
+  },
+  methods: {
+    navigateToDetail(request) {
+      this.$router.push({
+        name: "featurePostDetail",
+        params: { requestId: request.id },
+      });
+    },
+  },
+};
+</script>
+
+
+<style scoped>
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+</style>
+>>>>>>> main
