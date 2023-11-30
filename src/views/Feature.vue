@@ -41,7 +41,6 @@ axios
 
 <script>
 export default {
-<<<<<<< HEAD
   data() {
     return {
       hardcodedPost: {
@@ -58,7 +57,6 @@ export default {
   },
 };
 </script>
-=======
   components: {
     FeaturePost,
   },
@@ -89,4 +87,3 @@ button {
   justify-content: center;
 }
 </style>
->>>>>>> main

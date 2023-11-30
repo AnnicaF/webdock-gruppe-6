@@ -16,12 +16,9 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.5",
     "axios": "^1.6.1",
-<<<<<<< HEAD
     "lodash.debounce": "^4.0.8",
-    "vue": "^3.3.4",
-=======
+
     "vue": "^3.3.8",
->>>>>>> main
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
