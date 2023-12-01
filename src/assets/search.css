@@ -1,8 +1,9 @@
 @import "./base.css";
 
 .search-container {
-  max-width: 235px;
+  /*  max-width: 235px; */
   margin: 0 auto;
+  flex: 0 1 235px;
 }
 
 .search-input {
@@ -13,6 +14,7 @@
   border: 2px solid #018647;
   outline: none;
   transition: box-shadow 0.3s;
+  padding-left: 40px; /* to make room for the icon */
 }
 
 .search-input:focus {
@@ -30,8 +32,4 @@
   transform: translateY(-50%);
   height: 20px;
   width: 20px;
-}
-
-.search-input {
-  padding-left: 40px; /* Adjust the padding to make room for the icon */
 }
