@@ -61,6 +61,10 @@ a:hover {
   align-items: center;
   flex: 1;
   justify-content: flex-end;
+  flex-grow: 0;
+  flex: 0 1 auto;
+
+  margin-left: auto;
 }
 
 button {
@@ -96,4 +100,16 @@ button {
 .signup:hover {
   background-color: #018647;
   color: white;
+}
+
+.branding,
+.navigation,
+.search-container,
+.logsign {
+  flex: 0 1 auto;
+}
+
+.search-container {
+  flex: 0 1 470px;
+  margin-right: auto;
 }
