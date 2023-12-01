@@ -3,11 +3,11 @@
 .search-container {
   /*  max-width: 235px; */
   margin: 0 auto;
-  flex: 0 1 235px;
+  flex: 0 1 470px;
 }
 
 .search-input {
-  width: 200%;
+  width: 100%;
   padding: 18px 18px;
   font-size: 1.2em;
   border-radius: 25px; /* Makes the input rounded */
