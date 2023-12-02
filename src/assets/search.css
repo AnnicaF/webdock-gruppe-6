@@ -3,7 +3,7 @@
 .search-container {
   /*  max-width: 235px; */
   margin: 0;
-  flex: 0 1 470px;
+  flex: 0 1 470px; /* flex-grow, flex-shrink, flex-basis */
 }
 
 .search-input {

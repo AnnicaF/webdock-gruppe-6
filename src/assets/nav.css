@@ -108,6 +108,46 @@ button {
 }
 
 .search-container {
-  flex: 0 1 470px;
+  flex: 0 1 470px; /* flex-grow, flex-shrink, flex-basis */
   margin-right: auto;
+
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-container {
+    order: 1; /* Search bar appears 1st */
+    max-width: 100%;
+    flex: none; /* Override any previous flex settings */
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .branding {
+    order: 2; /* Logo appears 2nd */
+    margin-bottom: 0.5rem;
+  }
+
+  .navigation {
+    order: 3; /* Navigation links appears 3rd */
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .logsign {
+    order: 4; /* Login/sign-up buttons appears last */
+    width: 100%;
+    justify-content: center;
+  }
+
+  nav ul li {
+    margin: 0; /* To remove margin from li elements in mobile view */
+    padding: 0.5rem;
+  }
 }
