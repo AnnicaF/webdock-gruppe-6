@@ -33,7 +33,7 @@ app.post("/verify", async (req, res) => {
       },
     });
 
-    res.json(userInstance[0]); // Returner den oprettede bruger
+    res.json(userInstance[0]);
   } catch (error) {
     console.error("Error verifying token or inserting user:", error);
     res.status(401).json({ error: "Invalid token" });
@@ -42,7 +42,9 @@ app.post("/verify", async (req, res) => {
 
 app.post("/insertUser", async (req, res) => {
   try {
-    const { id, name, email, avatarURL } = req.body;
+    const { id, name, email, avatarURL, token, roleID } = req.body;
+
+    console.log("Received userData with roleID:", roleID);
 
     await User.findOrCreate({
       where: { id: id },
@@ -50,6 +52,8 @@ app.post("/insertUser", async (req, res) => {
         name: name,
         email: email,
         avatarURL: avatarURL,
+        token: token,
+        roleID: roleID,
       },
     });
 
