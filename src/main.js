@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import axios from "axios";
 import router from "./router"; // Sørg for at din router-fil er korrekt konfigureret
 
 import "@fortawesome/fontawesome-free/css/all.css";
