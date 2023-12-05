@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="redirectToWebDock">Redirect</button>
+    <button @click="redirectToWebDock">Login</button>
   </div>
 </template>
     
@@ -8,7 +8,7 @@
 export default {
   methods: {
     async redirectToWebDock() {
-      const encodedURL = encodeURIComponent("http://localhost:5174");
+      const encodedURL = encodeURIComponent("http://localhost:5173");
       const redirectURL = `https://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=${encodedURL}`;
       window.location.href = redirectURL;
     },

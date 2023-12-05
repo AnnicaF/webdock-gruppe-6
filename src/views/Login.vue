@@ -8,7 +8,7 @@
 export default {
   methods: {
     async redirectToWebDock() {
-      const encodedURL = encodeURIComponent("http://localhost:5174/login");
+      const encodedURL = encodeURIComponent("http://localhost:5173/login");
       const redirectURL = `https://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=${encodedURL}`;
       window.location.href = redirectURL;
     },
