@@ -41,7 +41,7 @@ module.exports = {
       avatarURL: {
         type: Sequelize.STRING,
       },
-      roleId: {
+      roleID: {
         type: Sequelize.INTEGER,
         references: {
           model: "Roles",
@@ -61,7 +61,7 @@ module.exports = {
     });
 
     await queryInterface.addConstraint("Users", {
-      fields: ["roleId"],
+      fields: ["roleID"],
       type: "foreign key",
       references: {
         table: "Roles",
@@ -72,7 +72,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     // Fjern fremmednøgle fra Users-tabel
-    await queryInterface.removeConstraint("Users", "Users_roleId_fkey");
+    await queryInterface.removeConstraint("Users", "Users_roleID_fkey");
 
     // Fjern Users-tabel
     await queryInterface.dropTable("Users");

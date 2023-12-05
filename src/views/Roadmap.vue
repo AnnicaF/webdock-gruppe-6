@@ -1,6 +1,6 @@
 <script setup>
 import Nav from "../components/Nav.vue";
-import RoadMapPost from "../components/RoadmapPost.vue";
+import RoadMapPost from "../components/RoadMapPost.vue";
 </script>
 
 <template>

@@ -14,14 +14,22 @@
         <li><router-link :to="{ name: 'RoadMap' }">Roadmap</router-link></li>
       </ul>
       <ul class="logsign">
-        <button type="button" class="login">Login</button>
+        <LoginButton />
         <button type="button" class="signup">Sign up</button>
       </ul>
     </nav>
   </header>
 </template>
 
-<script></script>
+<script>
+import LoginButton from "@/components/LoginButton.vue";
+
+export default {
+  components: {
+    LoginButton,
+  },
+};
+</script>
 
 <style>
 @import "@/assets/nav.css";
