@@ -46,16 +46,7 @@ app.post("/insertUser", async (req, res) => {
 
     console.log("Received userData with roleID:", roleID);
 
-    await User.findOrCreate({
-      where: { id: id },
-      defaults: {
-        name: name,
-        email: email,
-        avatarURL: avatarURL,
-        token: token,
-        roleID: roleID,
-      },
-    });
+    await User.update({ roleID: roleID }, { where: { id: id } });
 
     res.json({ success: true });
   } catch (error) {
