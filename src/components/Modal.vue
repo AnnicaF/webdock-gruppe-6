@@ -170,7 +170,7 @@ label {
 select,
 input,
 textarea {
-  width: 100%;
+  width: 97%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;

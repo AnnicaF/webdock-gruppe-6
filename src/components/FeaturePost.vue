@@ -1,23 +1,22 @@
 <template>
-  <div class="post-container" :class="getIndexClass(index)">
+  <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
           <span class="upvote-count">{{upvoteCount}}</span>
         </button>
-        <span class="upvote-count">{{ upvoteCount }}</span>
       </div>
     </div>
     <div class="post">
       <div class="post-content">
         <h2 class="title">{{ title }}</h2>
-        <div class="status-container">
+        <!-- <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
             {{ status }}
           </div>
-        </div>
-        <p class="description">{{ description }}</p>
+        </div> -->
+        <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
           <p class="small-text">{{ user }}</p>
@@ -48,21 +47,6 @@ export default {
     index: Number,
   },
   methods: {
-    getStatusClass(status) {
-      const statusColorMap = {
-        planned: "planned-color",
-        "under review": "under-review-color",
-        completed: "completed-color",
-        "in progress": "in-progress-color",
-      };
-      return statusColorMap[status] || "default-color";
-    },
-
-    getIndexClass(index) {
-      let i = index % 2;
-      return "iswhite-" + i;
-    },
-
     handleUpvote() {
       this.upvoteCount += 1;
     },
@@ -78,6 +62,10 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
+
+.post{
+  width: 100%;
+}
 .iswhite-1 {
   background-color: var(--white);
 }
@@ -87,7 +75,7 @@ export default {
   padding-bottom: 5px;
 }
 
-.description {
+.bodyText {
   font-size: 16px;
 }
 
@@ -96,6 +84,7 @@ hr {
   margin-bottom: 15px;
   width: 170px;
   border: 1px solid var(--green-primary);
+  margin-left: 0px;
 }
 
 .user_date_box {
@@ -124,7 +113,7 @@ hr {
 }
 
 .default-color {
-  background: #000000;
+  background: #ffa500; 
 }
 .comment_icon {
   color: grey;
