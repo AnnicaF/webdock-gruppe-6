@@ -31,7 +31,7 @@ export default {
         const userData = await response.json();
         console.log("Received userData from backend:", userData);
 
-        userData.roleID = userData.email.endsWith("@edu.ucl.dk") ? 1 : 2;
+        userData.roleID = userData.email === "abfr31852@edu.ucl.dk" ? 1 : 2;
 
         console.log("Modified userData with roleID:", userData);
 
