@@ -16,9 +16,8 @@ exports.show = async (req, res) => {
 
 //create a new request
 exports.create = async (req, res) => {
-  console.log("bob");
   const { title, bodyText } = req.body;
-
+    
   const newRequest = Request.build({
     title: title,
     bodyText: bodyText,
