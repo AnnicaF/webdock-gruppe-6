@@ -7,13 +7,7 @@ const cors = require("cors");
 const environment = process.env.NODE_ENV || 'development';
 const dbConfig = config[environment];
 
-const sequelize = new Sequelize({
-    dialect: "mysql",
-    host: "lynge.vps.webdock.cloud",
-    username: "root",
-    password: "zob4hSbUGSAM",
-    database: "featurerequest",
-});
+const sequelize = new Sequelize(dbConfig);
 
 const connectToDb = async () => {
 try {
