@@ -38,7 +38,13 @@
 export default {
   props: {
     title: String,
-    bodyText: String,
+    description: String,
+    upvoteCount: Number,
+    commentCount: Number,
+    user: String,
+    status: String,
+    date: String,
+    index: Number,
   },
   methods: {
     handleUpvote() {

@@ -10,20 +10,22 @@ import { ref } from "vue";
 
 const requests = ref(null);
 
-axios
-  .get("http://localhost:3000/api/v1/request")
-  .then((response) => (requests.value = response.data))
+function get(){
+  axios.get("http://localhost:3000/api/v1/request")
+    .then((response) => (requests.value = response.data))
+    .then(console.log(requests))
 
-  .catch((err) => {
-    console.log("error: " + err);
-  });
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
+get();
 </script>
 
 <template>
   <Nav />
-  <FilterBar />
-  <div class="box">
-    <button
+  <FilterBar @callLoad="get"/>
+    <FeaturePost
       v-for="(request, index) in requests"
       :key="index"
       @click="navigateToDetail(request)"
@@ -34,7 +36,8 @@ axios
         :index="index"
       />
     </button>
-  </div>
+  <div>
+
 </template>
 
 <script>
