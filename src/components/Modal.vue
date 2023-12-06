@@ -66,7 +66,6 @@ export default {
     },
 
     createPost() {
-      console.log(categories.value)
 
       let data = {
         title: document.getElementById("title").value,
