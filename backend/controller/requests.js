@@ -1,23 +1,35 @@
-const {Request} = require("../models");
+const { Request } = require("../models");
 
 //get all requests
 exports.show = async (req, res) => {
-  try{
+  try {
     const requests = await Request.findAll();
     return res.status(200).json(requests);
   } catch (err) {
     console.log(err);
     return res.send("Error");
   }
-  
+};
 
-  
+//get searched requests
+exports.search = async (req, res) => {
+  try {
+    const requests = await Request.findAll({
+      where: {
+        title: req.body,
+      },
+    });
+    return res.status(200).json(requests);
+  } catch (err) {
+    console.log(err);
+    return res.send("Error");
+  }
 };
 
 //create a new request
 exports.create = async (req, res) => {
   const { title, bodyText } = req.body;
-    
+
   const newRequest = Request.build({
     title: title,
     bodyText: bodyText,
@@ -31,11 +43,6 @@ exports.create = async (req, res) => {
     return res.json(err);
   }
 };
-
-
-
-
-
 
 // router.get("/v1/request", async (req, res) => {
 //   const users = await Request.findAll();

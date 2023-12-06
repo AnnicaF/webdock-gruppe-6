@@ -10,8 +10,9 @@ import { ref } from "vue";
 
 const requests = ref(null);
 
-function get(){
-  axios.get("http://localhost:3000/api/v1/request")
+function get() {
+  axios
+    .get("http://localhost:3000/api/v1/request")
     .then((response) => (requests.value = response.data))
     .then(console.log(requests))
 
@@ -19,11 +20,24 @@ function get(){
       console.log("error: " + err);
     });
 }
+
+function search(search) {
+  console.log(search);
+  axios
+    .get("http://localhost:3000/api/v1/request/search", search)
+    .then((response) => (requests.value = response.data))
+    .then(console.log(requests))
+
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
+
 get();
 </script>
 
 <template>
-  <Nav />
+  <Nav @callsearch="search" />
   <FilterBar />
   <div class="box">
     <button

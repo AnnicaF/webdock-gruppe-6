@@ -4,7 +4,7 @@
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-          <span class="upvote-count">{{upvoteCount}}</span>
+          <span class="upvote-count">{{ upvoteCount }}</span>
         </button>
       </div>
     </div>
@@ -15,7 +15,7 @@
           <div class="status-label" :class="getStatusClass(status)">
             planned
           </div>
-        </div> 
+        </div>
         <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
@@ -33,8 +33,8 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
   props: {
     title: String,
@@ -59,17 +59,17 @@ export default {
         "in progress": "in-progress-color",
       };
       return statusColorMap[status] || "default-color";
-      },
-      
-      getIndexClass(index) {
+    },
+
+    getIndexClass(index) {
       let i = index % 2;
-      return "iswhite-"+i
-    }
-  }
+      return "iswhite-" + i;
+    },
+  },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .post-container {
   display: flex;
   background-color: var(--grey-mid);
@@ -78,7 +78,7 @@ export default {
   padding: 20px;
 }
 
-.post{
+.post {
   width: 100%;
 }
 .iswhite-1 {
@@ -128,7 +128,7 @@ hr {
 }
 
 .default-color {
-  background: black; 
+  background: black;
 }
 .comment_icon {
   color: grey;
