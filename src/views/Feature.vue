@@ -30,6 +30,7 @@ get();
     :key="index"
     :title="request.title"
     :bodyText="request.bodyText"
+    :status="'Under Review'"
     :index="index"
     @click="navigateToDetail(request)"
   />

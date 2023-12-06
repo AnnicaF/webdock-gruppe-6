@@ -16,11 +16,12 @@ exports.show = async (req, res) => {
 
 //create a new request
 exports.create = async (req, res) => {
-  const { title, bodyText } = req.body;
+  const { title, bodyText, categoryID } = req.body;
     
   const newRequest = Request.build({
     title: title,
     bodyText: bodyText,
+    categoryID: categoryID,
   });
 
   try {
