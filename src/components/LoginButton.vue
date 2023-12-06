@@ -4,7 +4,7 @@
   </div>
 </template>
     
-  <script>
+<script>
 export default {
   methods: {
     async redirectToWebDock() {
@@ -19,7 +19,7 @@ export default {
 
         console.log("Fetching data with ssoToken:", ssoToken);
 
-        // Send et POST request til verify med ssoToken til vores backend endpoint
+        // Send et POST request til authenticate med ssoToken til vores backend endpoint
         const response = await fetch("http://localhost:3001/authenticate", {
           method: "POST",
           headers: {
@@ -29,6 +29,7 @@ export default {
           // Sender ssoToken som JSON til request body
           body: JSON.stringify({ ssoToken }),
         });
+
         // Parse the JSON response med user data
         const userData = await response.json();
         console.log("Received userData from backend:", userData);
@@ -48,4 +49,3 @@ export default {
   },
 };
 </script>
-  

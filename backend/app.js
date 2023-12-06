@@ -24,9 +24,6 @@ app.post("/authenticate", async (req, res) => {
     // Verify the JWT token
     const user = jwt.verify(ssoToken, "e389bb7b-dc58-4b0b-8f54-dac159d5a609");
 
-    // Determine roleID based on email domain
-    const roleID = email.endsWith("@edu.ucl.dk") ? 1 : 2;
-
     // Check if the user exists in the database
     const [existingUser, created] = await User.findOrCreate({
       where: { id: user.id },
@@ -35,7 +32,7 @@ app.post("/authenticate", async (req, res) => {
         email: user.email,
         avatarURL: user.avatarURL,
         token: ssoToken,
-        roleID: roleID,
+        roleID: 1, // Include the token in the database
       },
     });
 
@@ -47,7 +44,7 @@ app.post("/authenticate", async (req, res) => {
           email: email || user.email,
           avatarURL: avatarURL || user.avatarURL,
           token: ssoToken,
-          roleID: roleID,
+          roleID: 1, // Include the token in the database
         },
         { where: { id: user.id } }
       );
