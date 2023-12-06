@@ -1,5 +1,5 @@
 <template>
-  <div class="post-container">
+  <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
@@ -11,11 +11,11 @@
     <div class="post">
       <div class="post-content">
         <h2 class="title">{{ title }}</h2>
-        <!-- <div class="status-container">
+        <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
-            {{ status }}
+            planned
           </div>
-        </div> -->
+        </div> 
         <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
@@ -39,12 +39,33 @@ export default {
   props: {
     title: String,
     bodyText: String,
+    description: String,
+    upvoteCount: Number,
+    commentCount: Number,
+    user: String,
+    status: String,
+    date: String,
+    index: Number,
   },
   methods: {
     handleUpvote() {
       this.upvoteCount += 1;
     },
-  },
+    getStatusClass(status) {
+      const statusColorMap = {
+        planned: "planned-color",
+        "under review": "under-review-color",
+        completed: "completed-color",
+        "in progress": "in-progress-color",
+      };
+      return statusColorMap[status] || "default-color";
+      },
+      
+      getIndexClass(index) {
+      let i = index % 2;
+      return "iswhite-"+i
+    }
+  }
 };
 </script>
   
@@ -107,7 +128,7 @@ hr {
 }
 
 .default-color {
-  background: #ffa500; 
+  background: black; 
 }
 .comment_icon {
   color: grey;
