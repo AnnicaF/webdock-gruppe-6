@@ -24,15 +24,20 @@ get();
 
 <template>
   <Nav />
-  <FilterBar @callLoad="get"/>
-  <FeaturePost
-    v-for="(request, index) in requests"
-    :key="index"
-    :title="request.title"
-    :bodyText="request.bodyText"
-    :index="index"
-    @click="navigateToDetail(request)"
-  />
+  <FilterBar />
+  <div class="box">
+    <button
+      v-for="(request, index) in requests"
+      :key="index"
+      @click="navigateToDetail(request)"
+    >
+      <FeaturePost
+        :title="request.title"
+        :bodyText="request.bodyText"
+        :index="index"
+      />
+    </button>
+  </div>
 </template>
 
 <script>
@@ -50,7 +55,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 button {
