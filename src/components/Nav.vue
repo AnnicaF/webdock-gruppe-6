@@ -17,7 +17,7 @@
       <Search />
 
       <ul class="logsign">
-        <button type="button" class="login">Login</button>
+        <LoginButton />
         <button type="button" class="signup">Sign up</button>
       </ul>
     </nav>
@@ -25,10 +25,12 @@
 </template>
 
 <script>
-import Search from "./Search.vue";
+import LoginButton from "@/components/LoginButton.vue";
+import Search from "@/components/Search.vue";
 
 export default {
   components: {
+    LoginButton,
     Search,
   },
 };

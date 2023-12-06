@@ -10,19 +10,20 @@ import { ref } from "vue";
 
 const requests = ref(null);
 
-axios
-  .get("http://localhost:3000/api/v1/request")
-  .then((response) => (requests.value = response.data))
+function get(){
+  axios.get("http://localhost:3000/api/v1/request")
+    .then((response) => (requests.value = response.data))
+    .then(console.log(requests))
 
-  .catch((err) => {
-    console.log("error: " + err);
-  });
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
+get();
 </script>
 
 <template>
   <Nav />
-  <!--  <Search />  searchbar fjernet & flyttet til nav.vue -->
-
   <FilterBar />
   <div class="box">
     <button

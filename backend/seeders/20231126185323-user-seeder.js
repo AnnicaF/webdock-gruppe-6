@@ -7,6 +7,7 @@ module.exports = {
       "Users",
       [
         {
+          id: 22475,
           name: "Annica Frederiksen",
           email: "abfr31852@edu.ucl.dk",
           avatarURL: "http://placekitten.com/200/300",

@@ -15,11 +15,13 @@
                 <div v-for="(post, index) in posts" :key="index">
                   <div class="postContainer">
                     <div class="upvoteContainer">
-                      
                       <button @click="upvote(post)" class="upvote-button">
-                        <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
+                        <font-awesome-icon
+                          class="fa-lg"
+                          icon="fa-solid fa-caret-up"
+                        />
                         {{ post.upvoteCount }}
-                      </button>  
+                      </button>
                     </div>
                     <h3>{{ post.title }}</h3>
                   </div>
@@ -43,7 +45,10 @@
                   <div class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
-                        <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
+                        <font-awesome-icon
+                          class="fa-lg"
+                          icon="fa-solid fa-caret-up"
+                        />
                         {{ post.upvoteCount }}
                       </button>
                     </div>
@@ -69,7 +74,10 @@
                   <div class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
-                        <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up"/>
+                        <font-awesome-icon
+                          class="fa-lg"
+                          icon="fa-solid fa-caret-up"
+                        />
                         {{ post.upvoteCount }}
                       </button>
                     </div>
@@ -107,8 +115,9 @@ export default {
 }
 
 .columnContainer {
-  flex: 1;
-  margin: 10px;
+  flex: 2;
+  margin: 5px;
+  align-items: center;
 }
 
 .roadmapSpacer {
@@ -125,9 +134,9 @@ export default {
 .roadmapColumn {
   border: 1px solid gray;
   border-radius: 10px;
+  width: 100%;
 }
 .scrollContainer {
-  width: 100%;
   overflow-y: auto;
   height: 500px;
 }
@@ -140,13 +149,13 @@ export default {
   border-top-right-radius: 10px;
 }
 
-.planned{
-  background-color: #0076C5;
+.planned {
+  background-color: #0076c5;
 }
-.progress{
-  background-color: #A259FF;
+.progress {
+  background-color: #a259ff;
 }
-.complete{
+.complete {
   background-color: var(--green-primary);
 }
 
@@ -188,7 +197,7 @@ export default {
   color: grey;
 }
 
-h3{
+h3 {
   margin-left: 10px;
 }
 </style>
