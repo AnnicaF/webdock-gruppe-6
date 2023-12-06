@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Feature from "../views/Feature.vue";
+import Login from "../views/Login.vue";
 import FeaturePostDetail from "../views/FeaturePostDetail.vue";
 import RoadMap from "../views/RoadMap.vue";
 
@@ -12,9 +13,17 @@ const router = createRouter({
       component: Feature,
     },
     {
-      path: "/featurePostDetail/:id",
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+    {
+      path: "/featurePostDetail/:requestId",
       name: "featurePostDetail",
       component: FeaturePostDetail,
+      props: true,
+    },
+    {
       path: "/roadmap",
       name: "RoadMap",
       component: RoadMap,

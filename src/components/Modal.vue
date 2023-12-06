@@ -37,6 +37,7 @@
 
 <script>
 import axios from "axios";
+import Feature from "../views/Feature.vue";
 
 export default {
   data() {
@@ -67,19 +68,24 @@ export default {
 
     createPost() {
       let data = {
-        title: document.getElementById("title"),
-        bodyText: document.getElementById("description")
+        title: document.getElementById("title").value,
+        bodyText: document.getElementById("description").value
       };
 
       axios.post('http://localhost:3000/api/v1/request', data)
         .then(response => {
           // Handle the success response
           console.log('Response:', response.data);
+          this.$parent.$emit("callLoad");
         })
         .catch(error => {
           // Handle the error
           console.error('Error:', error);
         });
+
+        this.hide();
+        
+        
     },
   },
 };
@@ -164,7 +170,7 @@ label {
 select,
 input,
 textarea {
-  width: 100%;
+  width: 97%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
