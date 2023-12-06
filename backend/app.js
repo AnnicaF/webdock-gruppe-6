@@ -1,4 +1,3 @@
-// Importer nødvendige moduler og din User-model
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { User } = require("./models");
@@ -14,44 +13,51 @@ app.use(
 
 app.use(express.json());
 
-app.post("/verify", async (req, res) => {
+app.post("/authenticate", async (req, res) => {
   try {
-    const { ssoToken } = req.body;
+    const { ssoToken, name, email, avatarURL } = req.body;
 
     if (!ssoToken) {
       throw new Error("JWT must be provided");
     }
 
+    // Verify the JWT token
     const user = jwt.verify(ssoToken, "e389bb7b-dc58-4b0b-8f54-dac159d5a609");
-    console.log(user);
-    const userInstance = await User.findOrCreate({
+
+    // Determine roleID based on email domain
+    const roleID = email.endsWith("@edu.ucl.dk") ? 1 : 2;
+
+    // Check if the user exists in the database
+    const [existingUser, created] = await User.findOrCreate({
       where: { id: user.id },
       defaults: {
         name: user.name,
         email: user.email,
         avatarURL: user.avatarURL,
+        token: ssoToken,
+        roleID: roleID,
       },
     });
 
-    res.json(userInstance[0]);
+    // If the user already exists, update their information
+    if (!created) {
+      await User.update(
+        {
+          name: name || user.name,
+          email: email || user.email,
+          avatarURL: avatarURL || user.avatarURL,
+          token: ssoToken,
+          roleID: roleID,
+        },
+        { where: { id: user.id } }
+      );
+    }
+
+    // Respond with the user information
+    res.json(existingUser);
   } catch (error) {
-    console.error("Error verifying token or inserting user:", error);
+    console.error("Error authenticating user:", error);
     res.status(401).json({ error: "Invalid token" });
-  }
-});
-
-app.post("/insertUser", async (req, res) => {
-  try {
-    const { id, name, email, avatarURL, token, roleID } = req.body;
-
-    console.log("Received userData with roleID:", roleID);
-
-    await User.update({ roleID: roleID }, { where: { id: id } });
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error("Error inserting user:", error);
-    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
