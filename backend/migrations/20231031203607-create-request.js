@@ -17,6 +17,7 @@ module.exports = {
       },
       statusID: {
         type: Sequelize.INTEGER,
+        defaultValue: 1,
         references: {
           model: "Statuses",
           key: "id"
