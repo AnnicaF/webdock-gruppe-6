@@ -1,54 +1,46 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import MK from "../components/MakeRequest.vue";
 import Nav from "../components/Nav.vue";
-import FeaturePost from "../components/FeaturePost.vue";
-//import Footer from "../components/Footer.vue";
-
 import axios from "axios";
 import { ref } from "vue";
 
 const requests = ref(null);
 
-function get(){
-  axios.get("http://localhost:3000/api/v1/request")
+function get() {
+  axios
+    .get("http://localhost:3000/api/v1/request")
     .then((response) => (requests.value = response.data))
-    .then(console.log(requests))
-
     .catch((err) => {
       console.log("error: " + err);
     });
 }
+
 get();
 </script>
 
 <template>
   <Nav />
-  <FilterBar @callLoad="get"/>
-  <FeaturePost
-    v-for="(request, index) in requests"
-    :key="index"
-    :title="request.title"
-    :bodyText="request.bodyText"
-    :index="index"
-    @click="navigateToDetail(request)"
-  />
+  <FilterBar @callLoad="get" />
+  <div>
+    <button @click="sendEmail">Send Email</button>
+  </div>
 </template>
 
 <script>
-export default {
-  components: {
-    FeaturePost,
-  },
-  methods: {
-    navigateToDetail(request) {
-      this.$router.push({
-        name: "featurePostDetail",
-        params: { requestId: request.id },
-      });
-    },
-  },
-};
+import axios from "axios";
+
+async function sendEmail() {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/v1/send-email"
+    );
+
+    // Log JSON-responsen i konsollen
+    console.log(response.data);
+  } catch (error) {
+    console.error("Error sending email:", error.message);
+  }
+}
 </script>
 
 
