@@ -2,7 +2,7 @@
 const postmark = require("postmark");
 
 const client = new postmark.ServerClient(
-  "5ad8a908-04d3-4dbc-918b-228993c31b2a"
+  "c3d41965-18a4-479f-a591-4369b7f5952c"
 );
 
 // Function to send an email
@@ -10,8 +10,8 @@ exports.sendEmail = async (req, res) => {
   try {
     // Send an email
     client.sendEmail({
-      From: "abfr31852@edu.ucl.dk",
-      To: "lban38219@edu.ucl.dk",
+      From: "uclfeedback@webdock.io",
+      To: "abfr31852@edu.ucl.dk",
       Subject: "Hello from Postmark",
       HtmlBody: "<strong>Hello</strong> dear Postmark user.",
       TextBody: "Hello from Postmark!",
