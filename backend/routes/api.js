@@ -8,6 +8,7 @@ const router = express.Router();
 //requests
 router.get("/v1/request", requests.show);
 router.post("/v1/request", requests.create);
+router.post("/v1/request/status", requests.changeStatus)
 
 //categories
 router.get("/v1/category", categories.show);

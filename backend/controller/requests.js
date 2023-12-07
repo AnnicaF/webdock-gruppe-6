@@ -4,9 +4,6 @@ const axios = require("axios");
 //get all requests
 exports.show = async (req, res) => {
   try{
-
-    
-
     const requests = await Request.findAll();
     return res.status(200).json(requests);
   } catch (err) {
@@ -17,10 +14,9 @@ exports.show = async (req, res) => {
 
 //create a new request
 exports.create = async (req, res) => {
-  const { title, bodyText, categoryID, categoryName } = req.body;
-  let userID = 22653;
+  const { title, bodyText, categoryID, categoryName, userId } = req.body;
   let data = {
-    userID: userID,
+    userID: userId,
     title: title,
     description: bodyText,
     category: categoryName
@@ -36,7 +32,7 @@ exports.create = async (req, res) => {
     title: title,
     bodyText: bodyText,
     categoryID: categoryID,
-    userID: userID,
+    userID: userId,
   });
 
   try {
@@ -52,13 +48,15 @@ exports.create = async (req, res) => {
     // Handle the error
     console.error('Error:', error);
   });
-
- 
-
-  
 };
 
+exports.changeStatus = async (req, res) => {
+  try{
+    console.log(req.body);
+  } catch {
 
+  }
+}
 
 
 

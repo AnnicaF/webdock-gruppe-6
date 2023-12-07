@@ -32,6 +32,7 @@ export default {
         console.log("Received userData from backend:", userData);
 
         userData.roleID = userData.email === "abfr31852@edu.ucl.dk" ? 1 : 2;
+        localStorage.setItem('userId', userData.id);
 
         console.log("Modified userData with roleID:", userData);
 

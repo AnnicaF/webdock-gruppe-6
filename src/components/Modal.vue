@@ -69,6 +69,7 @@ export default {
       let category = document.getElementById("category").value.split(",");
       console.log(category);
       let data = {
+        userId: localStorage.getItem("userId"),
         title: document.getElementById("title").value,
         bodyText: document.getElementById("description").value,
         categoryID: category[0],
