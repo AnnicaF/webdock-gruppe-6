@@ -27,7 +27,7 @@
             <option class="option_list" value="">Select a category</option>
             <option
               v-for="(category, index) in categories"
-              :value="category.id"
+              :value="category.id+','+category.name"
               :key="index"
             >
               {{ category.name }}
@@ -66,11 +66,13 @@ export default {
     },
 
     createPost() {
-
+      let category = document.getElementById("category").value.split(",");
+      console.log(category);
       let data = {
         title: document.getElementById("title").value,
         bodyText: document.getElementById("description").value,
-        categoryID: document.getElementById("category").value,
+        categoryID: category[0],
+        categoryName: category[1]
       };
 
       axios.post('http://localhost:3000/api/v1/request', data)
