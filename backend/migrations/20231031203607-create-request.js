@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       bodyText: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       statusID: {
         type: Sequelize.INTEGER,
@@ -50,30 +50,30 @@ module.exports = {
     await queryInterface.addConstraint("Requests", {
       fields: ["userID"],
       type: "foreign key",
-      name:"fk_user_id",
+      name:"fk_request_user",
       references: {
-        model: "Users",
-        key: "id"
+        table: "Users",
+        field: "id"
       }
     });
 
     await queryInterface.addConstraint("Requests", {
       fields: ["statusID"],
       type: "foreign key",
-      name:"fk_status_id",
+      name:"fk_request_status",
       references: {
-        model: "Statuses",
-        key: "id"
+        table: "Statuses",
+        field: "id"
       }
     });
 
     await queryInterface.addConstraint("Requests", {
       fields: ["categoryID"],
       type: "foreign key",
-      name:"fk_category_id",
+      name:"fk_request_category",
       references: {
-        model: "Categories",
-        key: "id"
+        table: "Categories",
+        field: "id"
       }
     });
   },

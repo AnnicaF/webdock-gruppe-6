@@ -39,20 +39,20 @@ module.exports = {
     await queryInterface.addConstraint("Comments", {
       fields: ["userID"],
       type: "foreign key",
-      name:"fk_user_id",
+      name:"fk_comment_user",
       references: {
-        model: "Users",
-        key: "id"
+        table: "Users",
+        field: "id"
       }
     });
 
     await queryInterface.addConstraint("Comments", {
       fields: ["requestID"],
       type: "foreign key",
-      name:"fk_request_id",
+      name:"fk_comment_request",
       references: {
-        model: "Requests",
-        key: "id"
+        table: "Requests",
+        field: "id"
       }
     });
   },
