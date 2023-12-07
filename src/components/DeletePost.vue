@@ -1,20 +1,22 @@
 <template>
   <div>
-    <button @click="showModal" class="statusButton">
-      <font-awesome-icon class="fa-tc" icon="fa-solid fa-trash-can" />Remove
+    <button @click="showModal" class="adminButton">
+      <font-awesome-icon class="fa-tc" icon="fa-solid fa-trash-can" />Delete
       Post
     </button>
+  </div>
 
-    <!-- Modal -->
-    <div
-      :class="{ 'modal-overlay': true, active: isModalVisible }"
-      v-show="isModalVisible"
-    >
-      <div class="modal">
-        <div class="modal-content">
+  <!-- Modal -->
+  <div
+    :class="{ 'modal-overlay': true, active: isModalVisible }"
+    v-show="isModalVisible"
+  >
+    <div class="modal">
+      <div class="modal-content">
+        <div class="buttonContainer">
           <p>Are you sure you want to delete this post?</p>
-          <button @click="deletePost">Yes</button>
-          <button @click="closeModal">Cancel</button>
+          <button @click="deletePost" class="deleteButton">Delete</button>
+          <button @click="closeModal" class="cancelButton">Cancel</button>
         </div>
       </div>
     </div>
@@ -57,17 +59,13 @@ export default {
 <style scoped>
 .fa-tc {
   padding-right: 5px;
+  color: rgb(225, 69, 69);
 }
 
-.statusButton {
+.adminButton {
   color: black;
   font-size: 16px;
-  padding: 12px;
-  margin: 0px;
   cursor: pointer;
-}
-
-button {
   background: white;
   border: 1px solid black;
   border-radius: 5px;
@@ -75,6 +73,11 @@ button {
 
 button:hover {
   background-color: var(--grey-mid);
+}
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin: 0px;
 }
 
 .modal-overlay {
@@ -97,13 +100,37 @@ button:hover {
   padding: 20px;
 }
 
-button {
-  background: white;
-  border: 1px solid black;
+.buttonContainer {
+  text-align: center;
+}
+
+.buttonContainer button {
+  margin: 5px;
+}
+
+.deleteButton {
+  background-color: rgb(225, 69, 69);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
   border-radius: 5px;
 }
 
-button:hover {
+.deleteButton:hover {
+  background-color: rgb(255, 84, 84);
+}
+
+.cancelButton {
+  background-color: rgb(227, 227, 227);
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.cancelButton:hover {
   background-color: var(--grey-mid);
 }
 </style>

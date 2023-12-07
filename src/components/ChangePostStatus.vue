@@ -71,28 +71,28 @@ div ul {
   padding-left: 5px;
   margin: 0px;
 }
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-  margin: 0px;
-}
 
-.statusButton {
+.adminButton {
   color: black;
   font-size: 16px;
   padding: 12px;
   margin: 0px;
   cursor: pointer;
-}
-
-button {
   background: white;
   border: 1px solid black;
   border-radius: 5px;
 }
 
+.adminButton {
+}
+
 button:hover {
   background-color: var(--grey-mid);
+}
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin: 0px;
 }
 
 .dropdown-content {
