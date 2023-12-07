@@ -50,19 +50,31 @@ module.exports = {
     await queryInterface.addConstraint("Requests", {
       fields: ["userID"],
       type: "foreign key",
-      name:"fk_user_id"
+      name:"fk_user_id",
+      references: {
+        model: "Users",
+        key: "id"
+      }
     });
 
     await queryInterface.addConstraint("Requests", {
       fields: ["statusID"],
       type: "foreign key",
-      name:"fk_user_id"
+      name:"fk_status_id",
+      references: {
+        model: "Statuses",
+        key: "id"
+      }
     });
 
     await queryInterface.addConstraint("Requests", {
       fields: ["categoryID"],
       type: "foreign key",
-      name:"fk_user_id"
+      name:"fk_category_id",
+      references: {
+        model: "Categories",
+        key: "id"
+      }
     });
   },
   async down(queryInterface, Sequelize) {

@@ -39,13 +39,21 @@ module.exports = {
     await queryInterface.addConstraint("Replies", {
       fields: ["userID"],
       type: "foreign key",
-      name:"fk_user_id"
+      name:"fk_user_id",
+      references: {
+        model: "Users",
+        key: "id"
+      }
     });
 
     await queryInterface.addConstraint("Replies", {
       fields: ["commentID"],
       type: "foreign key",
-      name:"fk_user_id"
+      name:"fk_comment_id",
+      references: {
+        model: "Comments",
+        key: "id"
+      }
     });
   },
   async down(queryInterface, Sequelize) {

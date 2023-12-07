@@ -40,7 +40,11 @@ module.exports = {
     await queryInterface.addConstraint("Users", {
       fields: ["roleID"],
       type: "foreign key",
-      name:"fk_user_id"
+      name:"fk_role_id",
+      references: {
+        table: "Roles", // Specify the table name here
+        field: "id"      // Specify the field name here
+      },
     });
   },
   async down(queryInterface, Sequelize) {
