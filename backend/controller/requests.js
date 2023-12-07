@@ -1,4 +1,4 @@
-const {Request} = require("../models");
+const {Request, Comment} = require("../models");
 
 //get all requests
 exports.show = async (req, res) => {
@@ -37,6 +37,7 @@ exports.showOne = async (req, res) => {
     where: {
       id: req.params.id,
     },
+    include: Comment
   });
   res.status(200).json(request);
 };
