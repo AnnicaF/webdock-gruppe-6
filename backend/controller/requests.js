@@ -32,7 +32,14 @@ exports.create = async (req, res) => {
   }
 };
 
-
+exports.showOne = async (req, res) => {
+  const request = await Request.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.status(200).json(request);
+};
 
 
 

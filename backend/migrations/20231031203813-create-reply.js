@@ -13,10 +13,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       userID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id"
+        }
       },
       commentID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Comments",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +34,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    });
+
+    await queryInterface.addConstraint("Replies", {
+      fields: ["userID"],
+      type: "foreign key",
+      name:"fk_user_id"
+    });
+
+    await queryInterface.addConstraint("Replies", {
+      fields: ["commentID"],
+      type: "foreign key",
+      name:"fk_user_id"
     });
   },
   async down(queryInterface, Sequelize) {
