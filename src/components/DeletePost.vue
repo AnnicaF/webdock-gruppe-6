@@ -1,23 +1,23 @@
 <template>
   <div>
-    <template v-if="isAdmin">
-      <p>You have the permission to remove posts.</p>
-      <button @click="openModal">
-        <font-awesome-icon class="fa-tc" icon="fa-solid fa-trash-can" />Remove
-        Post
-      </button>
-      <div v-if="showModal" class="modal-overlay">
-        <div class="modal">
-          <p>Are you sure you want to remove this post?</p>
-          <button @click="confirmDelete">Yes</button>
+    <button @click="showModal" class="statusButton">
+      <font-awesome-icon class="fa-tc" icon="fa-solid fa-trash-can" />Remove
+      Post
+    </button>
+
+    <!-- Modal -->
+    <div
+      :class="{ 'modal-overlay': true, active: isModalVisible }"
+      v-show="isModalVisible"
+    >
+      <div class="modal">
+        <div class="modal-content">
+          <p>Are you sure you want to delete this post?</p>
+          <button @click="deletePost">Yes</button>
           <button @click="closeModal">Cancel</button>
         </div>
       </div>
-    </template>
-
-    <template v-else>
-      <p>You do not have permission to remove posts.</p>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -25,35 +25,29 @@
 export default {
   data() {
     return {
-      isAdmin: false,
-      showModal: false,
+      isModalVisible: false,
     };
   },
-  created() {
-    // requires admin user role
-    this.isAdmin =
-      this.$store.state.user && this.$store.state.user.role === "admin";
-  },
   methods: {
-    openModal() {
-      this.showModal = true;
+    showModal() {
+      this.isModalVisible = true;
     },
     closeModal() {
-      this.showModal = false;
+      this.isModalVisible = false;
     },
-    confirmDelete() {
-      // Make an Axios request to your backend to delete the post
-      this.$axios
+    deletePost() {
+      // Perform the deletion using Axios
+      const postId = 1; // Replace with the actual post ID
+      axios
         .delete(`/api/posts/${postId}`)
-        .then((response) => {
-          // Handle success (e.g., show a success message)
-          console.log("Post removed");
+        .then(() => {
+          console.log("Post deleted successfully");
           this.closeModal();
+          // You might want to emit an event or update some state in AdminPanel
         })
         .catch((error) => {
-          // Handle error (e.g., show an error message)
-          console.error("Error removing post:", error);
-          this.closeModal();
+          console.error("Error deleting post", error);
+          // Handle error, e.g., show an error message to the user
         });
     },
   },
@@ -61,22 +55,55 @@ export default {
 </script>
 
 <style scoped>
+.fa-tc {
+  padding-right: 5px;
+}
+
+.statusButton {
+  color: black;
+  font-size: 16px;
+  padding: 12px;
+  margin: 0px;
+  cursor: pointer;
+}
+
+button {
+  background: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: var(--grey-mid);
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Style for the modal content */
 .modal {
   background: white;
+  border: 1px solid black;
+  border-radius: 5px;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  background: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: var(--grey-mid);
 }
 </style>

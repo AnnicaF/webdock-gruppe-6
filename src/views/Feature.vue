@@ -1,7 +1,7 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
 import MK from "../components/MakeRequest.vue";
-import Nav from "../components/Nav.vue";
+import NavBar from "../components/NavBar.vue";
 import FeaturePost from "../components/FeaturePost.vue";
 //import Footer from "../components/Footer.vue";
 
@@ -10,8 +10,9 @@ import { ref } from "vue";
 
 const requests = ref(null);
 
-function get(){
-  axios.get("http://localhost:3000/api/v1/request")
+function get() {
+  axios
+    .get("http://localhost:3000/api/v1/request")
     .then((response) => (requests.value = response.data))
     .then(console.log(requests))
 
@@ -23,8 +24,8 @@ get();
 </script>
 
 <template>
-  <Nav />
-  <FilterBar @callLoad="get"/>
+  <NavBar />
+  <FilterBar @callLoad="get" />
   <FeaturePost
     v-for="(request, index) in requests"
     :key="index"
@@ -50,7 +51,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 button {
