@@ -1,6 +1,6 @@
 <template>
   <div :class="{ showDropdown: showDropdown }" class="dropdown-container">
-    <button @click="toggleDropdown" class="statusButton">
+    <button @click="toggleDropdown" class="adminButton">
       Under Review<font-awesome-icon
         class="fa-cd"
         icon="fa-solid fa-caret-down"
