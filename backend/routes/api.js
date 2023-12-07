@@ -5,9 +5,9 @@ const auth = require("../controller/auth");
 
 const router = express.Router();
 
-
 router.get("/v1/request", requests.show);
 router.post("/v1/request", requests.create);
+router.get("/v1/requests/newest", requests.getNewestRequests);
 
 router.post("/v1/authenticate", auth.authentication);
 

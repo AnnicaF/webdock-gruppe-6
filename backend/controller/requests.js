@@ -1,17 +1,14 @@
-const {Request} = require("../models");
+const { Request } = require("../models");
 
 //get all requests
 exports.show = async (req, res) => {
-  try{
+  try {
     const requests = await Request.findAll();
     return res.status(200).json(requests);
   } catch (err) {
     console.log(err);
     return res.send("Error");
   }
-  
-
-  
 };
 
 //create a new request
@@ -33,10 +30,18 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.getNewestRequests = async (req, res) => {
+  try {
+    const newestRequests = await Request.findAll({
+      order: [["createdAt", "DESC"]],
+    });
 
-
-
-
+    res.json(newestRequests);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
 // router.get("/v1/request", async (req, res) => {
 //   const users = await Request.findAll();

@@ -63,6 +63,11 @@ export default {
     },
     setActiveTab(tabName) {
       this.activeTab = tabName;
+      if (tabName === "New") {
+        // Udsend en begivenhed til parent komponenten (feature.vue)
+        // for at informere om, at "New" er valgt
+        this.$emit("newSelected");
+      }
     },
   },
 };

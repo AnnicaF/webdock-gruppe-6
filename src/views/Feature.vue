@@ -10,8 +10,9 @@ import { ref } from "vue";
 
 const requests = ref(null);
 
-function get(){
-  axios.get("http://localhost:3000/api/v1/request")
+function get() {
+  axios
+    .get("http://localhost:3000/api/v1/request")
     .then((response) => (requests.value = response.data))
     .then(console.log(requests))
 
@@ -20,11 +21,22 @@ function get(){
     });
 }
 get();
+
+const getNewestRequests = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/api/v1/requests/newest"
+    );
+    requests.value = response.data;
+  } catch (error) {
+    console.error("Error fetching newest requests:", error);
+  }
+};
 </script>
 
 <template>
   <Nav />
-  <FilterBar @callLoad="get"/>
+  <FilterBar @callLoad="get" @newSelected="getNewestRequests" />
   <FeaturePost
     v-for="(request, index) in requests"
     :key="index"
