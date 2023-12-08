@@ -40,7 +40,7 @@ export default {
       // Log when the search method is called (for testing)
       console.log("Search method called:", this.query);
       this.$parent.$emit("callsearch", this.query.toLowerCase());
-
+      /*
       // for now it's just mock data, so no debouncing, search() will eventually make an API call
       const mockData = [
         { id: 1, name: "Item 1" },
@@ -51,6 +51,7 @@ export default {
       this.results = mockData.filter((item) =>
         item.name.toLowerCase().includes(this.query.toLowerCase())
       );
+      */
     },
   },
 
