@@ -21,7 +21,7 @@ get();
 </script>
 
 <template>
-  <Nav />
+  <NavBar />
   <FilterBar @callLoad="get" />
   <div class="box">
     <button
