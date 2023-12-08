@@ -27,6 +27,10 @@ get();
     <button
       v-for="(request, index) in requests"
       :key="index"
+      :title="request.title"
+      :bodyText="request.bodyText"
+      :status="'Under Review'"
+      :index="index"
       @click="navigateToDetail(request)"
     >
       <FeaturePost

@@ -13,7 +13,7 @@
         <h2 class="title">{{ title }}</h2>
         <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
-            planned
+            {{status}}
           </div>
         </div> 
         <p class="bodyText">{{ bodyText }}</p>
@@ -53,12 +53,12 @@ export default {
     },
     getStatusClass(status) {
       const statusColorMap = {
-        planned: "planned-color",
+        "planned": "planned-color",
         "under review": "under-review-color",
-        completed: "completed-color",
+        "completed": "completed-color",
         "in progress": "in-progress-color",
       };
-      return statusColorMap[status] || "default-color";
+      return statusColorMap[status.toLowerCase()] || "default-color";
       },
       
       getIndexClass(index) {

@@ -1,4 +1,6 @@
 const {Request, Comment, User} = require("../models");
+const axios = require("axios");
+
 
 //get all requests
 exports.show = async (req, res) => {
@@ -9,9 +11,6 @@ exports.show = async (req, res) => {
     console.log(err);
     return res.send("Error");
   }
-  
-
-  
 };
 
 //get one request + user + comment
@@ -36,21 +35,51 @@ exports.showOne = async (req, res) => {
 
 //create a new request
 exports.create = async (req, res) => {
-  const { title, bodyText } = req.body;
-    
-  const newRequest = Request.build({
+  const { title, bodyText, categoryID, categoryName, userId } = req.body;
+  let data = {
+    userID: userId,
+    title: title,
+    description: bodyText,
+    category: categoryName
+  }
+
+  axios.post("https://webdock.io/en/platform_data/feature_requests/new", data)
+  .then(response => {
+    // Handle the success response
+    let webdockID = response.data.id;
+
+    const newRequest = Request.build({
+    id: webdockID,
     title: title,
     bodyText: bodyText,
+    categoryID: categoryID,
+    userID: userId,
   });
 
   try {
-    await newRequest.save();
+    newRequest.save();
 
     return res.status(201).json(newRequest);
   } catch (err) {
     return res.json(err);
   }
+
+  })
+  .catch(error => {
+    // Handle the error
+    console.error('Error:', error);
+  });
 };
+
+
+//webdock change status
+exports.changeStatus = async (req, res) => {
+  try{
+    console.log(req.body);
+  } catch {
+
+  }
+}
 
 //create a new comment
 exports.createComment = async (req, res) => {
@@ -64,6 +93,7 @@ exports.createComment = async (req, res) => {
 
   try {
     await newComment.save();
+
 
     return res.status(201).json(newComment);
   } catch (err) {

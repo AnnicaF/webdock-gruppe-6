@@ -10,10 +10,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       bodyText: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING,
+        allowNull: false
       },
       statusID: {
         type: Sequelize.INTEGER,
@@ -25,6 +27,7 @@ module.exports = {
       },
       categoryID: {
         type: Sequelize.INTEGER,
+        defaultValue: 1,
         references: {
           model: "Categories",
           key: "id"

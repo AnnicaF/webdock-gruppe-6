@@ -1,3 +1,18 @@
+<script setup>
+  import axios from "axios";
+  import { ref } from "vue";
+
+  const categories = ref(null);
+
+  axios.get("http://localhost:3000/api/v1/category")
+    .then((response) => (categories.value = response.data))
+    .then(console.log(categories))
+
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+</script>
+
 <template>
   <div class="modal" id="modal">
     <div class="modal_content">
@@ -12,10 +27,10 @@
             <option class="option_list" value="">Select a category</option>
             <option
               v-for="(category, index) in categories"
-              :value="category"
+              :value="category.id+','+category.name"
               :key="index"
             >
-              {{ category }}
+              {{ category.name }}
             </option>
           </select>
         </div>
@@ -40,22 +55,6 @@ import axios from "axios";
 import Feature from "../views/Feature.vue";
 
 export default {
-  data() {
-    return {
-      categories: [
-        "Dashboard Features",
-        "Documentation",
-        "Billing Features",
-        "Networking",
-        "Hardware and products",
-        "Perfect Server Stacks",
-        "Mobile App",
-        "Webdock API",
-        "Competition",
-        "Uncategorized",
-      ],
-    };
-  },
   name: "Modal",
   methods: {
     show() {
@@ -67,9 +66,14 @@ export default {
     },
 
     createPost() {
+      let category = document.getElementById("category").value.split(",");
+      console.log(category);
       let data = {
+        userId: localStorage.getItem("userId"),
         title: document.getElementById("title").value,
-        bodyText: document.getElementById("description").value
+        bodyText: document.getElementById("description").value,
+        categoryID: category[0],
+        categoryName: category[1]
       };
 
       axios.post('http://localhost:3000/api/v1/request', data)
