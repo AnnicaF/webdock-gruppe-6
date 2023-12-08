@@ -1,7 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import axios from "axios";
-import router from "./router"; // Sørg for at din router-fil er korrekt konfigureret
+import router from "./router";
+import store from "./store/store";
 
 import "@fortawesome/fontawesome-free/css/all.css";
 
@@ -26,10 +27,10 @@ library.add(faUserSecret, faComment, faCodeMerge);
 
 const app = createApp(App);
 
-// Brug Vue Router
 app.use(router);
 
-// Scroll til toppen ved navigation
+app.use(store);
+
 router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0);
   next();
