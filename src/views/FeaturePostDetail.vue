@@ -3,7 +3,7 @@ import { ref, onMounted, getCurrentInstance, defineExpose } from "vue";
 import axios from "axios";
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
-import Nav from "@/components/Nav.vue";
+import NavBar from "@/components/NavBar.vue";
 
 const { proxy } = getCurrentInstance();
 const selectedPost = ref(null);
@@ -51,9 +51,8 @@ onMounted(() => {
 </script>
 
 <template>
-
   <div>
-    <Nav />
+    <NavBar />
     <template v-if="loading">
       <!-- Vis en indlæsningsindikator her -->
       <p>Loading...</p>
@@ -80,7 +79,7 @@ export default {
   components: {
     PostDetail,
     CommentSection,
-    Nav,
+    NavBar,
   },
 
   methods: {

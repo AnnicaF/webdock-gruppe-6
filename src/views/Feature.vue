@@ -1,6 +1,7 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import Nav from "../components/Nav.vue";
+import MK from "../components/MakeRequest.vue";
+import NavBar from "../components/NavBar.vue";
 import FeaturePost from "../components/FeaturePost.vue";
 import axios from "axios";
 import { ref } from "vue";
