@@ -1,28 +1,53 @@
-// Require:
+const { Op } = require("sequelize");
+const { Request, User } = require("../models");
 const postmark = require("postmark");
+const cron = require("node-cron");
 
 const client = new postmark.ServerClient(
   "c3d41965-18a4-479f-a591-4369b7f5952c"
 );
 
-// Function to send an email
-exports.sendEmail = async (req, res) => {
+exports.sendDailyEmail = async () => {
   try {
-    // Send an email
-    client.sendEmail({
-      From: "uclfeedback@webdock.io",
-      To: "abfr31852@edu.ucl.dk",
-      Subject: "Hello from Postmark",
-      HtmlBody: "<strong>Hello</strong> dear Postmark user.",
-      TextBody: "Hello from Postmark!",
-      MessageStream: "outbound",
+    const currentDate = new Date();
+    const twentyFourHoursAgo = new Date(
+      currentDate.getTime() - 24 * 60 * 60 * 1000
+    );
+
+    const newRequests = await Request.findAll({
+      where: {
+        createdAt: {
+          [Op.gte]: twentyFourHoursAgo,
+        },
+      },
     });
 
-    res.json({
-      message: "E-mail sent successfully",
+    const usersWithRoleID = await User.findAll({
+      where: {
+        roleID: 1,
+      },
     });
+
+    // email content
+    const emailContent = `<p>Dear Admin,</p><p>Here are the new requests created in the last 24 hours:</p><ul>${newRequests
+      .map((request) => `<li>${request.title}</li>`)
+      .join("")}</ul>`;
+    ("<p>Good luck with your work!</p>");
+
+    for (const user of usersWithRoleID) {
+      await client.sendEmail({
+        From: "uclfeedback@webdock.io",
+        To: user.email,
+        Subject: "New Requests in the Last 24 Hours",
+        HtmlBody: emailContent,
+        MessageStream: "outbound",
+      });
+    }
+
+    console.log("Daily email sent successfully");
   } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("Error sending daily email:", error);
   }
 };
+
+cron.schedule("00 10 * * *", exports.sendDailyEmail);

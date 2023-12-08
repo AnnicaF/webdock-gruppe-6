@@ -21,27 +21,8 @@ get();
 <template>
   <Nav />
   <FilterBar @callLoad="get" />
-  <div>
-    <button @click="sendEmail">Send Email</button>
-  </div>
 </template>
 
-<script>
-import axios from "axios";
-
-async function sendEmail() {
-  try {
-    const response = await axios.post(
-      "http://localhost:3000/api/v1/send-email"
-    );
-
-    // Log JSON-responsen i konsollen
-    console.log(response.data);
-  } catch (error) {
-    console.error("Error sending email:", error.message);
-  }
-}
-</script>
 
 
 <style scoped>
