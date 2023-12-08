@@ -13,6 +13,9 @@
         </li>
         <li><router-link :to="{ name: 'RoadMap' }">Roadmap</router-link></li>
       </ul>
+
+      <Search />
+
       <ul class="logsign">
         <LoginButton />
         <button type="button" class="signup">Sign up</button>
@@ -23,10 +26,12 @@
 
 <script>
 import LoginButton from "@/components/LoginButton.vue";
+import Search from "@/components/Search.vue";
 
 export default {
   components: {
     LoginButton,
+    Search,
   },
 };
 </script>

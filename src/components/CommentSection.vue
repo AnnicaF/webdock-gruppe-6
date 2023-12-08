@@ -12,11 +12,11 @@
         <li v-for="comment in sortedComments" :key="comment.id">
           <div class="comment-content">
             <p>
-              <strong>{{ comment.user }}</strong>
+              <strong>{{ comment.User.name }}</strong>
             </p>
-            <p>{{ comment.text }}</p>
+            <p>{{ comment.bodyText }}</p>
             <hr />
-            <p class="comment-date">{{ comment.date }}</p>
+            <p class="comment-date">{{ comment.createdAt }}</p>
             <span @click="toggleReply(comment)" class="reply-text">Reply</span>
           </div>
 
@@ -67,7 +67,7 @@ export default {
   methods: {
     addComment() {
       this.$emit("addComment", this.newComment);
-
+      console.log(this.newComment);
       // Clear the input field
       this.newComment = "";
     },
@@ -102,3 +102,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  textarea {
+    width: 99%;
+    resize: none;
+  }
+</style>
