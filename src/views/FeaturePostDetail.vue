@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted, getCurrentInstance } from "vue";
+import { ref, onMounted, getCurrentInstance, defineExpose } from "vue";
 import axios from "axios";
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
-import Nav from "@/components/Nav.vue";
+import NavBar from "@/components/NavBar.vue";
 
 const { proxy } = getCurrentInstance();
 const selectedPost = ref(null);
@@ -15,6 +15,7 @@ const fetchPostDetails = async (requestId) => {
       `http://localhost:3000/api/v1/request/${requestId}`
     );
     selectedPost.value = response.data;
+    console.log(selectedPost.value);
   } catch (error) {
     console.error("Error fetching post details:", error);
     // Håndter fejl (f.eks. omdirigere til en 404-side)
@@ -23,16 +24,35 @@ const fetchPostDetails = async (requestId) => {
   }
 };
 
+const doComment = (newComment) => {
+
+  let data = {
+    bodyText: newComment,
+    userID: localStorage.getItem("userId"),
+    requestID: selectedPost.value.id 
+  };
+  axios.post(`http://localhost:3000/api/v1/request/${selectedPost.value.id }/comment`, data)
+    .then(response => {
+      // Handle the success response
+      console.log('Response:', response.data);
+      fetchPostDetails(selectedPost.value.id);
+    })
+    .catch(error => {
+      // Handle the error
+      console.error('Error:', error);
+    });
+}
+
 onMounted(() => {
   const requestId = proxy.$route.params.requestId;
   fetchPostDetails(requestId);
 });
+
 </script>
 
 <template>
-
   <div>
-    <Nav />
+    <NavBar />
     <template v-if="loading">
       <!-- Vis en indlæsningsindikator her -->
       <p>Loading...</p>
@@ -42,7 +62,7 @@ onMounted(() => {
       <PostDetail :post="selectedPost" />
       <CommentSection
         :comments="selectedPost.Comments"
-        @addComment="addComment"
+        @addComment="doComment"
         @Reply="addReply"
       />
     </template>
@@ -59,21 +79,11 @@ export default {
   components: {
     PostDetail,
     CommentSection,
-    Nav,
+    NavBar,
   },
 
   methods: {
-    async handleAddComment(newComment) {
-      // Update the comments data in the parent component
-      this.selectedPost.Comments.unshift({
-        id: this.selectedPost.Comments.length + 1,
-        user: "Annica Frederiksen",
-        text: newComment,
-        date: new Date().toLocaleDateString(),
-        replyActive: false,
-        replyText: "",
-      });
-    },
+    
   },
   setup() {
     const selectedPost = ref(null);
@@ -101,17 +111,6 @@ export default {
       const requestId = proxy.$route.params.requestId;
       fetchPostDetails(requestId);
     });
-
-    const addComment = (newComment) => {
-      // Add the comment to the 'Comments' array
-      selectedPost.value.Comments.push({
-        id: selectedPost.value.Comments.length + 1,
-        user: "Current User",
-        text: newComment,
-        date: new Date().toLocaleDateString(),
-        Replies: [],
-      });
-    };
 
     const addReply = ({ comment, replyText }) => {
       // Add the reply to the 'Replies' array in the respective comment

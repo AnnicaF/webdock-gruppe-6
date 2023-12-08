@@ -1,14 +1,15 @@
 <script setup>
-import Nav from "../components/Nav.vue";
+import NavBar from "../components/NavBar.vue";
 import RoadMapPost from "../components/RoadMapPost.vue";
+import AdminPanel from "../components/AdminPanel.vue";
 </script>
 
 <template>
-  <Nav />
+  <NavBar />
+  <AdminPanel />
   <div>
     <RoadMapPost :posts="hardcodedPosts" />
   </div>
-  <Footer />
 </template>
 
 <script>
