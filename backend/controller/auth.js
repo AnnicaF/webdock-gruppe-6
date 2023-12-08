@@ -1,19 +1,7 @@
-const express = require("express");
+const { User } = require("../models");
 const jwt = require("jsonwebtoken");
-const { User } = require("./models");
-const app = express();
-const port = 3001;
-const cors = require("cors");
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
-
-app.use(express.json());
-
-app.post("/authenticate", async (req, res) => {
+exports.authentication = async (req, res) => {
   try {
     const { ssoToken, name, email, avatarURL } = req.body;
 
@@ -56,8 +44,4 @@ app.post("/authenticate", async (req, res) => {
     console.error("Error authenticating user:", error);
     res.status(401).json({ error: "Invalid token" });
   }
-});
-
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+};

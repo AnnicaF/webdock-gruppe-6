@@ -25,15 +25,18 @@ export default {
         console.log("Fetching data with ssoToken:", ssoToken);
 
         // Send et POST request til authenticate med ssoToken til vores backend endpoint
-        const response = await fetch("http://localhost:3001/authenticate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          // Sender ssoToken som JSON til request body
-          body: JSON.stringify({ ssoToken }),
-        });
+        const response = await fetch(
+          "http://localhost:3000/api/v1/authenticate",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            // Sender ssoToken som JSON til request body
+            body: JSON.stringify({ ssoToken }),
+          }
+        );
 
         // Parse the JSON response med user data
         const userData = await response.json();
