@@ -1,6 +1,7 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
 import Nav from "../components/Nav.vue";
+import FeaturePost from "../components/FeaturePost.vue";
 import axios from "axios";
 import { ref } from "vue";
 
@@ -36,6 +37,21 @@ get();
   </div>
 </template>
 
+<script>
+export default {
+  components: {
+    FeaturePost,
+  },
+  methods: {
+    navigateToDetail(request) {
+      this.$router.push({
+        name: "featurePostDetail",
+        params: { requestId: request.id },
+      });
+    },
+  },
+};
+</script>
 
 <style scoped>
 button {
