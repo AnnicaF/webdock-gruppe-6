@@ -16,6 +16,11 @@ export default {
       try {
         const urlParams = new URLSearchParams(window.location.search);
         const ssoToken = urlParams.get("ssoToken");
+        if (ssoToken == null){
+          ssoToken = localStorage.getItem("ssoToken");
+        }else{
+          localStorage.setItem("ssoToken", ssoToken);
+        }
 
         console.log("Fetching data with ssoToken:", ssoToken);
 
@@ -36,7 +41,7 @@ export default {
         // Parse the JSON response med user data
         const userData = await response.json();
         console.log("Received userData from backend:", userData);
-
+        localStorage.setItem("userId", userData.id)
         console.log("User data sent successfully.");
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -1,0 +1,35 @@
+@import "./base.css";
+
+.search-container {
+  /*  max-width: 235px; */
+  margin: 0;
+  flex: 0 1 470px; /* flex-grow, flex-shrink, flex-basis */
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 18px;
+  font-size: 1.2em;
+  border-radius: 25px; /* Makes the input rounded */
+  border: 2px solid #018647;
+  outline: none;
+  transition: box-shadow 0.3s;
+  padding-left: 40px; /* to make room for the icon */
+}
+
+.search-input:focus {
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+}

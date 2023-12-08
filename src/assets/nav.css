@@ -1,98 +1,159 @@
-@import './base.css';
+@import "./base.css";
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 
 header {
-   background-color: white;
-   z-index: 99;
-   width: 100%;
-   border-top: 12px solid #018647;
-   border-bottom: 2px solid #EFEFEF;
+  background-color: white;
+  z-index: 99;
+  width: 100%;
+  border-top: 12px solid #018647;
+  border-bottom: 2px solid #efefef;
 }
 
 nav {
-   display: flex;
-   flex-direction: row;
-   padding: 12px 0;
-   width: 90%;
-   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  padding: 12px 0;
+  width: 90%;
+  margin: 0 auto;
+  align-items: center;
 }
 
 .navigation {
-   display: flex;
-   align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.navigation a {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
 }
 
 ul,
 .link {
-   list-style: none;
-   text-decoration: none;
+  list-style: none;
+  text-decoration: none;
 }
 
 li {
-   padding: 16px;
-   margin-left: 16px
+  padding: 16px;
+  margin-left: 16px;
 }
 
 .link {
-   transition: .5s ease all;
-   padding-bottom: 4px;
-   border-bottom: 1px solid transparent;
-   text-decoration: none;
+  transition: 0.5s ease all;
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
 }
 
 a {
-   text-decoration: none;
-   font-size: 18px;
-   font-weight: bold;
-   color: black;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
 }
 
 a:hover {
-   color: #018647;
+  color: #018647;
 }
 
 .branding {
-   display: flex;
-   align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logsign {
-   display: flex;
-   align-items: center;
-   flex: 1;
-   justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 1 auto;
+
+  margin-left: 1rem;
 }
 
 button {
-   padding: 10px 20px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 18px;
-   margin: 10px;
-   font-weight: bold;
-   transition-duration: .4s;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 10px;
+  font-weight: bold;
+  transition-duration: 0.4s;
 }
 
 .login {
-   background-color: #018647;
-   border: solid #018647;
-   color: white;
-   border-radius: 5px;
+  background-color: #018647;
+  border: solid #018647;
+  color: white;
+  border-radius: 5px;
 }
 
 .login:hover {
-   background-color: white;
-   color: #018647;
+  background-color: white;
+  color: #018647;
 }
 
 .signup {
-   background-color: white;
-   border: solid #018647;
-   color: #018647;
-   border-radius: 5px;
+  background-color: white;
+  border: solid #018647;
+  color: #018647;
+  border-radius: 5px;
 }
 
 .signup:hover {
-   background-color: #018647;
-   color: white;
+  background-color: #018647;
+  color: white;
+}
+
+.branding,
+.navigation,
+.search-container,
+.logsign {
+  flex: 0 1 auto;
+}
+
+.search-container {
+  flex: 0 1 470px; /* flex-grow, flex-shrink, flex-basis */
+  margin-right: auto;
+
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-container {
+    order: 1; /* Search bar appears 1st */
+    max-width: 100%;
+    flex: none; /* Override any previous flex settings */
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .branding {
+    order: 2; /* Logo appears 2nd */
+    margin-bottom: 0.5rem;
+  }
+
+  .navigation {
+    order: 3; /* Navigation links appears 3rd */
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .logsign {
+    order: 4; /* Login/sign-up buttons appears last */
+    width: 100%;
+    justify-content: center;
+  }
+
+  nav ul li {
+    margin: 0; /* To remove margin from li elements in mobile view */
+    padding: 0.5rem;
+  }
 }
