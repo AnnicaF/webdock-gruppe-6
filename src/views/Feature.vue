@@ -24,7 +24,7 @@ get();
 
 <template>
   <Nav />
-  <FilterBar />
+  <FilterBar @callLoad="get"/>
   <div class="box">
     <button
       v-for="(request, index) in requests"

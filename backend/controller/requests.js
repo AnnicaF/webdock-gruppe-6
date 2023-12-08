@@ -1,4 +1,4 @@
-const {Request, Comment} = require("../models");
+const {Request, Comment, User} = require("../models");
 
 //get all requests
 exports.show = async (req, res) => {
@@ -13,6 +13,26 @@ exports.show = async (req, res) => {
 
   
 };
+
+//get one request + user + comment
+exports.showOne = async (req, res) => {
+  const request = await Request.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [
+      {
+        model: User
+      },
+      {
+        model: Comment,
+        include: User
+      }
+    ]
+  });
+  res.status(200).json(request);
+};
+
 
 //create a new request
 exports.create = async (req, res) => {
@@ -32,16 +52,24 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.showOne = async (req, res) => {
-  const request = await Request.findOne({
-    where: {
-      id: req.params.id,
-    },
-    include: Comment
+//create a new comment
+exports.createComment = async (req, res) => {
+  const { bodyText, userID, requestID } = req.body;
+    
+  const newComment = Comment.build({
+    bodyText: bodyText,
+    userID: userID,
+    requestID: requestID
   });
-  res.status(200).json(request);
-};
 
+  try {
+    await newComment.save();
+
+    return res.status(201).json(newComment);
+  } catch (err) {
+    return res.json(err);
+  }
+};
 
 
 

@@ -1,4 +1,3 @@
-
 <template>
   <div class="post-container">
     <div class="vote">
@@ -15,14 +14,14 @@
         <p class="description">{{ post.bodyText }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text"> user </p>
+          <p class="small-text"> {{ post.User.name }} </p>
           <p class="small-text">{{ post.createdAt }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count"> commentCount </span>
+            <span class="comment-count" @load="countComments(post.comments)"> </span>
           </div>
         </div>
       </div>
@@ -42,6 +41,10 @@ export default {
     upvotePost() {
       console.log("Upvoting post:", this.post.id);
     },
+    countComments(com) {
+      console.log("bob")
+      document.getElementById("comment-count").innerHTML = com.length
+    }
   },
 };
 </script>
