@@ -60,6 +60,7 @@ export default {
       };
       return statusColorMap[status] || "default-color";
       },
+      
       getIndexClass(index) {
       let i = index % 2;
       return "iswhite-"+i

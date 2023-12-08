@@ -13,10 +13,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       userID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id"
+        }
       },
       requestID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Requests",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +33,26 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      }
+    });
+
+    await queryInterface.addConstraint("Comments", {
+      fields: ["userID"],
+      type: "foreign key",
+      name:"fk_comment_user",
+      references: {
+        table: "Users",
+        field: "id"
+      }
+    });
+
+    await queryInterface.addConstraint("Comments", {
+      fields: ["requestID"],
+      type: "foreign key",
+      name:"fk_comment_request",
+      references: {
+        table: "Requests",
+        field: "id"
       }
     });
   },

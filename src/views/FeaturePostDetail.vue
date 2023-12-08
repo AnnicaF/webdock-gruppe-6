@@ -15,6 +15,7 @@ const fetchPostDetails = async (requestId) => {
       `http://localhost:3000/api/v1/request/${requestId}`
     );
     selectedPost.value = response.data;
+    console.log(selectedPost.value);
   } catch (error) {
     console.error("Error fetching post details:", error);
     // Håndter fejl (f.eks. omdirigere til en 404-side)
@@ -40,11 +41,11 @@ onMounted(() => {
     <template v-else>
       <!-- Vis PostDetail og CommentSection her -->
       <PostDetail :post="selectedPost" />
-      <CommentSection
+      <!-- <CommentSection
         :comments="selectedPost.Comments"
         @addComment="addComment"
         @Reply="addReply"
-      />
+      /> -->
     </template>
   </div>
 </template>

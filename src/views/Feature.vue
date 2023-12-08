@@ -21,8 +21,22 @@ get();
 <template>
   <Nav />
   <FilterBar @callLoad="get" />
-</template>
 
+  <FilterBar />
+  <div class="box">
+    <button
+      v-for="(request, index) in requests"
+      :key="index"
+      @click="navigateToDetail(request)"
+    >
+      <FeaturePost
+        :title="request.title"
+        :bodyText="request.bodyText"
+        :index="index"
+      />
+    </button>
+  </div>
+</template>
 
 
 <style scoped>

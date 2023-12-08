@@ -6,6 +6,8 @@ const cron = require("node-cron");
 const router = express.Router();
 
 router.get("/v1/request", requests.show);
+router.get("/v1/request/:id", requests.showOne)
+
 router.post("/v1/request", requests.create);
 
 module.exports = router;

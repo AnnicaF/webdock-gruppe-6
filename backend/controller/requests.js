@@ -1,4 +1,4 @@
-const {Request} = require("../models");
+const {Request, Comment} = require("../models");
 
 //get all requests
 exports.show = async (req, res) => {
@@ -16,9 +16,8 @@ exports.show = async (req, res) => {
 
 //create a new request
 exports.create = async (req, res) => {
-  console.log("bob");
   const { title, bodyText } = req.body;
-
+    
   const newRequest = Request.build({
     title: title,
     bodyText: bodyText,
@@ -33,7 +32,15 @@ exports.create = async (req, res) => {
   }
 };
 
-
+exports.showOne = async (req, res) => {
+  const request = await Request.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: Comment
+  });
+  res.status(200).json(request);
+};
 
 
 

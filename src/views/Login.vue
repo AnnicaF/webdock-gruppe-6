@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <button @click="redirectToWebDock">Redirect</button>
-  </div>
+  <div></div>
 </template>
-  
+<!--   
 <script>
 export default {
   methods: {
@@ -58,4 +56,4 @@ export default {
     }
   },
 };
-</script>
+</script> -->

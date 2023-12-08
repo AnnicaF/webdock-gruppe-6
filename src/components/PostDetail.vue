@@ -6,7 +6,7 @@
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
         </button>
-        <span class="upvote-count">{{ post.upvoteCount }}</span>
+        <span class="upvote-count"> upvoteCount </span>
       </div>
     </div>
     <div class="post">
@@ -15,14 +15,14 @@
         <p class="description">{{ post.bodyText }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{ post.user }}</p>
-          <p class="small-text">{{ post.date }}</p>
+          <p class="small-text"> user </p>
+          <p class="small-text">{{ post.createdAt }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ post.commentCount }}</span>
+            <span class="comment-count"> commentCount </span>
           </div>
         </div>
       </div>
