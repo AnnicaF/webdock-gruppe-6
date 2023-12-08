@@ -1,5 +1,5 @@
 const { Request } = require("../models");
-const { Op } = require("sequelize");
+const { Op } = require("sequelize"); // allows us to perform a SQL LIKE query, which is used for pattern matching in search.
 
 //get all requests
 exports.show = async (req, res) => {
