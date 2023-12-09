@@ -17,12 +17,12 @@ const router = createRouter({
       name: "login",
       component: Login,
     },
-    {
-      path: "/featurePostDetail/:requestId",
-      name: "featurePostDetail",
-      component: FeaturePostDetail,
-      props: true,
-    },
+    // {
+    //   path: "/featurePostDetail/:requestId",
+    //   name: "featurePostDetail",
+    //   component: FeaturePostDetail,
+    //   props: true,
+    // },
     {
       path: "/roadmap",
       name: "RoadMap",

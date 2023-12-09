@@ -8,7 +8,7 @@
 import { mapMutations } from "vuex";
 export default {
   methods: {
-    ...mapMutations(["setAuthentication"]),
+    ...mapMutations(["setAuthentication", "setUserRole"]),
 
     async redirectToWebDock() {
       const encodedURL = encodeURIComponent("http://localhost:5173");
@@ -45,10 +45,13 @@ export default {
         const userData = await response.json();
 
         console.log("Received userData from backend:", userData);
-        this.setAuthentication({
+
+        this.$store.commit("setAuthentication", {
           isAuthenticated: true,
           userId: userData.id,
+          roleID: userData.roleID,
         });
+        this.$store.commit("setUserRole", userData.roleID);
 
         //localStorage.setItem("userId", userData.id);
         console.log("User data sent successfully.");

@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 exports.authentication = async (req, res) => {
   try {
-    const { ssoToken, name, email, avatarURL } = req.body;
+    const { ssoToken, name, email, avatarURL, roleID } = req.body;
 
     if (!ssoToken) {
       throw new Error("JWT must be provided");

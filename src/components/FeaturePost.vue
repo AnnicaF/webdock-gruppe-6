@@ -1,10 +1,21 @@
+<script setup>
+import AdminPanel from "./AdminPanel.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+// Hent roleID fra localStorage
+const roleID = localStorage.getItem("roleID");
+
+const isAdmin = computed(() => roleID == 1);
+</script>
+
 <template>
   <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-          <span class="upvote-count">{{upvoteCount}}</span>
+          <span class="upvote-count">{{ upvoteCount }}</span>
         </button>
       </div>
     </div>
@@ -15,7 +26,7 @@
           <div class="status-label" :class="getStatusClass(status)">
             planned
           </div>
-        </div> 
+        </div>
         <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
@@ -29,11 +40,13 @@
             <span class="comment-count">{{ commentCount }}</span>
           </div>
         </div>
+        <template v-if="isAdmin">
+          <AdminPanel />
+        </template>
       </div>
     </div>
   </div>
 </template>
-  
   <script>
 export default {
   props: {
@@ -46,6 +59,15 @@ export default {
     status: String,
     date: String,
     index: Number,
+    roleID: Number,
+  },
+  setup(props) {
+    // Brug computed for at overvåge brugerens rolle og bestemme, om de er admin
+    const isAdmin = computed(() => props.roleID === 1);
+
+    return {
+      isAdmin,
+    };
   },
   methods: {
     handleUpvote() {
@@ -59,13 +81,13 @@ export default {
         "in progress": "in-progress-color",
       };
       return statusColorMap[status] || "default-color";
-      },
-      
-      getIndexClass(index) {
+    },
+
+    getIndexClass(index) {
       let i = index % 2;
-      return "iswhite-"+i
-    }
-  }
+      return "iswhite-" + i;
+    },
+  },
 };
 </script>
   
@@ -78,7 +100,7 @@ export default {
   padding: 20px;
 }
 
-.post{
+.post {
   width: 100%;
 }
 .iswhite-1 {
@@ -128,7 +150,7 @@ hr {
 }
 
 .default-color {
-  background: black; 
+  background: black;
 }
 .comment_icon {
   color: grey;

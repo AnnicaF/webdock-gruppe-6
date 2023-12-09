@@ -58,8 +58,8 @@ export default {
 }
 .adminButton button {
   color: black;
-  font-size: 16px;
-  padding: 12px;
+  font-size: 10px;
+  padding: 6px;
   margin: 0px;
   cursor: pointer;
   background: white;
@@ -69,10 +69,5 @@ export default {
 
 button:hover {
   background-color: var(--grey-mid);
-}
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-  margin: 0px;
 }
 </style>

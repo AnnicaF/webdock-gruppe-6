@@ -74,16 +74,13 @@ div ul {
 
 .adminButton {
   color: black;
-  font-size: 16px;
-  padding: 12px;
+  font-size: 10px;
+  padding: 6px;
   margin: 0px;
   cursor: pointer;
   background: white;
   border: 1px solid black;
   border-radius: 5px;
-}
-
-.adminButton {
 }
 
 button:hover {
