@@ -46,12 +46,15 @@ export default {
 
         console.log("Received userData from backend:", userData);
 
+        localStorage.setItem("roleID", String(userData.roleID));
+
+        this.$store.commit("setUserRole", userData.roleID);
+
         this.$store.commit("setAuthentication", {
           isAuthenticated: true,
           userId: userData.id,
           roleID: userData.roleID,
         });
-        this.$store.commit("setUserRole", userData.roleID);
 
         //localStorage.setItem("userId", userData.id);
         console.log("User data sent successfully.");

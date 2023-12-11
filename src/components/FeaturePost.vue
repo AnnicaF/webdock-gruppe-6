@@ -3,10 +3,8 @@ import AdminPanel from "./AdminPanel.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-// Hent roleID fra localStorage
-const roleID = localStorage.getItem("roleID");
-
-const isAdmin = computed(() => roleID == 1);
+const store = useStore();
+const isAdmin = computed(() => store.state.roleID === 1);
 </script>
 
 <template>
@@ -63,7 +61,7 @@ export default {
   },
   setup(props) {
     // Brug computed for at overvåge brugerens rolle og bestemme, om de er admin
-    const isAdmin = computed(() => props.roleID === 1);
+    const isAdmin = computed(() => store.state.roleID === 1);
 
     return {
       isAdmin,
