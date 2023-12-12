@@ -92,6 +92,13 @@ export default {
 
 .bodyText {
   font-size: 16px;
+  font-weight: 100;
+  height: 36px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
 }
 
 hr {
