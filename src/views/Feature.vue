@@ -7,7 +7,6 @@ import axios from "axios";
 import { ref } from "vue";
 
 const requests = ref(null);
-const commentCount = ref(null);
 
 function get() {
   axios

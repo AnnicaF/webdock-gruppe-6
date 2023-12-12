@@ -13,7 +13,7 @@
               </div>
               <div class="scrollContainer">
                 <div v-for="(post, index) in posts" :key="index">
-                  <div class="postContainer">
+                  <div v-if="post.Status.name=='Planned'" class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon
@@ -42,7 +42,7 @@
               </div>
               <div class="scrollContainer">
                 <div v-for="(post, index) in posts" :key="index">
-                  <div class="postContainer">
+                  <div v-if="post.Status.name=='In Progress'" class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon
@@ -71,7 +71,7 @@
               </div>
               <div class="scrollContainer">
                 <div v-for="(post, index) in posts" :key="index">
-                  <div class="postContainer">
+                  <div v-if="post.Status.name=='Completed'" class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon
