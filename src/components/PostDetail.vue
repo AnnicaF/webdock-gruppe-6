@@ -4,8 +4,9 @@
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-        </button>
-        <span class="upvote-count"> upvoteCount </span>
+        <span class="upvote-count"> X </span>
+      </button>
+        
       </div>
     </div>
     <div class="post">
@@ -57,9 +58,7 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
-.post {
-  max-height: 200px;
-}
+
 
 .post-content {
   padding: 20px;
