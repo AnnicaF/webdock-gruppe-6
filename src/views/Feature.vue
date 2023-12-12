@@ -3,7 +3,7 @@ import FilterBar from "../components/FilterBar.vue";
 import MK from "../components/MakeRequest.vue";
 import Nav from "../components/Nav.vue";
 import FeaturePost from "../components/FeaturePost.vue";
-//import Footer from "../components/Footer.vue";
+import Footer from "../components/Footer.vue";
 
 import axios from "axios";
 import { ref } from "vue";
@@ -40,20 +40,25 @@ get();
 </script>
 
 <template>
-  <Nav @callsearch="search" />
-  <FilterBar />
-  <div class="box">
-    <button
-      v-for="(request, index) in requests"
-      :key="index"
-      @click="navigateToDetail(request)"
-    >
-      <FeaturePost
-        :title="request.title"
-        :bodyText="request.bodyText"
-        :index="index"
-      />
-    </button>
+  <div class="main-container">
+    <Nav @callsearch="search" />
+    <FilterBar />
+    <div class="content">
+      <div class="box">
+        <button
+          v-for="(request, index) in requests"
+          :key="index"
+          @click="navigateToDetail(request)"
+        >
+          <FeaturePost
+            :title="request.title"
+            :bodyText="request.bodyText"
+            :index="index"
+          />
+        </button>
+      </div>
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -61,6 +66,7 @@ get();
 export default {
   components: {
     FeaturePost,
+    Footer,
   },
   methods: {
     navigateToDetail(request) {
@@ -74,6 +80,16 @@ export default {
 </script>
 
 <style scoped>
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
 button {
   padding: 0;
   border: none;
