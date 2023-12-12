@@ -1,12 +1,12 @@
-
 <template>
   <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-        </button>
-        <span class="upvote-count">{{ post.upvoteCount }}</span>
+        <span class="upvote-count"> X </span>
+      </button>
+        
       </div>
     </div>
     <div class="post">
@@ -15,14 +15,14 @@
         <p class="description">{{ post.bodyText }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{ post.user }}</p>
-          <p class="small-text">{{ post.date }}</p>
+          <p class="small-text"> {{ post.User.name }} </p>
+          <p class="small-text">{{ new Date(post.createdAt).toLocaleDateString("en-GB") }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ post.commentCount }}</span>
+            <span class="comment-count" @load="countComments(post.comments)"> {{ post.Comments.length }}</span>
           </div>
         </div>
       </div>
@@ -42,6 +42,10 @@ export default {
     upvotePost() {
       console.log("Upvoting post:", this.post.id);
     },
+    countComments(com) {
+      console.log("bob");
+      document.getElementById("comment-count").innerHTML = com.length;
+    },
   },
 };
 </script>
@@ -54,9 +58,7 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
-.post {
-  max-height: 200px;
-}
+
 
 .post-content {
   padding: 20px;

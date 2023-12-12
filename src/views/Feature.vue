@@ -1,10 +1,8 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
 import MK from "../components/MakeRequest.vue";
-import Nav from "../components/Nav.vue";
+import NavBar from "../components/NavBar.vue";
 import FeaturePost from "../components/FeaturePost.vue";
-//import Footer from "../components/Footer.vue";
-
 import axios from "axios";
 import { ref } from "vue";
 
@@ -13,9 +11,9 @@ const requests = ref(null);
 function get() {
   axios
     .get("http://localhost:3000/api/v1/request")
-    .then((response) => (requests.value = response.data))
-    .then(console.log(requests))
-
+    .then((response) => {requests.value = response.data;
+      console.log(response)
+    })
     .catch((err) => {
       console.log("error: " + err);
     });
@@ -40,18 +38,23 @@ get();
 </script>
 
 <template>
-  <Nav @callsearch="search" />
-  <FilterBar />
+  <NavBar @callsearch="search"/>
+  <FilterBar @callLoad="get" />
   <div class="box">
     <button
       v-for="(request, index) in requests"
       :key="index"
       @click="navigateToDetail(request)"
     >
-      <FeaturePost
+      <feature-post
+        :roleID="roleID"
         :title="request.title"
         :bodyText="request.bodyText"
         :index="index"
+        :status="request.Status.name"
+        :date="request.createdAt"
+        :commentCount="request.Comments"
+        :user="request.User.name"
       />
     </button>
   </div>
@@ -61,6 +64,12 @@ get();
 export default {
   components: {
     FeaturePost,
+  },
+  data() {
+    return {
+      // Få brugerens rolle fra din backend eller hvor du har det gemt efter log ind
+      roleID: 1, // 1 betyder admin i dit tilfælde
+    };
   },
   methods: {
     navigateToDetail(request) {
@@ -80,6 +89,7 @@ button {
   background: none;
   text-align: left;
   cursor: pointer;
+  margin: 0px;
 }
 
 .box {

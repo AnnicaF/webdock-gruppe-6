@@ -1,9 +1,24 @@
+<script setup>
+  import axios from "axios";
+  import { ref } from "vue";
+
+  const categories = ref(null);
+
+  axios.get("http://localhost:3000/api/v1/category")
+    .then((response) => (categories.value = response.data))
+    .then(console.log(categories))
+
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+</script>
+
 <template>
   <div class="modal" id="modal">
     <div class="modal_content">
       <div class="modal_header">
         <h1 class="modal_title">Create a Post</h1>
-        <span class="modal_close" @click="hide()">&times;</span>
+        <span class="modal_close" @click="hide">&times;</span>
       </div>
       <div class="modal_body">
         <div class="form-group">
@@ -12,10 +27,10 @@
             <option class="option_list" value="">Select a category</option>
             <option
               v-for="(category, index) in categories"
-              :value="category"
+              :value="category.id+','+category.name"
               :key="index"
             >
-              {{ category }}
+              {{ category.name }}
             </option>
           </select>
         </div>
@@ -38,54 +53,52 @@
 <script>
 import axios from "axios";
 import Feature from "../views/Feature.vue";
+import { mapMutations, mapState } from "vuex";
 
 export default {
-  data() {
-    return {
-      categories: [
-        "Dashboard Features",
-        "Documentation",
-        "Billing Features",
-        "Networking",
-        "Hardware and products",
-        "Perfect Server Stacks",
-        "Mobile App",
-        "Webdock API",
-        "Competition",
-        "Uncategorized",
-      ],
-    };
-  },
   name: "Modal",
   methods: {
     show() {
       const modal = document.getElementById("modal");
+      modal.classList.add("show");
     },
     hide() {
       const modal = document.getElementById("modal");
       modal.classList.remove("show");
     },
-
+    ...mapMutations(["setAuthentication"]),
     createPost() {
-      let data = {
-        title: document.getElementById("title").value,
-        bodyText: document.getElementById("description").value
-      };
+      // Tjek om brugeren er logget ind baseret på local storage
+      const isAuthenticated =
+        localStorage.getItem("isAuthenticated") === "true";
+      const userId = localStorage.getItem("userId");
 
-      axios.post('http://localhost:3000/api/v1/request', data)
-        .then(response => {
-          // Handle the success response
-          console.log('Response:', response.data);
-          this.$parent.$emit("callLoad");
-        })
-        .catch(error => {
-          // Handle the error
-          console.error('Error:', error);
-        });
+      if (isAuthenticated && userId) {
+        let data = {
+          title: document.getElementById("title").value,
+          bodyText: document.getElementById("description").value,
+        };
+
+        axios
+          .post("http://localhost:3000/api/v1/request", data)
+          .then((response) => {
+            console.log("Response:", response.data);
+            this.setAuthentication({
+              isAuthenticated: true,
+              userId: response.data.userId,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
 
         this.hide();
-        
-        
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+      } else {
+        // Vis en popup eller gør noget andet for at informere brugeren om at logge ind
+        alert("Du skal logge ind for at oprette en post");
+      }
     },
   },
 };
@@ -177,7 +190,7 @@ textarea {
   resize: none;
 }
 
-textarea{
+textarea {
   height: 100px;
 }
 

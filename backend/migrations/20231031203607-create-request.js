@@ -10,19 +10,35 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       bodyText: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       statusID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        references: {
+          model: "Statuses",
+          key: "id"
+        }
       },
       categoryID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        references: {
+          model: "Categories",
+          key: "id"
+        }
       },
       userID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +47,36 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      }
+    });
+
+    await queryInterface.addConstraint("Requests", {
+      fields: ["userID"],
+      type: "foreign key",
+      name:"fk_request_user",
+      references: {
+        table: "Users",
+        field: "id"
+      }
+    });
+
+    await queryInterface.addConstraint("Requests", {
+      fields: ["statusID"],
+      type: "foreign key",
+      name:"fk_request_status",
+      references: {
+        table: "Statuses",
+        field: "id"
+      }
+    });
+
+    await queryInterface.addConstraint("Requests", {
+      fields: ["categoryID"],
+      type: "foreign key",
+      name:"fk_request_category",
+      references: {
+        table: "Categories",
+        field: "id"
       }
     });
   },
