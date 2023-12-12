@@ -22,20 +22,20 @@ const isAdmin = computed(() => store.state.roleID === 1);
         <h2 class="title">{{ title }}</h2>
         <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
-            planned
+            {{ status }}
           </div>
         </div>
         <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
           <p class="small-text">{{ user }}</p>
-          <p class="small-text">{{ date }}</p>
+          <p class="small-text">{{ new Date(date).toLocaleDateString("en-GB") }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ commentCount }}</span>
+            <span class="comment-count">{{ commentCount.length }}</span>
           </div>
         </div>
         <template v-if="isAdmin">
@@ -52,7 +52,7 @@ export default {
     bodyText: String,
     description: String,
     upvoteCount: Number,
-    commentCount: Number,
+    commentCount: Array,
     user: String,
     status: String,
     date: String,
@@ -73,9 +73,9 @@ export default {
     },
     getStatusClass(status) {
       const statusColorMap = {
-        planned: "planned-color",
+        "planned": "planned-color",
         "under review": "under-review-color",
-        completed: "completed-color",
+        "completed": "completed-color",
         "in progress": "in-progress-color",
       };
       return statusColorMap[status] || "default-color";
@@ -89,7 +89,7 @@ export default {
 };
 </script>
   
-  <style scoped>
+<style scoped>
 .post-container {
   display: flex;
   background-color: var(--grey-mid);
@@ -102,7 +102,7 @@ export default {
   width: 100%;
 }
 .iswhite-1 {
-  background-color: var(--white);
+  background-color: var(--grey-light);
 }
 
 .title {
@@ -112,6 +112,13 @@ export default {
 
 .bodyText {
   font-size: 16px;
+  font-weight: 100;
+  height: 36px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
 }
 
 hr {

@@ -11,7 +11,9 @@ const requests = ref(null);
 function get() {
   axios
     .get("http://localhost:3000/api/v1/request")
-    .then((response) => (requests.value = response.data))
+    .then((response) => {requests.value = response.data;
+      console.log(response)
+    })
     .catch((err) => {
       console.log("error: " + err);
     });
@@ -34,6 +36,10 @@ get();
         :title="request.title"
         :bodyText="request.bodyText"
         :index="index"
+        :status="request.Status.name"
+        :date="request.createdAt"
+        :commentCount="request.Comments"
+        :user="request.User.name"
       />
     </button>
   </div>
@@ -68,6 +74,7 @@ button {
   background: none;
   text-align: left;
   cursor: pointer;
+  margin: 0px;
 }
 
 .box {

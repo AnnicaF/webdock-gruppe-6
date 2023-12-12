@@ -1,3 +1,18 @@
+<script setup>
+  import axios from "axios";
+  import { ref } from "vue";
+
+  const categories = ref(null);
+
+  axios.get("http://localhost:3000/api/v1/category")
+    .then((response) => (categories.value = response.data))
+    .then(console.log(categories))
+
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+</script>
+
 <template>
   <div class="modal" id="modal">
     <div class="modal_content">
@@ -12,10 +27,10 @@
             <option class="option_list" value="">Select a category</option>
             <option
               v-for="(category, index) in categories"
-              :value="category"
+              :value="category.id+','+category.name"
               :key="index"
             >
-              {{ category }}
+              {{ category.name }}
             </option>
           </select>
         </div>
@@ -41,22 +56,6 @@ import Feature from "../views/Feature.vue";
 import { mapMutations, mapState } from "vuex";
 
 export default {
-  data() {
-    return {
-      categories: [
-        "Dashboard Features",
-        "Documentation",
-        "Billing Features",
-        "Networking",
-        "Hardware and products",
-        "Perfect Server Stacks",
-        "Mobile App",
-        "Webdock API",
-        "Competition",
-        "Uncategorized",
-      ],
-    };
-  },
   name: "Modal",
   methods: {
     show() {
