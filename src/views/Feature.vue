@@ -11,7 +11,9 @@ const requests = ref(null);
 function get() {
   axios
     .get("http://localhost:3000/api/v1/request")
-    .then((response) => (requests.value = response.data))
+    .then((response) => {requests.value = response.data;
+    console.log(response)
+    })
     .catch((err) => {
       console.log("error: " + err);
     });
@@ -27,16 +29,13 @@ get();
     <button
       v-for="(request, index) in requests"
       :key="index"
-      :title="request.title"
-      :bodyText="request.bodyText"
-      :status="'Under Review'"
-      :index="index"
       @click="navigateToDetail(request)"
     >
       <FeaturePost
         :title="request.title"
         :bodyText="request.bodyText"
         :index="index"
+        :status="request.Status.name"
       />
     </button>
   </div>

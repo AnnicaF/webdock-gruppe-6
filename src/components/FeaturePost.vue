@@ -12,8 +12,8 @@
       <div class="post-content">
         <h2 class="title">{{ title }}</h2>
         <div class="status-container">
-          <div class="status-label" >
-            {{status}}
+          <div class="status-label" :class="getStatusClass(status)">
+            {{ status }}
           </div>
         </div> 
         <p class="bodyText">{{ bodyText }}</p>

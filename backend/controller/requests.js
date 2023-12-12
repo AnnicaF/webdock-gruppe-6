@@ -1,11 +1,13 @@
-const {Request, Comment, User} = require("../models");
+const {Request, Comment, User, Status} = require("../models");
 const axios = require("axios");
 
 
 //get all requests
 exports.show = async (req, res) => {
   try{
-    const requests = await Request.findAll();
+    const requests = await Request.findAll({
+      include: Status
+    });
     return res.status(200).json(requests);
   } catch (err) {
     console.log(err);

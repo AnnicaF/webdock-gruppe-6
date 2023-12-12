@@ -8,7 +8,7 @@ module.exports = {
       [
         {
           id: 1,
-          name: "Under Rewiew",
+          name: "Under Review",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
