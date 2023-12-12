@@ -21,7 +21,7 @@ import MergePost from "./MergePost.vue";
 }
 .adminButton {
   color: black;
-  font-size: 16px;
+  font-size: 10px;
   padding: 12px;
   margin: 0px;
   cursor: pointer;
@@ -36,7 +36,7 @@ import MergePost from "./MergePost.vue";
 button:hover {
   background-color: var(--grey-mid);
 }
-div > .showDropdown ul {
+.showDropdown ul {
   position: relative;
   display: inline-block;
 }
@@ -47,36 +47,5 @@ div ul {
   z-index: 1;
   list-style: none;
   margin: 0;
-}
-
-.fa-cd {
-  padding-left: 5px;
-  margin: 0px;
-}
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-  margin: 0px;
-}
-
-.dropdown-content {
-  color: black;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-content ul {
-  padding: 0;
-}
-
-.dropdown-content li {
-  list-style: none;
-  text-decoration: none;
-  padding: 18px;
-  margin: 0px;
-  cursor: pointer;
-}
-
-.dropdown-content li:hover {
-  background-color: #f1f1f1; /* Grey background on hover */
 }
 </style>

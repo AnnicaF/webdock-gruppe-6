@@ -31,7 +31,8 @@ get();
       :key="index"
       @click="navigateToDetail(request)"
     >
-      <FeaturePost
+      <feature-post
+        :roleID="roleID"
         :title="request.title"
         :bodyText="request.bodyText"
         :index="index"
@@ -48,6 +49,12 @@ get();
 export default {
   components: {
     FeaturePost,
+  },
+  data() {
+    return {
+      // Få brugerens rolle fra din backend eller hvor du har det gemt efter log ind
+      roleID: 1, // 1 betyder admin i dit tilfælde
+    };
   },
   methods: {
     navigateToDetail(request) {
