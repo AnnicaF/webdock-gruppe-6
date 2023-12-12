@@ -24,6 +24,25 @@ exports.show = async (req, res) => {
   }
 };
 
+//get searched requests
+exports.search = async (req, res) => {
+  try {
+    const searchQuery = req.query.q; // Extracting search term from query parameters
+    console.log("Received search query: ", searchQuery); // print the received searchQuery
+
+    const requests = await Request.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchQuery}%`, // Allows for partial matching
+        },
+      },
+    });
+    return res.status(200).json(requests);
+  } catch (err) {
+    console.log(err);
+    return res.send("Error");
+  }
+
 //get one request + user + comment
 exports.showOne = async (req, res) => {
   const request = await Request.findOne({
@@ -41,6 +60,7 @@ exports.showOne = async (req, res) => {
     ]
   });
   res.status(200).json(request);
+
 };
 
 
