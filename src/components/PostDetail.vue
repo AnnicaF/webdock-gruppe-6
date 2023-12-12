@@ -1,12 +1,19 @@
+<script setup>
+import AdminPanel from "./AdminPanel.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const isAdmin = computed(() => store.state.roleID === 1);
+</script>
 <template>
   <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-        <span class="upvote-count"> X </span>
-      </button>
-        
+          <span class="upvote-count"> X </span>
+        </button>
       </div>
     </div>
     <div class="post">
@@ -15,17 +22,24 @@
         <p class="description">{{ post.bodyText }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text"> {{ post.User.name }} </p>
-          <p class="small-text">{{ new Date(post.createdAt).toLocaleDateString("en-GB") }}</p>
+          <p class="small-text">{{ post.User.name }}</p>
+          <p class="small-text">
+            {{ new Date(post.createdAt).toLocaleDateString("en-GB") }}
+          </p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count" @load="countComments(post.comments)"> {{ post.Comments.length }}</span>
+            <span class="comment-count" @load="countComments(post.comments)">
+              {{ post.Comments.length }}</span
+            >
           </div>
         </div>
       </div>
+      <template v-if="isAdmin">
+        <AdminPanel />
+      </template>
     </div>
   </div>
 </template>
@@ -37,6 +51,15 @@ export default {
       type: Object,
       required: true,
     },
+    roleID: Number,
+  },
+  setup(props) {
+    // Brug computed for at overvåge brugerens rolle og bestemme, om de er admin
+    const isAdmin = computed(() => store.state.roleID === 1);
+
+    return {
+      isAdmin,
+    };
   },
   methods: {
     upvotePost() {
@@ -58,7 +81,6 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
-
 
 .post-content {
   padding: 20px;
