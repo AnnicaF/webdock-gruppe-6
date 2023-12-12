@@ -61,7 +61,7 @@ onMounted(() => {
       <!-- Vis PostDetail og CommentSection her -->
       <PostDetail :post="selectedPost" />
       <CommentSection
-        :comments="selectedPost.Comments"
+        :comments="selectedPost.Comments.reverse()"
         @addComment="doComment"
         @Reply="addReply"
       />

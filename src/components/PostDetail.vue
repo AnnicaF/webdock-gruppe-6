@@ -15,13 +15,13 @@
         <hr />
         <div class="user_date_box">
           <p class="small-text"> {{ post.User.name }} </p>
-          <p class="small-text">{{ post.createdAt }}</p>
+          <p class="small-text">{{ new Date(post.createdAt).toLocaleDateString("en-GB") }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count" @load="countComments(post.comments)"> </span>
+            <span class="comment-count" @load="countComments(post.comments)"> {{ post.Comments.length }}</span>
           </div>
         </div>
       </div>

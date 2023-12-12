@@ -20,13 +20,13 @@
         <hr />
         <div class="user_date_box">
           <p class="small-text">{{ user }}</p>
-          <p class="small-text">{{ date }}</p>
+          <p class="small-text">{{ new Date(date).toLocaleDateString("en-GB") }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ commentCount }}</span>
+            <span class="comment-count">{{ commentCount.length }}</span>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default {
     bodyText: String,
     description: String,
     upvoteCount: Number,
-    commentCount: Number,
+    commentCount: Array,
     user: String,
     status: String,
     date: String,

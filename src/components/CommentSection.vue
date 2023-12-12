@@ -16,7 +16,7 @@
             </p>
             <p>{{ comment.bodyText }}</p>
             <hr />
-            <p class="comment-date">{{ comment.createdAt }}</p>
+            <p class="comment-date">{{ new Date(comment.createdAt).toLocaleDateString("en-GB") }}</p>
             <span @click="toggleReply(comment)" class="reply-text">Reply</span>
           </div>
 

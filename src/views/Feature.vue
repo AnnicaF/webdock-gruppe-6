@@ -7,12 +7,13 @@ import axios from "axios";
 import { ref } from "vue";
 
 const requests = ref(null);
+const commentCount = ref(null);
 
 function get() {
   axios
     .get("http://localhost:3000/api/v1/request")
     .then((response) => {requests.value = response.data;
-    console.log(response)
+      console.log(response)
     })
     .catch((err) => {
       console.log("error: " + err);
@@ -36,6 +37,9 @@ get();
         :bodyText="request.bodyText"
         :index="index"
         :status="request.Status.name"
+        :date="request.createdAt"
+        :commentCount="request.Comments"
+        :user="request.User.name"
       />
     </button>
   </div>

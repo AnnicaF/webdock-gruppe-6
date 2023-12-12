@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const {Request, Comment, User, Status} = require("../models");
 const axios = require("axios");
 
@@ -6,7 +7,15 @@ const axios = require("axios");
 exports.show = async (req, res) => {
   try{
     const requests = await Request.findAll({
-      include: Status
+      include: [{
+        model: User
+      },
+      {
+        model: Status
+      },
+      {
+        model: Comment
+      }],
     });
     return res.status(200).json(requests);
   } catch (err) {
@@ -76,10 +85,31 @@ exports.create = async (req, res) => {
 
 //webdock change status
 exports.changeStatus = async (req, res) => {
+  const {feature_request_id, status} = req.body;
   try{
-    console.log(req.body);
-  } catch {
-
+    const statusObj = await Status.findOne(
+    {
+       where: {name: status}
+    });
+    
+    if (statusObj) {
+      await Request.update(
+        {
+          statusID: statusObj.id
+        },
+        {
+          where: { id: feature_request_id}
+        }
+      );
+      return res.status(200).send("Status updated successfully");
+    } else{
+      return res.status(404).send("Status not found");
+    }
+    
+    
+  } catch (err) {
+    console.error("Error updating request: ", err);
+    return res.status(500).send(err);
   }
 }
 
