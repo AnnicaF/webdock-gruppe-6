@@ -67,6 +67,7 @@ button {
   background: none;
   text-align: left;
   cursor: pointer;
+  margin: 0px;
 }
 
 .box {

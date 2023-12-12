@@ -69,7 +69,7 @@ export default {
 };
 </script>
   
-  <style scoped>
+<style scoped>
 .post-container {
   display: flex;
   background-color: var(--grey-mid);
@@ -82,7 +82,7 @@ export default {
   width: 100%;
 }
 .iswhite-1 {
-  background-color: var(--white);
+  background-color: var(--grey-light);
 }
 
 .title {
