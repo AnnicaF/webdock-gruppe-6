@@ -43,9 +43,9 @@ export default {
       console.log("Upvoting post:", this.post.id);
     },
     countComments(com) {
-      console.log("bob")
-      document.getElementById("comment-count").innerHTML = com.length
-    }
+      console.log("bob");
+      document.getElementById("comment-count").innerHTML = com.length;
+    },
   },
 };
 </script>

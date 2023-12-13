@@ -20,8 +20,8 @@ axios.get("http://localhost:3000/api/v1/category")
     <hr class="line" />
   </div>
   <div class="filter_container">
-    <button @click="openModal()">Create Post</button>
-    <Modal />
+    <button @click="openModal">Create Post</button>
+    <Modal v-if="isAuthenticated" />
     <div>
       <ul class="filter_bar">
         <li
@@ -64,6 +64,8 @@ axios.get("http://localhost:3000/api/v1/category")
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -73,10 +75,17 @@ export default {
   components: {
     Modal,
   },
+  computed: {
+    ...mapState(["isAuthenticated"]),
+  },
   methods: {
     openModal() {
-      const modal = document.getElementById("modal");
-      modal.classList.add("show");
+      if (this.isAuthenticated) {
+        const modal = document.getElementById("modal");
+        modal.classList.add("show");
+      } else {
+        alert("Du skal logge ind for at oprette en post.");
+      }
     },
     setActiveTab(tabName) {
       this.activeTab = tabName;

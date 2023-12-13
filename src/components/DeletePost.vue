@@ -64,8 +64,9 @@ export default {
 
 .adminButton {
   color: black;
-  font-size: 16px;
+  font-size: 10px;
   cursor: pointer;
+  padding: 6px;
   background: white;
   border: 1px solid black;
   border-radius: 5px;

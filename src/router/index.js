@@ -16,7 +16,7 @@ const router = createRouter({
       name: "featurePostDetail",
       component: FeaturePostDetail,
       props: true,
-    },
+     },
     {
       path: "/roadmap",
       name: "RoadMap",

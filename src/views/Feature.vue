@@ -21,20 +21,36 @@ function get() {
 function category(cat){
   
 }
+  
+function search(searchQuery) {
+  console.log(searchQuery);
+  axios
+    .get("http://localhost:3000/api/v1/request/search", {
+      params: {
+        q: searchQuery, // This sends the search term as a query parameter
+      },
+    })
+    .then((response) => (requests.value = response.data))
+    .then(console.log(requests))
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
 
 get();
 </script>
 
 <template>
-  <NavBar />
-  <FilterBar @callLoad="get" @callCategory="category"/>
+  <NavBar @callsearch="search"/>
+  <FilterBar @callLoad="get"  @callCategory="category"/>
   <div class="box">
     <button
       v-for="(request, index) in requests"
       :key="index"
       @click="navigateToDetail(request)"
     >
-      <FeaturePost
+      <feature-post
+        :roleID="roleID"
         :title="request.title"
         :bodyText="request.bodyText"
         :index="index"
@@ -51,6 +67,12 @@ get();
 export default {
   components: {
     FeaturePost,
+  },
+  data() {
+    return {
+      // Få brugerens rolle fra din backend eller hvor du har det gemt efter log ind
+      roleID: 1, // 1 betyder admin i dit tilfælde
+    };
   },
   methods: {
     navigateToDetail(request) {
