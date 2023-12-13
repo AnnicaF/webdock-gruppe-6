@@ -3,7 +3,7 @@ const {Request, Comment, User, Status} = require("../models");
 const axios = require("axios");
 
 
-//get all requests
+//get all requests (+ user + status + comments)
 exports.show = async (req, res) => {
   try{
     const requests = await Request.findAll({
@@ -24,7 +24,7 @@ exports.show = async (req, res) => {
   }
 };
 
-//get one request + user + comment
+//get one request (+ user + comment)
 exports.showOne = async (req, res) => {
   const request = await Request.findOne({
     where: {
@@ -43,6 +43,27 @@ exports.showOne = async (req, res) => {
   res.status(200).json(request);
 };
 
+exports.showCategory = async (req, res) => {
+  try{
+    const requests = await Request.findAll({
+      where: {category: req.body}
+    },{
+      include: [{
+        model: User
+      },
+      {
+        model: Status
+      },
+      {
+        model: Comment
+      }],
+    });
+    return res.status(200).json(requests);
+  } catch (err) {
+    console.log(err);
+    return res.send("Error");
+  }
+};
 
 //create a new request
 exports.create = async (req, res) => {

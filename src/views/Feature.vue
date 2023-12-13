@@ -1,6 +1,5 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import MK from "../components/MakeRequest.vue";
 import NavBar from "../components/NavBar.vue";
 import FeaturePost from "../components/FeaturePost.vue";
 import axios from "axios";
@@ -19,12 +18,16 @@ function get() {
     });
 }
 
+function category(cat){
+  
+}
+
 get();
 </script>
 
 <template>
   <NavBar />
-  <FilterBar @callLoad="get" />
+  <FilterBar @callLoad="get" @callCategory="category"/>
   <div class="box">
     <button
       v-for="(request, index) in requests"
