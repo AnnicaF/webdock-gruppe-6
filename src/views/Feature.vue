@@ -1,6 +1,5 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import MK from "../components/MakeRequest.vue";
 import NavBar from "../components/NavBar.vue";
 import FeaturePost from "../components/FeaturePost.vue";
 import axios from "axios";
@@ -19,12 +18,41 @@ function get() {
     });
 }
 
+function category(cat){
+  axios
+    .get("http://localhost:3000/api/v1/cat", {
+      params: {
+        c: cat
+      },
+    })
+    .then((response) => (requests.value = response.data))
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
+  
+function search(searchQuery) {
+  console.log(searchQuery);
+  axios
+    .get("http://localhost:3000/api/v1/search", {
+      params: {
+        q: searchQuery, // This sends the search term as a query parameter
+      },
+    })
+    .then((response) => {requests.value = response.data;
+      console.log(response)})
+    .then(console.log(requests))
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
+
 get();
 </script>
 
 <template>
-  <NavBar />
-  <FilterBar @callLoad="get" />
+  <NavBar @callsearch="search"/>
+  <FilterBar @callLoad="get"  @callCategory="category"/>
   <div class="box">
     <button
       v-for="(request, index) in requests"

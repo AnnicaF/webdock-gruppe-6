@@ -1,5 +1,18 @@
 <script setup>
 import Modal from "../components/Modal.vue";
+
+import axios from "axios";
+import { ref } from "vue";
+
+const categories = ref(null);
+
+axios.get("http://localhost:3000/api/v1/category")
+  .then((response) => (categories.value = response.data))
+  .then(console.log(categories))
+
+  .catch((err) => {
+    console.log("error: " + err);
+  });
 </script>
 
 <template>
@@ -33,9 +46,13 @@ import Modal from "../components/Modal.vue";
           <label for="categorySelect">{{ categoryLabel }}</label>
           <select id="categorySelect" @change="selectCategory">
             <option value="">All Categories</option>
-            <option value="Category 1">Category 1</option>
-            <option value="Category 2">Category 2</option>
-            <option value="Category 3">Category 3</option>
+            <option
+              v-for="(category, index) in categories"
+              :value="category.id"
+              :key="index"
+            >
+              {{ category.name }}
+            </option>
           </select>
         </li>
       </ul>
@@ -73,6 +90,10 @@ export default {
     setActiveTab(tabName) {
       this.activeTab = tabName;
     },
+    selectCategory() {
+      console.log(document.getElementById("categorySelect").value)
+      this.$emit("callCategory", document.getElementById("categorySelect").value);
+    }
   },
 };
 </script>

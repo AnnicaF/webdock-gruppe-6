@@ -18,7 +18,7 @@ export default {
     async fetchData() {
       try {
         const urlParams = new URLSearchParams(window.location.search);
-        const ssoToken = urlParams.get("ssoToken");
+        let ssoToken = urlParams.get("ssoToken");
         if (ssoToken == null) {
           ssoToken = localStorage.getItem("ssoToken");
         } else {

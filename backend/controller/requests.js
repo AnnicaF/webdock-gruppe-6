@@ -2,7 +2,6 @@ const { where } = require("sequelize");
 const { Request, Comment, User, Status } = require("../models");
 const axios = require("axios");
 
-//get all requests
 exports.show = async (req, res) => {
   try {
     const requests = await Request.findAll({
@@ -25,7 +24,27 @@ exports.show = async (req, res) => {
   }
 };
 
-//get one request + user + comment
+//get searched requests
+exports.search = async (req, res) => {
+  try {
+    const searchQuery = req.query.q; // Extracting search term from query parameters
+    console.log("Received search query: ", searchQuery); // print the received searchQuery
+
+    const requests = await Request.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchQuery}%`, // Allows for partial matching
+        },
+      },
+    });
+    return res.status(200).json(requests);
+  } catch (err) {
+    console.log(err);
+    return res.send("Error");
+  }
+}
+
+//get one request (+ user + comment)
 exports.showOne = async (req, res) => {
   const request = await Request.findOne({
     where: {
@@ -42,7 +61,33 @@ exports.showOne = async (req, res) => {
     ],
   });
   res.status(200).json(request);
+
 };
+
+//get request from 1 category
+exports.showCat = async (req, res) => {
+  try{
+    const requests = await Request.findAll({
+      where: {
+        categoryID: req.params.c,
+      },
+      include: [{
+        model: User
+      },
+      {
+        model: Status
+      },
+      {
+        model: Comment
+      }],
+    });
+    return res.status(200).json(requests);
+  } catch (err) {
+    console.log(err);
+    return res.send("Error");
+  }
+};
+
 
 //create a new request
 exports.create = async (req, res) => {
