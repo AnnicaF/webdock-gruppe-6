@@ -1,62 +1,64 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable("Comments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       bodyText: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       userID: {
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       requestID: {
         type: Sequelize.INTEGER,
         references: {
           model: "Requests",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
 
     await queryInterface.addConstraint("Comments", {
       fields: ["userID"],
       type: "foreign key",
-      name:"fk_comment_user",
+      name: "fk_comment_user",
       references: {
         table: "Users",
-        field: "id"
-      }
+        field: "id",
+      },
+      onDelete: "CASCADE",
     });
 
     await queryInterface.addConstraint("Comments", {
       fields: ["requestID"],
       type: "foreign key",
-      name:"fk_comment_request",
+      name: "fk_comment_request",
       references: {
         table: "Requests",
-        field: "id"
-      }
+        field: "id",
+      },
+      onDelete: "CASCADE",
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Comments');
-  }
+    await queryInterface.dropTable("Comments");
+  },
 };

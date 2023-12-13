@@ -67,6 +67,7 @@ module.exports = {
         table: "Roles",
         field: "id",
       },
+      onDelete: "CASCADE",
     });
   },
 

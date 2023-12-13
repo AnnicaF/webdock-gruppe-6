@@ -1,21 +1,22 @@
 const { where } = require("sequelize");
-const {Request, Comment, User, Status} = require("../models");
+const { Request, Comment, User, Status } = require("../models");
 const axios = require("axios");
-
 
 //get all requests
 exports.show = async (req, res) => {
-  try{
+  try {
     const requests = await Request.findAll({
-      include: [{
-        model: User
-      },
-      {
-        model: Status
-      },
-      {
-        model: Comment
-      }],
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Status,
+        },
+        {
+          model: Comment,
+        },
+      ],
     });
     return res.status(200).json(requests);
   } catch (err) {
@@ -32,17 +33,16 @@ exports.showOne = async (req, res) => {
     },
     include: [
       {
-        model: User
+        model: User,
       },
       {
         model: Comment,
-        include: User
-      }
-    ]
+        include: User,
+      },
+    ],
   });
   res.status(200).json(request);
 };
-
 
 //create a new request
 exports.create = async (req, res) => {
@@ -51,81 +51,76 @@ exports.create = async (req, res) => {
     userID: userId,
     title: title,
     description: bodyText,
-    category: categoryName
-  }
+    category: categoryName,
+  };
 
-  axios.post("https://webdock.io/en/platform_data/feature_requests/new", data)
-  .then(response => {
-    // Handle the success response
-    let webdockID = response.data.id;
+  axios
+    .post("https://webdock.io/en/platform_data/feature_requests/new", data)
+    .then((response) => {
+      // Handle the success response
+      let webdockID = response.data.id;
 
-    const newRequest = Request.build({
-    id: webdockID,
-    title: title,
-    bodyText: bodyText,
-    categoryID: categoryID,
-    userID: userId,
-  });
+      const newRequest = Request.build({
+        id: webdockID,
+        title: title,
+        bodyText: bodyText,
+        categoryID: categoryID,
+        userID: userId,
+      });
 
-  try {
-    newRequest.save();
+      try {
+        newRequest.save();
 
-    return res.status(201).json(newRequest);
-  } catch (err) {
-    return res.json(err);
-  }
-
-  })
-  .catch(error => {
-    // Handle the error
-    console.error('Error:', error);
-  });
+        return res.status(201).json(newRequest);
+      } catch (err) {
+        return res.json(err);
+      }
+    })
+    .catch((error) => {
+      // Handle the error
+      console.error("Error:", error);
+    });
 };
-
 
 //webdock change status
 exports.changeStatus = async (req, res) => {
-  const {feature_request_id, status} = req.body;
-  try{
-    const statusObj = await Status.findOne(
-    {
-       where: {name: status}
+  const { feature_request_id, status } = req.body;
+  try {
+    const statusObj = await Status.findOne({
+      where: { name: status },
     });
-    
+
     if (statusObj) {
       await Request.update(
         {
-          statusID: statusObj.id
+          statusID: statusObj.id,
         },
         {
-          where: { id: feature_request_id}
+          where: { id: feature_request_id },
         }
       );
       return res.status(200).send("Status updated successfully");
-    } else{
+    } else {
       return res.status(404).send("Status not found");
     }
-    
-    
   } catch (err) {
     console.error("Error updating request: ", err);
     return res.status(500).send(err);
   }
-}
+};
 
 //create a new comment
 exports.createComment = async (req, res) => {
   const { bodyText, userID, requestID } = req.body;
-    
+
   const newComment = Comment.build({
     bodyText: bodyText,
     userID: userID,
-    requestID: requestID
+    requestID: requestID,
   });
 
   try {
     await newComment.save();
-
 
     return res.status(201).json(newComment);
   } catch (err) {
@@ -133,7 +128,26 @@ exports.createComment = async (req, res) => {
   }
 };
 
+exports.deleteRequest = async (req, res) => {
+  const requestId = req.params.requestId;
 
+  try {
+    // Find anmodningen baseret på requestId
+    const request = await Request.findByPk(requestId);
+
+    if (!request) {
+      return res.status(404).json({ error: "Anmodning ikke fundet" });
+    }
+
+    // Slet anmodningen
+    await request.destroy();
+
+    return res.status(204).send(); // 204 No Content - Anmodningen blev slettet
+  } catch (error) {
+    console.error("Fejl under sletning af anmodning:", error);
+    return res.status(500).json({ error: "Internt serverproblem" });
+  }
+};
 
 // router.get("/v1/request", async (req, res) => {
 //   const users = await Request.findAll();

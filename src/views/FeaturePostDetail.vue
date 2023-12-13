@@ -1,9 +1,20 @@
 <script setup>
-import { ref, onMounted, getCurrentInstance, defineExpose } from "vue";
+import {
+  ref,
+  onMounted,
+  getCurrentInstance,
+  defineExpose,
+  computed,
+} from "vue";
 import axios from "axios";
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
 import NavBar from "@/components/NavBar.vue";
+import AdminPanel from "@/components/AdminPanel.vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const isAdmin = computed(() => store.state.roleID === 1);
 
 const { proxy } = getCurrentInstance();
 const selectedPost = ref(null);
@@ -25,29 +36,31 @@ const fetchPostDetails = async (requestId) => {
 };
 
 const doComment = (newComment) => {
-
   let data = {
     bodyText: newComment,
     userID: localStorage.getItem("userId"),
-    requestID: selectedPost.value.id 
+    requestID: selectedPost.value.id,
   };
-  axios.post(`http://localhost:3000/api/v1/request/${selectedPost.value.id }/comment`, data)
-    .then(response => {
+  axios
+    .post(
+      `http://localhost:3000/api/v1/request/${selectedPost.value.id}/comment`,
+      data
+    )
+    .then((response) => {
       // Handle the success response
-      console.log('Response:', response.data);
+      console.log("Response:", response.data);
       fetchPostDetails(selectedPost.value.id);
     })
-    .catch(error => {
+    .catch((error) => {
       // Handle the error
-      console.error('Error:', error);
+      console.error("Error:", error);
     });
-}
+};
 
 onMounted(() => {
   const requestId = proxy.$route.params.requestId;
   fetchPostDetails(requestId);
 });
-
 </script>
 
 <template>
@@ -60,6 +73,9 @@ onMounted(() => {
     <template v-else>
       <!-- Vis PostDetail og CommentSection her -->
       <PostDetail :post="selectedPost" />
+      <template v-if="isAdmin && selectedPost">
+        <AdminPanel :requestId="selectedPost.id" />
+      </template>
       <CommentSection
         :comments="selectedPost.Comments.reverse()"
         @addComment="doComment"
@@ -73,19 +89,23 @@ onMounted(() => {
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 export default {
+  props: {
+    roleID: Number,
+  },
   components: {
     PostDetail,
     CommentSection,
     NavBar,
+    AdminPanel,
   },
 
-  methods: {
-    
-  },
   setup() {
+    // Brug computed for at overvåge brugerens rolle og bestemme, om de er admin
+    const isAdmin = computed(() => store.state.roleID === 1);
+
     const selectedPost = ref(null);
     const loading = ref(true);
 
@@ -94,11 +114,8 @@ export default {
         const response = await axios.get(
           `http://localhost:3000/api/v1/request/${requestId}`
         );
-        // Sørg for, at 'Comments' er initialiseret som en tom array
-        selectedPost.value = {
-          ...response.data,
-          Comments: response.data.Comments || [],
-        };
+        console.log("Server response:", response.data);
+        selectedPost.value = response.data;
       } catch (error) {
         console.error("Error fetching post details:", error);
         // Handle error (e.g., redirect to a 404 page)
@@ -107,9 +124,13 @@ export default {
       }
     };
 
-    onMounted(() => {
-      const requestId = proxy.$route.params.requestId;
-      fetchPostDetails(requestId);
+    onMounted(async () => {
+      try {
+        const requestId = proxy.$route.params.requestId;
+        await fetchPostDetails(requestId);
+      } catch (error) {
+        console.error("Error during component initialization:", error);
+      }
     });
 
     const addReply = ({ comment, replyText }) => {
@@ -126,8 +147,9 @@ export default {
     return {
       selectedPost,
       loading,
-      addComment,
+      doComment,
       addReply,
+      isAdmin,
     };
   },
 };

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <button @click="showModal" class="adminButton">
       <font-awesome-icon class="fa-tc" icon="fa-solid fa-trash-can" />Delete
@@ -7,7 +7,7 @@
   </div>
 
   <!-- Modal -->
-  <div
+  <!-- <div
     :class="{ 'modal-overlay': true, active: isModalVisible }"
     v-show="isModalVisible"
   >
@@ -21,8 +21,8 @@
       </div>
     </div>
   </div>
-</template>
-
+</template> -->
+<!-- 
 <script>
 export default {
   data() {
@@ -134,4 +134,4 @@ button:hover {
 .cancelButton:hover {
   background-color: var(--grey-mid);
 }
-</style>
+</style> --> 

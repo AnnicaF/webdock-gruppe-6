@@ -1,11 +1,3 @@
-<script setup>
-import AdminPanel from "./AdminPanel.vue";
-import { computed } from "vue";
-import { useStore } from "vuex";
-
-const store = useStore();
-const isAdmin = computed(() => store.state.roleID === 1);
-</script>
 <template>
   <div class="post-container">
     <div class="vote">
@@ -37,9 +29,6 @@ const isAdmin = computed(() => store.state.roleID === 1);
           </div>
         </div>
       </div>
-      <template v-if="isAdmin">
-        <AdminPanel />
-      </template>
     </div>
   </div>
 </template>
@@ -51,15 +40,6 @@ export default {
       type: Object,
       required: true,
     },
-    roleID: Number,
-  },
-  setup(props) {
-    // Brug computed for at overvåge brugerens rolle og bestemme, om de er admin
-    const isAdmin = computed(() => store.state.roleID === 1);
-
-    return {
-      isAdmin,
-    };
   },
   methods: {
     upvotePost() {

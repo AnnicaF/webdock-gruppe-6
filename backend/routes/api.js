@@ -12,7 +12,9 @@ router.get("/v1/request", requests.show);
 router.get("/v1/request/:id", requests.showOne);
 router.post("/v1/request", requests.create);
 router.post("/v1/request/:id/comment", requests.createComment);
-    //webdock can change status here
+
+router.delete("/v1/request/:requestId", requests.deleteRequest);
+//webdock can change status here
 router.post("/v1/request/status", requests.changeStatus);
 
 //categories
