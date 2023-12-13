@@ -18,6 +18,9 @@ router.post("/v1/request/:id/comment", requests.createComment);
     //webdock can change status here
 router.post("/v1/request/status", requests.changeStatus);
 
+//likes
+
+router.post("/v1/lie");
 
 //categories
 router.get("/v1/category", categories.show);

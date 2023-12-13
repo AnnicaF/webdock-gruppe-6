@@ -1,10 +1,14 @@
+<script setup>
+import axios from "axios";
+</script>
+
 <template>
   <div class="post-container">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-        <span class="upvote-count"> X </span>
+        <span class="upvote-count" @click="handleUpvote(post.id)"> X </span>
       </button>
         
       </div>
@@ -39,6 +43,26 @@ export default {
     },
   },
   methods: {
+    handleUpvote(postId){
+      console.log("+1")
+      let curUser = localStorage.getItem("userId")
+      if(curUser){
+        let data = {
+          requestId: postId,
+          userId: localStorage.getItem("userId")
+        }
+        axios.post('http://localhost:3000/api/v1/like', data)
+          .then((response) => {
+            console.log("Response:", response.data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          })
+      }else{
+        alert("can't")
+      }
+      
+    },
     upvotePost() {
       console.log("Upvoting post:", this.post.id);
     },

@@ -88,10 +88,10 @@ export default {
           .post("http://localhost:3000/api/v1/request", data)
           .then((response) => {
             console.log("Response:", response.data);
-            this.setAuthentication({
-              isAuthenticated: true,
-              //userId: response.data.userId,
-            });
+            // this.setAuthentication({
+            //   isAuthenticated: true,
+            //   userId: response.data.userId,
+            // });
             this.$parent.$emit("callLoad");
           })
           .catch((error) => {
