@@ -132,15 +132,16 @@ exports.deleteRequest = async (req, res) => {
   const requestId = req.params.requestId;
 
   try {
-    // Find anmodningen baseret på requestId
-    const request = await Request.findByPk(requestId);
+    // Find anmodningen baseret på requestId med tilknyttede kommentarer
+    const request = await Request.findByPk(requestId, { include: Comment });
 
     if (!request) {
       return res.status(404).json({ error: "Anmodning ikke fundet" });
     }
 
-    // Slet anmodningen
-    await request.destroy();
+    await Comment.destroy({ where: { requestID: requestId } });
+
+    await Request.destroy({ where: { id: requestId } });
 
     return res.status(204).send(); // 204 No Content - Anmodningen blev slettet
   } catch (error) {
@@ -148,7 +149,6 @@ exports.deleteRequest = async (req, res) => {
     return res.status(500).json({ error: "Internt serverproblem" });
   }
 };
-
 // router.get("/v1/request", async (req, res) => {
 //   const users = await Request.findAll();
 
