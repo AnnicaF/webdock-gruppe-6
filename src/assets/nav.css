@@ -1,6 +1,5 @@
 @import "./base.css";
 
-
 header {
   background-color: white;
   z-index: 99;
@@ -16,6 +15,9 @@ nav {
   width: 90%;
   margin: 0 auto;
   align-items: center;
+  @media (min-width: 1140px) {
+    max-width: 1140px;
+  }
 }
 
 .navigation {
@@ -62,6 +64,48 @@ a:hover {
   align-items: center;
 }
 
+.icon {
+  display: flex;
+  position: relative;
+  top: 0;
+  height: 100%;
+  color: black;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+.dropdown-nav {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  background-color: white;
+  top: 0;
+  left: 0;
+
+  li {
+    margin-left: 0;
+    .link {
+      color: black;
+    }
+  }
+  .mobile-nav-enter-active,
+  .mobile-nav-leaving {
+    transition: 1s ease all;
+  }
+  .mobile-nav-enter-from,
+  .mobile-nav-leave-to {
+    transform: translateX(-250px);
+  }
+
+  .mobile-nav-enter-to {
+    transform: translateX(0);
+  }
+}
+
 .logsign {
   display: flex;
   align-items: center;
@@ -80,6 +124,13 @@ button {
   margin: 10px;
   font-weight: bold;
   transition-duration: 0.4s;
+}
+
+.fa-bars {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .login {

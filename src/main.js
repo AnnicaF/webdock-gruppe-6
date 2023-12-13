@@ -19,12 +19,13 @@ import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faCodeMerge } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 /* add icons to the library */
 library.add(faUserSecret, faComment, faCaretUp);
 library.add(faUserSecret, faComment, faCaretDown);
 library.add(faUserSecret, faComment, faTrashCan);
 library.add(faUserSecret, faComment, faCodeMerge);
-
+library.add(faUserSecret, faComment, faBars);
 const app = createApp(App);
 
 app.use(router);

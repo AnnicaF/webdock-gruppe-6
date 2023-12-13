@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button @click="redirectToWebDock">Login</button>
+    <button @click="redirectToWebDock" class="login">Login</button>
   </div>
 </template>
-    
+
 <script>
 import { mapMutations } from "vuex";
 export default {
