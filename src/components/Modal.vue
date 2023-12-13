@@ -67,16 +67,21 @@ export default {
       modal.classList.remove("show");
     },
     ...mapMutations(["setAuthentication"]),
+    
     createPost() {
       // Tjek om brugeren er logget ind baseret på local storage
       const isAuthenticated =
         localStorage.getItem("isAuthenticated") === "true";
       const userId = localStorage.getItem("userId");
+      const categoryBoth = document.getElementById("category").value.split(",");
 
       if (isAuthenticated && userId) {
         let data = {
           title: document.getElementById("title").value,
           bodyText: document.getElementById("description").value,
+          userId: userId,
+          categoryID: categoryBoth[0],
+          categoryName: categoryBoth[1]
         };
 
         axios
@@ -85,8 +90,9 @@ export default {
             console.log("Response:", response.data);
             this.setAuthentication({
               isAuthenticated: true,
-              userId: response.data.userId,
+              //userId: response.data.userId,
             });
+            this.$parent.$emit("callLoad");
           })
           .catch((error) => {
             console.error("Error:", error);

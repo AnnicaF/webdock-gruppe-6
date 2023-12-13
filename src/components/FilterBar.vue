@@ -48,7 +48,7 @@ axios.get("http://localhost:3000/api/v1/category")
             <option value="">All Categories</option>
             <option
               v-for="(category, index) in categories"
-              :value="category.name"
+              :value="category.id"
               :key="index"
             >
               {{ category.name }}
@@ -91,7 +91,7 @@ export default {
       this.activeTab = tabName;
     },
     selectCategory() {
-      
+      console.log(document.getElementById("categorySelect").value)
       this.$emit("callCategory", document.getElementById("categorySelect").value);
     }
   },
