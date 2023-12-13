@@ -20,7 +20,7 @@ function get() {
 
 function category(cat){
   axios
-    .get("http://localhost:3000/api/v1/request/category", {
+    .get("http://localhost:3000/api/v1/cat", {
       params: {
         c: cat
       },
@@ -34,12 +34,13 @@ function category(cat){
 function search(searchQuery) {
   console.log(searchQuery);
   axios
-    .get("http://localhost:3000/api/v1/request/search", {
+    .get("http://localhost:3000/api/v1/search", {
       params: {
         q: searchQuery, // This sends the search term as a query parameter
       },
     })
-    .then((response) => (requests.value = response.data))
+    .then((response) => {requests.value = response.data;
+      console.log(response)})
     .then(console.log(requests))
     .catch((err) => {
       console.log("error: " + err);

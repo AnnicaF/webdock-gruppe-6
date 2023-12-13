@@ -10,8 +10,8 @@ const router = express.Router();
     //these get
 router.get("/v1/request", requests.show);
 router.get("/v1/request/:id", requests.showOne);
-router.get("/v1/request/category", requests.showCategory);
-router.get("/v1/request/search", requests.search);
+router.get("/v1/cat", requests.showCat);
+router.get("/v1/search", requests.search);
     //these adds to the db
 router.post("/v1/request", requests.create);
 router.post("/v1/request/:id/comment", requests.createComment);
