@@ -78,7 +78,7 @@ export default {
         "completed": "completed-color",
         "in progress": "in-progress-color",
       };
-      return statusColorMap[status] || "default-color";
+      return statusColorMap[status.toLowerCase()] || "default-color";
     },
 
     getIndexClass(index) {
