@@ -19,7 +19,16 @@ function get() {
 }
 
 function category(cat){
-  
+  axios
+    .get("http://localhost:3000/api/v1/request/category", {
+      params: {
+        c: cat
+      },
+    })
+    .then((response) => (requests.value = response.data))
+    .catch((err) => {
+      console.log("error: " + err);
+    });
 }
   
 function search(searchQuery) {

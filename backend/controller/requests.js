@@ -64,10 +64,11 @@ exports.showOne = async (req, res) => {
 
 };
 
+//get request from 1 category
 exports.showCategory = async (req, res) => {
   try{
     const requests = await Request.findAll({
-      where: {category: req.body}
+      where: {category: req.params.c}
     },{
       include: [{
         model: User

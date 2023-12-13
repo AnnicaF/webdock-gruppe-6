@@ -11,12 +11,13 @@ const router = express.Router();
 router.get("/v1/request", requests.show);
 router.get("/v1/request/:id", requests.showOne);
 router.get("/v1/request/category", requests.showCategory);
+router.get("/v1/request/search", requests.search);
     //these adds to the db
 router.post("/v1/request", requests.create);
 router.post("/v1/request/:id/comment", requests.createComment);
     //webdock can change status here
 router.post("/v1/request/status", requests.changeStatus);
-router.get("/v1/request/search", requests.search);
+
 
 //categories
 router.get("/v1/category", categories.show);
