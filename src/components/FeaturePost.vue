@@ -1,10 +1,19 @@
+<script setup>
+import AdminPanel from "./AdminPanel.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const isAdmin = computed(() => store.state.roleID === 1);
+</script>
+
 <template>
   <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
       <div class="upvote-container">
         <button @click="handleUpvote" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-          <span class="upvote-count">{{upvoteCount}}</span>
+          <span class="upvote-count">{{ upvoteCount }}</span>
         </button>
       </div>
     </div>
@@ -13,27 +22,29 @@
         <h2 class="title">{{ title }}</h2>
         <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
-            planned
+            {{ status }}
           </div>
-        </div> 
+        </div>
         <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
           <p class="small-text">{{ user }}</p>
-          <p class="small-text">{{ date }}</p>
+          <p class="small-text">{{ new Date(date).toLocaleDateString("en-GB") }}</p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ commentCount }}</span>
+            <span class="comment-count">{{ commentCount.length }}</span>
           </div>
         </div>
+        <template v-if="isAdmin">
+          <AdminPanel />
+        </template>
       </div>
     </div>
   </div>
 </template>
-  
   <script>
 export default {
   props: {
@@ -41,11 +52,20 @@ export default {
     bodyText: String,
     description: String,
     upvoteCount: Number,
-    commentCount: Number,
+    commentCount: Array,
     user: String,
     status: String,
     date: String,
     index: Number,
+    roleID: Number,
+  },
+  setup(props) {
+    // Brug computed for at overvåge brugerens rolle og bestemme, om de er admin
+    const isAdmin = computed(() => store.state.roleID === 1);
+
+    return {
+      isAdmin,
+    };
   },
   methods: {
     handleUpvote() {
@@ -53,23 +73,22 @@ export default {
     },
     getStatusClass(status) {
       const statusColorMap = {
-        planned: "planned-color",
+        "planned": "planned-color",
         "under review": "under-review-color",
-        completed: "completed-color",
+        "completed": "completed-color",
         "in progress": "in-progress-color",
       };
       return statusColorMap[status] || "default-color";
-      },
-      
-      getIndexClass(index) {
+    },
+
+    getIndexClass(index) {
       let i = index % 2;
-      return "iswhite-"+i
-    }
-  }
+      return "iswhite-" + i;
+    },
+  },
 };
 </script>
-  
-  <style scoped>
+<style scoped>
 .post-container {
   display: flex;
   background-color: var(--grey-mid);
@@ -78,11 +97,11 @@ export default {
   padding: 20px;
 }
 
-.post{
+.post {
   width: 100%;
 }
 .iswhite-1 {
-  background-color: var(--white);
+  background-color: var(--grey-light);
 }
 
 .title {
@@ -92,6 +111,13 @@ export default {
 
 .bodyText {
   font-size: 16px;
+  font-weight: 100;
+  height: 36px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
 }
 
 hr {
@@ -128,7 +154,7 @@ hr {
 }
 
 .default-color {
-  background: black; 
+  background: black;
 }
 .comment_icon {
   color: grey;

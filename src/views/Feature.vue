@@ -1,6 +1,7 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import Nav from "../components/Nav.vue";
+import NavBar from "../components/NavBar.vue";
+import FeaturePost from "../components/FeaturePost.vue";
 import axios from "axios";
 import { ref } from "vue";
 
@@ -9,7 +10,38 @@ const requests = ref(null);
 function get() {
   axios
     .get("http://localhost:3000/api/v1/request")
+    .then((response) => {requests.value = response.data;
+      console.log(response)
+    })
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
+
+function category(cat){
+  axios
+    .get("http://localhost:3000/api/v1/cat", {
+      params: {
+        c: cat
+      },
+    })
     .then((response) => (requests.value = response.data))
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+}
+  
+function search(searchQuery) {
+  console.log(searchQuery);
+  axios
+    .get("http://localhost:3000/api/v1/search", {
+      params: {
+        q: searchQuery, // This sends the search term as a query parameter
+      },
+    })
+    .then((response) => {requests.value = response.data;
+      console.log(response)})
+    .then(console.log(requests))
     .catch((err) => {
       console.log("error: " + err);
     });
@@ -19,23 +51,49 @@ get();
 </script>
 
 <template>
-  <Nav />
-  <FilterBar @callLoad="get" />
+  <NavBar @callsearch="search"/>
+  <FilterBar @callLoad="get"  @callCategory="category"/>
   <div class="box">
     <button
       v-for="(request, index) in requests"
       :key="index"
       @click="navigateToDetail(request)"
     >
-      <FeaturePost
+      <feature-post
+        :roleID="roleID"
         :title="request.title"
         :bodyText="request.bodyText"
         :index="index"
+        :status="request.Status.name"
+        :date="request.createdAt"
+        :commentCount="request.Comments"
+        :user="request.User.name"
       />
     </button>
   </div>
 </template>
 
+<script>
+export default {
+  components: {
+    FeaturePost,
+  },
+  data() {
+    return {
+      // Få brugerens rolle fra din backend eller hvor du har det gemt efter log ind
+      roleID: 1, // 1 betyder admin i dit tilfælde
+    };
+  },
+  methods: {
+    navigateToDetail(request) {
+      this.$router.push({
+        name: "featurePostDetail",
+        params: { requestId: request.id },
+      });
+    },
+  },
+};
+</script>
 
 <style scoped>
 button {
@@ -44,6 +102,7 @@ button {
   background: none;
   text-align: left;
   cursor: pointer;
+  margin: 0px;
 }
 
 .box {

@@ -13,7 +13,7 @@
               </div>
               <div class="scrollContainer">
                 <div v-for="(post, index) in posts" :key="index">
-                  <div class="postContainer">
+                  <div v-if="post.Status.name=='Planned'" class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon
@@ -42,7 +42,7 @@
               </div>
               <div class="scrollContainer">
                 <div v-for="(post, index) in posts" :key="index">
-                  <div class="postContainer">
+                  <div v-if="post.Status.name=='In Progress'" class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon
@@ -71,7 +71,7 @@
               </div>
               <div class="scrollContainer">
                 <div v-for="(post, index) in posts" :key="index">
-                  <div class="postContainer">
+                  <div v-if="post.Status.name=='Completed'" class="postContainer">
                     <div class="upvoteContainer">
                       <button @click="upvote(post)" class="upvote-button">
                         <font-awesome-icon
@@ -108,15 +108,16 @@ export default {
 
 <style scoped>
 .contentContainer {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  grid-auto-rows: auto;
   align-items: center;
   width: 100%;
 }
 
 .columnContainer {
-  flex: 2;
-  margin: 5px;
+  margin: 0;
   align-items: center;
 }
 
@@ -199,5 +200,21 @@ export default {
 
 h3 {
   margin-left: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .contentContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .roadmapColumn {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .scrollContainer {
+    height: auto;
+    max-height: 300px;
+  }
 }
 </style>

@@ -12,11 +12,11 @@
         <li v-for="comment in sortedComments" :key="comment.id">
           <div class="comment-content">
             <p>
-              <strong>{{ comment.user }}</strong>
+              <strong>{{ comment.User.name }}</strong>
             </p>
-            <p>{{ comment.text }}</p>
+            <p>{{ comment.bodyText }}</p>
             <hr />
-            <p class="comment-date">{{ comment.date }}</p>
+            <p class="comment-date">{{ new Date(comment.createdAt).toLocaleDateString("en-GB") }}</p>
             <span @click="toggleReply(comment)" class="reply-text">Reply</span>
           </div>
 
@@ -67,7 +67,7 @@ export default {
   methods: {
     addComment() {
       this.$emit("addComment", this.newComment);
-
+      console.log(this.newComment);
       // Clear the input field
       this.newComment = "";
     },
@@ -102,3 +102,46 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.section {
+display: flex;
+justify-content: center;
+max-width: 600px;
+margin: auto;
+flex-direction: column;
+}
+
+.container{
+  background-color: var(--grey-mid);
+}
+
+.comment-box{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+textarea {
+  resize: none;
+  width: 66%;
+  height: 80px;
+  padding: 3px;
+  margin: 0 auto;
+}
+
+.button-container{
+  margin: auto;
+  width: 66%;
+}
+
+.button-container button{
+  background-color: var(--green-primary);
+  border-style: none;
+  border-radius: 4px;
+  color: var(--white);
+  font-size: 12px;
+}
+
+
+</style>
