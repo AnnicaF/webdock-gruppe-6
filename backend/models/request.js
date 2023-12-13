@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Request.init({
     title: DataTypes.STRING,
-    bodyText: DataTypes.STRING,
+    bodyText: DataTypes.TEXT,
     statusID: DataTypes.INTEGER,
     categoryID: DataTypes.INTEGER,
     userID: DataTypes.INTEGER

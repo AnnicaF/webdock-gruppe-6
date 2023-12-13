@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false
       },
       bodyText: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       statusID: {
