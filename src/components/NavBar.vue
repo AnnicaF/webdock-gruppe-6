@@ -20,7 +20,6 @@
 
       <ul class="logsign">
         <LoginButton />
-        <button type="button" class="signup">Sign up</button>
       </ul>
     </nav>
   </header>

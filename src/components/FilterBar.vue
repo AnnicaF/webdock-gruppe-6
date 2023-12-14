@@ -131,11 +131,16 @@ export default {
 button {
   background-color: var(--green-primary);
   color: var(--white);
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 16px;
-  padding: 8px 18px;
-  border: none;
+  padding: 4px 12px;
+  border: solid var(--green-primary);
   cursor: pointer;
+}
+
+button:hover{
+  background-color: var(--white);
+  color: var(--green-primary);
 }
 
 .line-container {

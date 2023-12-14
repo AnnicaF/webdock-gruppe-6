@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="redirectToWebDock">Login</button>
+    <button class="login" @click="redirectToWebDock">Login</button>
   </div>
 </template>
     
