@@ -1,7 +1,7 @@
 
 <template>
   <div class="section">
-    <div class="comment-box">
+    <div class="comment-box" v-if="isAuthenticated">
       <textarea v-model="newComment" placeholder="Leave a comment"></textarea>
       <div class="button-container">
         <button @click="addComment">Submit</button>
@@ -47,6 +47,8 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: {
     comments: Array,
@@ -62,6 +64,7 @@ export default {
         ? [...this.comments].sort((a, b) => new Date(b.date) - new Date(a.date))
         : [];
     },
+    ...mapState(["isAuthenticated"]),
   },
 
   methods: {

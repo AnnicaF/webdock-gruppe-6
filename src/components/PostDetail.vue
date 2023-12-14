@@ -40,6 +40,8 @@ import axios from "axios";
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: {
     post: {
@@ -47,11 +49,12 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapState(["isAuthenticated"]),
+  },
   methods: {
     handleUpvote(){
-      console.log(this.post.id)
-      let curUser = localStorage.getItem("userId")
-      if(curUser){
+      if(this.isAuthenticated){
         let data = {
           requestId: this.post.id,
           userId: localStorage.getItem("userId")
@@ -65,8 +68,9 @@ export default {
           .catch((error) => {
             console.error("Error:", error);
           })
+        
       }else{
-        alert("can't")
+        alert("Du skal logge ind for at upvote en post.")
       }
       
     },
