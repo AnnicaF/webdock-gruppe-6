@@ -59,7 +59,7 @@ export default {
         axios.post('http://localhost:3000/api/v1/like', data)
           .then((response) => {
             console.log("Response:", response.data);
-            window.location.reload();
+            this.$router.go();
 
           })
           .catch((error) => {
