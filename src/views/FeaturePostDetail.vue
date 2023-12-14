@@ -74,7 +74,7 @@ onMounted(() => {
       <!-- Vis PostDetail og CommentSection her -->
       <PostDetail :post="selectedPost" />
       <template v-if="isAdmin && selectedPost">
-        <AdminPanel :requestId="selectedPost.id" />
+        <AdminPanel :requestId="selectedPost.id" :status="selectedPost.StatusId"/>
       </template>
       <CommentSection
         :comments="selectedPost.Comments.reverse()"

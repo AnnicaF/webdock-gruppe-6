@@ -1,7 +1,12 @@
+<script setup>
+  import axios from "axios";
+</script>
+
 <template>
   <div :class="{ showDropdown: showDropdown }" class="dropdown-container">
     <button @click="toggleDropdown" class="adminButton">
-      Under Review<font-awesome-icon
+      {{dropdownItems[status-2] || "Under Reveiw"}}
+      <font-awesome-icon
         class="fa-cd"
         icon="fa-solid fa-caret-down"
       />
@@ -12,7 +17,7 @@
       class="dropdown-content"
     >
       <ul>
-        <li v-for="(item, index) in dropdownItems" :key="index">
+        <li v-for="(item, index) in dropdownItems" :key="index" @click="doStatus(item, requestId)">
           {{ item }}
         </li>
       </ul>
@@ -25,8 +30,12 @@ export default {
   data() {
     return {
       showDropdown: false,
-      dropdownItems: ["Planned", "In progress", "Complete"],
+      dropdownItems: ["Planned", "In progress", "Completed"],
     };
+  },
+  props: {
+    status: String,
+    requestId: Number
   },
   mounted() {
     document.addEventListener("click", this.closeDropdownOnOutsideClick);
@@ -41,6 +50,7 @@ export default {
     handleDropdownItemClick() {
       // Handle dropdown item click logic here
       // You can use this method to perform actions when a dropdown item is clicked
+      
       this.showDropdown = false; // Close the dropdown after an item is clicked
     },
     closeDropdownOnOutsideClick(event) {
@@ -49,11 +59,27 @@ export default {
         this.showDropdown = false;
       }
     },
+    doStatus(status, requestId) {
+      const data = {
+        status: status,
+        feature_request_id: requestId
+      }
+      axios.post("http://localhost:3000/api/v1/request/status", data)
+        .then((res) => {
+          console.log("successful: ", res)
+        }
+        )
+        .catch((err) => {
+          console.log("an error as occurred: ", err)
+        }
+        )
+    }
   },
 };
 </script>
 
 <style scoped>
+
 div > .showDropdown ul {
   position: relative;
   display: inline-block;
@@ -75,7 +101,7 @@ div ul {
 .adminButton {
   color: black;
   font-size: 10px;
-  padding: 6px;
+  padding: 12px;
   margin: 0px;
   cursor: pointer;
   background: white;
@@ -90,11 +116,15 @@ button:hover {
   position: relative;
   display: inline-block;
   margin: 0px;
+  overflow: visible;
+  height: 37px;
 }
 
 .dropdown-content {
   color: black;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  background-color: var(--grey-light);
 }
 
 .dropdown-content ul {
@@ -104,7 +134,7 @@ button:hover {
 .dropdown-content li {
   list-style: none;
   text-decoration: none;
-  padding: 18px;
+  padding: 12px;
   margin: 0px;
   cursor: pointer;
 }

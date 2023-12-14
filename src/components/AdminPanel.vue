@@ -5,7 +5,9 @@
       <font-awesome-icon class="fa-tc" icon="fa-solid fa-trash-can" />Delete
       Post
     </button>
-    <ChangePostStatus class="statusButton" />
+    <ChangePostStatus class="statusButton" 
+    :status="status"
+    :requestId="requestId" />
 
     <!-- Delete Post Modal -->
     <div
@@ -16,7 +18,7 @@
         <div class="modal-content">
           <div class="buttonContainer">
             <p>Are you sure you want to delete this post?</p>
-            <button @click="deletePost" class="deleteButton">Delete</button>
+            <button @click="deletePost(requestId)" class="deleteButton">Delete</button>
             <button @click="closeDeleteModal" class="cancelButton">
               Cancel
             </button>
@@ -26,13 +28,14 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import ChangePostStatus from "./ChangePostStatus.vue";
 import MergePost from "./MergePost.vue";
 import { ref, defineProps } from "vue";
 import axios from "axios";
 
-const props = defineProps(["requestId"]);
+const props = defineProps(["requestId", "status"]);
 
 const isDeleteModalVisible = ref(false);
 
@@ -44,30 +47,53 @@ const closeDeleteModal = () => {
   isDeleteModalVisible.value = false;
 };
 
-const deletePost = () => {
-  if (!props.requestId) {
-    console.error("No requestId provided");
-    return;
-  }
 
-  axios
-    .delete(`http://localhost:3000/api/v1/request/${props.requestId}`)
-    .then(() => {
-      console.log("Request deleted successfully");
-      closeDeleteModal();
-      // You might want to emit an event or update some state in AdminPanel
-    })
-    .catch((error) => {
-      console.error("Error deleting request", error);
-      // Handle error, e.g., show an error message to the user
-    });
-};
+</script>
+
+<script>
+export default {
+  methods: {
+    goBack() {
+      this.$router.push("/");
+    },
+    deletePost(requestId) {
+      if (!requestId) {
+        console.error("No requestId provided");
+        
+        return;
+      }
+
+      axios
+        .delete(`http://localhost:3000/api/v1/request/${requestId}`)
+        .then(() => {
+          console.log("Request deleted successfully");
+          this.$router.push("/");
+          // You might want to emit an event or update some state in AdminPanel
+        })
+        .catch((error) => {
+          console.error("Error deleting request", error);
+          
+          // Handle error, e.g., show an error message to the user
+        });
+    }
+  }
+}
 </script>
 <style scoped>
 /* Styles for AdminPanel component */
 .adminContainer {
   display: flex;
-  align-items: center;
+  justify-content: center;
+}
+
+.adminContainer > div {
+  margin: 5px;
+  transition: 0.25s;
+}
+
+.adminContainer > div:hover {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .adminButton {
@@ -75,7 +101,7 @@ const deletePost = () => {
   font-size: 10px;
   cursor: pointer;
   padding: 12px;
-  margin: 0px;
+  margin: 5px;
   background: white;
   border: 1px solid black;
   border-radius: 5px;
@@ -83,6 +109,8 @@ const deletePost = () => {
 
 button:hover {
   background-color: var(--grey-mid);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .fa-tc {
