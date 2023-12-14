@@ -19,7 +19,10 @@ function get() {
 }
 
 function category(cat){
-  axios
+  if (!cat){
+    get();
+  } else {
+    axios
     .get("http://localhost:3000/api/v1/cat", {
       params: {
         c: cat
@@ -29,6 +32,8 @@ function category(cat){
     .catch((err) => {
       console.log("error: " + err);
     });
+  }
+  
 }
   
 function search(searchQuery) {

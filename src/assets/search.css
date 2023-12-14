@@ -4,14 +4,16 @@
   /*  max-width: 235px; */
   margin: 0;
   flex: 0 1 470px; /* flex-grow, flex-shrink, flex-basis */
+  display: flex;
+  justify-content: end;
 }
 
 .search-input {
   width: 100%;
-  padding: 18px 18px;
-  font-size: 1.2em;
+  max-width: 200px;
+  padding: 5px 5px;
   border-radius: 25px; /* Makes the input rounded */
-  border: 2px solid #018647;
+  border: 2px solid var(--green-primary);
   outline: none;
   transition: box-shadow 0.3s;
   padding-left: 40px; /* to make room for the icon */

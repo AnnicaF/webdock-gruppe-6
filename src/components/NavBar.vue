@@ -1,12 +1,14 @@
 <template>
   <header>
     <nav>
+      <router-link :to="{ name: 'Feature' }">
       <div class="branding">
         <img
           src="/src/assets/images/webdock-logo-full-whitebg.png"
           alt="Webdock.io logo"
         />
       </div>
+    </router-link>
       <ul class="navigation">
         <li>
           <router-link :to="{ name: 'Feature' }">Feature request</router-link>
