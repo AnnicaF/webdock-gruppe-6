@@ -1,10 +1,10 @@
 <template>
   <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
-      <div class="upvote-container">
-        <button @click="handleUpvote" class="upvote-button">
+      <div class="upvote-container"  :class="hasLiked()">
+        <button class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-          <span class="upvote-count">{{ upvoteCount }}</span>
+          <span class="upvote-count" >{{ upvoteCount.length }}</span>
         </button>
       </div>
     </div>
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     handleUpvote() {
-      this.upvoteCount += 1;
+      console.log("+1");
     },
     getStatusClass(status) {
       const statusColorMap = {
@@ -66,6 +66,18 @@ export default {
       let i = index % 2;
       return "iswhite-" + i;
     },
+    hasLiked(){
+      console.log(this.upvoteCount);
+      let hl = false;
+      this.upvoteCount.forEach(element => {
+        if(element.userID == localStorage.getItem("userId")){
+          hl = true;
+        }
+      });
+      if(hl){
+        return "hasLiked"
+      }
+    }
   },
 };
 </script>
@@ -177,6 +189,7 @@ hr {
   justify-content: center;
   border-radius: 4px;
   border: 1px solid #ccc;
+  z-index: -10;
 }
 
 .upvote-button {
@@ -195,5 +208,18 @@ hr {
 
 .fa-lg {
   color: grey;
+}
+
+.hasLiked{
+  background-color: var(--green-primary);
+  pointer-events: none;
+}
+
+.hasLiked .fa-lg{
+  color: white;
+}
+
+.hasLiked span{
+  color: white;
 }
 </style>

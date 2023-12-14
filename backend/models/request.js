@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       Request.belongsTo(models.User, { foreignKey: "userID" });
       models.User.hasMany(Request);
 
+
+      Request.hasMany(models.Comment, { foreignKey: "requestID" });
+      Request.hasMany(models.Like, { foreignKey: "requestID" });
+
       Request.hasMany(models.Comment, {
         foreignKey: "requestID",
         onDelete: "CASCADE",

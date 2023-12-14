@@ -91,7 +91,6 @@ export default {
       this.activeTab = tabName;
     },
     selectCategory() {
-      console.log(document.getElementById("categorySelect").value)
       this.$emit("callCategory", document.getElementById("categorySelect").value);
     }
   },

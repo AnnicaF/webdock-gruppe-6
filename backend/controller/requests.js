@@ -1,21 +1,22 @@
 const { Op } = require("sequelize");
-const { Request, Comment, User, Status } = require("../models");
+const {Request, Comment, User, Status, Like} = require("../models");
 const axios = require("axios");
 
 exports.show = async (req, res) => {
   try {
     const requests = await Request.findAll({
-      include: [
-        {
-          model: User,
-        },
-        {
-          model: Status,
-        },
-        {
-          model: Comment,
-        },
-      ],
+      include: [{
+        model: User
+      },
+      {
+        model: Status
+      },
+      {
+        model: Comment
+      },
+      {
+        model: Like
+      }],
     });
     return res.status(200).json(requests);
   } catch (err) {
@@ -36,17 +37,18 @@ exports.search = async (req, res) => {
           [Op.like]: `%${searchQuery}%`, // Allows for partial matching
         },
       },
-      include: [
-        {
-          model: User,
-        },
-        {
-          model: Status,
-        },
-        {
-          model: Comment,
-        },
-      ]
+      include: [{
+        model: User
+      },
+      {
+        model: Status
+      },
+      {
+        model: Comment
+      },
+      {
+        model: Like
+      }],
     });
     return res.status(200).json(requests);
   } catch (err) {
@@ -67,9 +69,12 @@ exports.showOne = async (req, res) => {
       },
       {
         model: Comment,
-        include: User,
+        include: User
       },
-    ],
+      {
+        model: Like
+      }
+    ]
   });
   res.status(200).json(request);
 
@@ -78,9 +83,11 @@ exports.showOne = async (req, res) => {
 //get request from 1 category
 exports.showCat = async (req, res) => {
   try{
+    const cat = req.query.c
+    console.log(cat);
     const requests = await Request.findAll({
       where: {
-        categoryID: req.query.c,
+        categoryID: cat
       },
       include: [{
         model: User
@@ -90,6 +97,9 @@ exports.showCat = async (req, res) => {
       },
       {
         model: Comment
+      },
+      {
+        model: Like
       }],
     });
     return res.status(200).json(requests);
