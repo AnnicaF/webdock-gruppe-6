@@ -10,10 +10,10 @@ const isAdmin = computed(() => store.state.roleID === 1);
 <template>
   <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
-      <div class="upvote-container">
-        <button @click="handleUpvote" class="upvote-button">
+      <div class="upvote-container"  :class="hasLiked()">
+        <button class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-          <span class="upvote-count" @click="handleUpvote">{{ upvoteCount }}</span>
+          <span class="upvote-count" >{{ upvoteCount.length }}</span>
         </button>
       </div>
     </div>
@@ -78,13 +78,25 @@ export default {
         "completed": "completed-color",
         "in progress": "in-progress-color",
       };
-      return statusColorMap[status] || "default-color";
+      return statusColorMap[status.toLowerCase()] || "default-color";
     },
 
     getIndexClass(index) {
       let i = index % 2;
       return "iswhite-" + i;
     },
+    hasLiked(){
+      console.log(this.upvoteCount);
+      let hl = false;
+      this.upvoteCount.forEach(element => {
+        if(element.userID == localStorage.getItem("userId")){
+          hl = true;
+        }
+      });
+      if(hl){
+        return "hasLiked"
+      }
+    }
   },
 };
 </script>
@@ -215,5 +227,18 @@ hr {
 
 .fa-lg {
   color: grey;
+}
+
+.hasLiked{
+  background-color: var(--green-primary);
+  pointer-events: none;
+}
+
+.hasLiked .fa-lg{
+  color: white;
+}
+
+.hasLiked span{
+  color: white;
 }
 </style>

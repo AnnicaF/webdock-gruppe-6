@@ -68,6 +68,7 @@ get();
         :date="request.createdAt"
         :commentCount="request.Comments"
         :user="request.User.name"
+        :upvoteCount="request.Likes"
       />
     </button>
   </div>

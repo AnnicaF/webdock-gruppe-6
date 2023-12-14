@@ -11,17 +11,16 @@ exports.show = async (req, res) => {
   };
 
   exports.create = async (req, res) => {
-    // const { userId, requestId } = req.body;
+    const { userId, requestId } = req.body;
       
-    // const newLike = Like.build({
-    // requestID: requestId,
-    // userID: userId,
-    // })
+    const newLike = Like.build({
+    requestID: requestId,
+    userID: userId,
+    })
     
     try {
-      //newLike.save();
-      console.log("hej")
-      return res.status(201).send("hej");
+      newLike.save();
+      return res.status(201).send(newLike);
     } catch (err) {
       return res.json(err);
     }

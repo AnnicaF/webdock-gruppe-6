@@ -5,10 +5,10 @@ import axios from "axios";
 <template>
   <div class="post-container">
     <div class="vote">
-      <div class="upvote-container">
-        <button @click="handleUpvote" class="upvote-button">
+      <div class="upvote-container" :class="hasLiked()">
+        <button @click="handleUpvote()" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-        <span class="upvote-count" @click="handleUpvote(post.id)"> X </span>
+        <span class="upvote-count"> {{ post.Likes.length }} </span>
       </button>
         
       </div>
@@ -43,17 +43,19 @@ export default {
     },
   },
   methods: {
-    handleUpvote(postId){
-      console.log("+1")
+    handleUpvote(){
+      console.log(this.post.id)
       let curUser = localStorage.getItem("userId")
       if(curUser){
         let data = {
-          requestId: postId,
+          requestId: this.post.id,
           userId: localStorage.getItem("userId")
         }
         axios.post('http://localhost:3000/api/v1/like', data)
           .then((response) => {
             console.log("Response:", response.data);
+            window.location.reload();
+
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -63,13 +65,22 @@ export default {
       }
       
     },
-    upvotePost() {
-      console.log("Upvoting post:", this.post.id);
-    },
     countComments(com) {
       console.log("bob");
       document.getElementById("comment-count").innerHTML = com.length;
     },
+    hasLiked(){
+      console.log(this.post.Likes);
+      let hl = false;
+      this.post.Likes.forEach(element => {
+        if(element.userID == localStorage.getItem("userId")){
+          hl = true;
+        }
+      });
+      if(hl){
+        return "hasLiked"
+      }
+    }
   },
 };
 </script>
@@ -191,5 +202,18 @@ hr {
 
 .fa-lg {
   color: grey;
+}
+
+.hasLiked{
+  background-color: var(--green-primary);
+  pointer-events: none;
+}
+
+.hasLiked .fa-lg{
+  color: white;
+}
+
+.hasLiked span{
+  color: white;
 }
 </style>

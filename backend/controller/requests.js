@@ -1,5 +1,5 @@
-const { where } = require("sequelize");
-const {Request, Comment, User, Status} = require("../models");
+const { Op } = require("sequelize");
+const {Request, Comment, User, Status, Like} = require("../models");
 const axios = require("axios");
 
 
@@ -15,6 +15,9 @@ exports.show = async (req, res) => {
       },
       {
         model: Comment
+      },
+      {
+        model: Like
       }],
     });
     return res.status(200).json(requests);
@@ -57,6 +60,9 @@ exports.showOne = async (req, res) => {
       {
         model: Comment,
         include: User
+      },
+      {
+        model: Like
       }
     ]
   });

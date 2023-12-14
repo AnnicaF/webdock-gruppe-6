@@ -1,6 +1,6 @@
 const express = require("express");
 const requests = require("../controller/requests");
-
+const likes = require("../controller/likes")
 const categories = require("../controller/categories");
 
 const auth = require("../controller/auth");
@@ -20,7 +20,7 @@ router.post("/v1/request/status", requests.changeStatus);
 
 //likes
 
-router.post("/v1/lie");
+router.post("/v1/like", likes.create);
 
 //categories
 router.get("/v1/category", categories.show);

@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       models.User.hasMany(Request);
 
       Request.hasMany(models.Comment, { foreignKey: "requestID" });
+      Request.hasMany(models.Like, { foreignKey: "requestID" });
     }
   }
   Request.init({
