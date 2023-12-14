@@ -51,7 +51,7 @@ export default {
         this.$store.commit("setUserRole", userData.roleID);
 
         this.$store.commit("setAuthentication", {
-          isAuthenticated: true,
+          isAuthenticated: userData.id ? true : false,
           userId: userData.id,
           roleID: userData.roleID,
         });

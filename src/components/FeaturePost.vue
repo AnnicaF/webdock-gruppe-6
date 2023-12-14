@@ -41,7 +41,7 @@ export default {
     title: String,
     bodyText: String,
     description: String,
-    upvoteCount: Number,
+    upvoteCount: Array,
     commentCount: Array,
     user: String,
     status: String,

@@ -5,10 +5,10 @@ import { createStore } from "vuex";
 // Funktion til at hente og parse data fra localStorage
 const getLocalStorageItem = (key) => {
   const item = localStorage.getItem(key);
-  return item ? JSON.parse(item) : null;
+  return item ? false : null;
 };
 
-const isAuthenticated = getLocalStorageItem("isAuthenticated") || false;
+const isAuthenticated =  false;
 const userId = getLocalStorageItem("userId") || null;
 const roleID = getLocalStorageItem("roleID") || null;
 
