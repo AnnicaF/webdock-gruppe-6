@@ -8,12 +8,11 @@
   height: 250px;
   color: white;
   display: flex;
-  margin-top: auto;
   justify-content: center;
   align-items: center;
-  position: absolute;
   bottom: 0;
   width: 100%;
+  margin-top: 18px;
 }
 
 .footer-content {
@@ -22,6 +21,7 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-top: 18px;
 }
 
 .footer-address,
@@ -30,19 +30,32 @@
 }
 
 .footer-address {
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
-.footer-dots {
+.footer-socials {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 20px; /* Adjust the space between icons as needed */
 }
 
-.dot {
-  width: 27px;
-  height: 27px;
-  background-color: white;
+.social-icon {
+  font-size: 27px; /* Adjust icon size as needed */
+  color: white; /* Set the icon color */
+  transition: color 0.3s ease;
+
+  /* If you want circle backgrounds like the dots */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Circle size */
+  height: 40px; /* Circle size */
   border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2); /* Translucent white background */
+}
+
+.social-icon:hover {
+  color: #018647; /* Color change on hover */
+  background-color: white; /* Solid white background on hover */
 }

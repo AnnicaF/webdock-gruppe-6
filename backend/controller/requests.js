@@ -33,9 +33,19 @@ exports.search = async (req, res) => {
 
     const requests = await Request.findAll({
       where: {
-        title: {
-          [Op.like]: `%${searchQuery}%`, // Allows for partial matching
-        },
+        // condition for search where the term is found either in title or the content of the posts
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${searchQuery}%`, // Allows for partial matching
+            },
+          },
+          {
+            bodyText: {
+              [Op.like]: `%${searchQuery}%`,
+            },
+          },
+        ],
       },
       include: [{
         model: User
