@@ -19,16 +19,22 @@ function get() {
 }
 
 function category(cat){
-  axios
-    .get("http://localhost:3000/api/v1/cat", {
-      params: {
-        c: cat
-      },
-    })
-    .then((response) => (requests.value = response.data))
-    .catch((err) => {
-      console.log("error: " + err);
-    });
+  if(!cat){
+    get();
+  }else{
+    axios
+      .get("http://localhost:3000/api/v1/cat", {
+        params: {
+          c: cat,
+        },
+      })
+      .then((response) => {requests.value = response.data;
+        console.log(response)})
+      .catch((err) => {
+        console.log("error: " + err);
+      });
+  }
+  
 }
   
 function search(searchQuery) {

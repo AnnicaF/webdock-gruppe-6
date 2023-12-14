@@ -85,9 +85,11 @@ exports.showOne = async (req, res) => {
 //get request from 1 category
 exports.showCat = async (req, res) => {
   try{
+    const cat = req.query.c
+    console.log(cat);
     const requests = await Request.findAll({
       where: {
-        categoryID: req.params.c,
+        categoryID: cat
       },
       include: [{
         model: User
@@ -97,6 +99,9 @@ exports.showCat = async (req, res) => {
       },
       {
         model: Comment
+      },
+      {
+        model: Like
       }],
     });
     return res.status(200).json(requests);
