@@ -12,7 +12,8 @@ header {
 nav {
   display: flex;
   flex-direction: row;
-  padding: 12px 0;
+  padding-left: 12px;
+  padding-right: 12px;
   width: 100%;
   margin: 0 auto;
   align-items: center;
