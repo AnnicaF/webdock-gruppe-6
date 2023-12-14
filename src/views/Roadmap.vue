@@ -1,7 +1,6 @@
 <script setup>
 import NavBar from "../components/NavBar.vue";
 import RoadMapPost from "../components/RoadMapPost.vue";
-import AdminPanel from "../components/AdminPanel.vue";
 import axios from "axios";
 import { ref } from "vue";
 
@@ -19,7 +18,6 @@ axios
 
 <template>
   <NavBar />
-  <AdminPanel />
   <div>
     <RoadMapPost :posts="requests" />
   </div>
