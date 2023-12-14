@@ -41,7 +41,6 @@ function search(searchQuery) {
     })
     .then((response) => {requests.value = response.data;
       console.log(response)})
-    .then(console.log(requests))
     .catch((err) => {
       console.log("error: " + err);
     });

@@ -39,6 +39,18 @@ exports.search = async (req, res) => {
           [Op.like]: `%${searchQuery}%`, // Allows for partial matching
         },
       },
+      include: [{
+        model: User
+      },
+      {
+        model: Status
+      },
+      {
+        model: Comment
+      },
+      {
+        model: Like
+      }],
     });
     return res.status(200).json(requests);
   } catch (err) {
