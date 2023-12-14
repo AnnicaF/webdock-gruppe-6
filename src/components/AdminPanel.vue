@@ -1,4 +1,7 @@
 <template>
+  <button @click="goBack">
+    back
+  </button>
   <div class="adminContainer">
     <MergePost class="adminButton" />
     <button @click="showDeleteModal" class="adminButton">
@@ -18,7 +21,7 @@
         <div class="modal-content">
           <div class="buttonContainer">
             <p>Are you sure you want to delete this post?</p>
-            <button @click="deletePost" class="deleteButton">Delete</button>
+            <button @click="deletePost(requestId)" class="deleteButton">Delete</button>
             <button @click="closeDeleteModal" class="cancelButton">
               Cancel
             </button>
@@ -47,24 +50,37 @@ const closeDeleteModal = () => {
   isDeleteModalVisible.value = false;
 };
 
-const deletePost = () => {
-  if (!props.requestId) {
-    console.error("No requestId provided");
-    return;
-  }
 
-  axios
-    .delete(`http://localhost:3000/api/v1/request/${props.requestId}`)
-    .then(() => {
-      console.log("Request deleted successfully");
-      closeDeleteModal();
-      // You might want to emit an event or update some state in AdminPanel
-    })
-    .catch((error) => {
-      console.error("Error deleting request", error);
-      // Handle error, e.g., show an error message to the user
-    });
-};
+</script>
+
+<script>
+export default {
+  methods: {
+    goBack() {
+      this.$router.push("/");
+    },
+    deletePost(requestId) {
+      if (!requestId) {
+        console.error("No requestId provided");
+        
+        return;
+      }
+
+      axios
+        .delete(`http://localhost:3000/api/v1/request/${requestId}`)
+        .then(() => {
+          console.log("Request deleted successfully");
+          this.$router.push("/");
+          // You might want to emit an event or update some state in AdminPanel
+        })
+        .catch((error) => {
+          console.error("Error deleting request", error);
+          
+          // Handle error, e.g., show an error message to the user
+        });
+    }
+  }
+}
 </script>
 <style scoped>
 /* Styles for AdminPanel component */

@@ -60,6 +60,7 @@ export default {
       }
     },
     doStatus(status, requestId) {
+      this.$router.push("/")
       const data = {
         status: status,
         feature_request_id: requestId
