@@ -5,7 +5,9 @@
       <font-awesome-icon class="fa-tc" icon="fa-solid fa-trash-can" />Delete
       Post
     </button>
-    <ChangePostStatus class="statusButton" />
+    <ChangePostStatus class="statusButton" 
+    :status="status"
+    :requestId="requestId" />
 
     <!-- Delete Post Modal -->
     <div
@@ -26,13 +28,14 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import ChangePostStatus from "./ChangePostStatus.vue";
 import MergePost from "./MergePost.vue";
 import { ref, defineProps } from "vue";
 import axios from "axios";
 
-const props = defineProps(["requestId"]);
+const props = defineProps(["requestId", "status"]);
 
 const isDeleteModalVisible = ref(false);
 
