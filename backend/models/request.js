@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Request extends Model {
     /**
@@ -19,19 +17,28 @@ module.exports = (sequelize, DataTypes) => {
       Request.belongsTo(models.User, { foreignKey: "userID" });
       models.User.hasMany(Request);
 
+
       Request.hasMany(models.Comment, { foreignKey: "requestID" });
       Request.hasMany(models.Like, { foreignKey: "requestID" });
+
+      Request.hasMany(models.Comment, {
+        foreignKey: "requestID",
+        onDelete: "CASCADE",
+      });
     }
   }
-  Request.init({
-    title: DataTypes.STRING,
-    bodyText: DataTypes.TEXT,
-    statusID: DataTypes.INTEGER,
-    categoryID: DataTypes.INTEGER,
-    userID: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Request',
-  });
+  Request.init(
+    {
+      title: DataTypes.STRING,
+      bodyText: DataTypes.TEXT,
+      statusID: DataTypes.INTEGER,
+      categoryID: DataTypes.INTEGER,
+      userID: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "Request",
+    }
+  );
   return Request;
 };

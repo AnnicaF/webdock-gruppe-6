@@ -19,20 +19,19 @@ function get() {
 }
 
 function category(cat){
-  if(!cat){
+  if (!cat){
     get();
-  }else{
+  } else {
     axios
-      .get("http://localhost:3000/api/v1/cat", {
-        params: {
-          c: cat,
-        },
-      })
-      .then((response) => {requests.value = response.data;
-        console.log(response)})
-      .catch((err) => {
-        console.log("error: " + err);
-      });
+    .get("http://localhost:3000/api/v1/cat", {
+      params: {
+        c: cat
+      },
+    })
+    .then((response) => (requests.value = response.data))
+    .catch((err) => {
+      console.log("error: " + err);
+    });
   }
   
 }

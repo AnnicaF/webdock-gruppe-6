@@ -8,9 +8,10 @@ import axios from "axios";
       <div class="upvote-container" :class="hasLiked()">
         <button @click="handleUpvote()" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
+
         <span class="upvote-count"> {{ post.Likes.length }} </span>
       </button>
-        
+
       </div>
     </div>
     <div class="post">
@@ -19,14 +20,18 @@ import axios from "axios";
         <p class="description">{{ post.bodyText }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text"> {{ post.User.name }} </p>
-          <p class="small-text">{{ new Date(post.createdAt).toLocaleDateString("en-GB") }}</p>
+          <p class="small-text">{{ post.User.name }}</p>
+          <p class="small-text">
+            {{ new Date(post.createdAt).toLocaleDateString("en-GB") }}
+          </p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count" @load="countComments(post.comments)"> {{ post.Comments.length }}</span>
+            <span class="comment-count" @load="countComments(post.comments)">
+              {{ post.Comments.length }}</span
+            >
           </div>
         </div>
       </div>
@@ -93,7 +98,6 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
-
 
 .post-content {
   padding: 20px;
