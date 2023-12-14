@@ -137,7 +137,6 @@ button:hover {
   padding: 12px;
   margin: 0px;
   cursor: pointer;
-  width: 75px;
 }
 
 .dropdown-content li:hover {
