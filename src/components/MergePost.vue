@@ -1,10 +1,8 @@
 <template>
-  <div>
     <button @click="mergePost" class="mergeButton">
       <font-awesome-icon class="fa-cm" icon="fa-solid fa-code-merge" />Merge
       Post
     </button>
-  </div>
 </template>
 
 <script>

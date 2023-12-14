@@ -1,7 +1,4 @@
 <template>
-  <button @click="goBack">
-    back
-  </button>
   <div class="adminContainer">
     <MergePost class="adminButton" />
     <button @click="showDeleteModal" class="adminButton">
@@ -86,7 +83,17 @@ export default {
 /* Styles for AdminPanel component */
 .adminContainer {
   display: flex;
-  align-items: center;
+  justify-content: center;
+}
+
+.adminContainer > div {
+  margin: 5px;
+  transition: 0.25s;
+}
+
+.adminContainer > div:hover {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .adminButton {
@@ -94,7 +101,7 @@ export default {
   font-size: 10px;
   cursor: pointer;
   padding: 12px;
-  margin: 0px;
+  margin: 5px;
   background: white;
   border: 1px solid black;
   border-radius: 5px;
@@ -102,6 +109,8 @@ export default {
 
 button:hover {
   background-color: var(--grey-mid);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .fa-tc {

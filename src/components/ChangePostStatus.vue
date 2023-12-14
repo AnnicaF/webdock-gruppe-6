@@ -79,6 +79,7 @@ export default {
 </script>
 
 <style scoped>
+
 div > .showDropdown ul {
   position: relative;
   display: inline-block;
@@ -100,7 +101,7 @@ div ul {
 .adminButton {
   color: black;
   font-size: 10px;
-  padding: 6px;
+  padding: 12px;
   margin: 0px;
   cursor: pointer;
   background: white;
@@ -115,11 +116,15 @@ button:hover {
   position: relative;
   display: inline-block;
   margin: 0px;
+  overflow: visible;
+  height: 37px;
 }
 
 .dropdown-content {
   color: black;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  background-color: var(--grey-light);
 }
 
 .dropdown-content ul {
@@ -129,9 +134,10 @@ button:hover {
 .dropdown-content li {
   list-style: none;
   text-decoration: none;
-  padding: 18px;
+  padding: 12px;
   margin: 0px;
   cursor: pointer;
+  width: 75px;
 }
 
 .dropdown-content li:hover {
