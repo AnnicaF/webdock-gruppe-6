@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Like.belongsTo(models.User, { foreignKey: "userID" });
+      models.User.hasMany(Like);
+
+      Like.belongsTo(models.Request, { foreignKey: "requestID" });
+      models.User.hasMany(Like);
     }
   }
   Like.init({

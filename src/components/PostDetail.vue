@@ -1,12 +1,17 @@
+<script setup>
+import axios from "axios";
+</script>
 
 <template>
   <div class="post-container">
     <div class="vote">
-      <div class="upvote-container">
-        <button @click="handleUpvote" class="upvote-button">
+      <div class="upvote-container" :class="hasLiked()">
+        <button @click="handleUpvote()" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-        </button>
-        <span class="upvote-count">{{ post.upvoteCount }}</span>
+
+        <span class="upvote-count"> {{ post.Likes.length }} </span>
+      </button>
+
       </div>
     </div>
     <div class="post">
@@ -15,14 +20,18 @@
         <p class="description">{{ post.bodyText }}</p>
         <hr />
         <div class="user_date_box">
-          <p class="small-text">{{ post.user }}</p>
-          <p class="small-text">{{ post.date }}</p>
+          <p class="small-text">{{ post.User.name }}</p>
+          <p class="small-text">
+            {{ new Date(post.createdAt).toLocaleDateString("en-GB") }}
+          </p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ post.commentCount }}</span>
+            <span class="comment-count" @load="countComments(post.comments)">
+              {{ post.Comments.length }}</span
+            >
           </div>
         </div>
       </div>
@@ -39,9 +48,44 @@ export default {
     },
   },
   methods: {
-    upvotePost() {
-      console.log("Upvoting post:", this.post.id);
+    handleUpvote(){
+      console.log(this.post.id)
+      let curUser = localStorage.getItem("userId")
+      if(curUser){
+        let data = {
+          requestId: this.post.id,
+          userId: localStorage.getItem("userId")
+        }
+        axios.post('http://localhost:3000/api/v1/like', data)
+          .then((response) => {
+            console.log("Response:", response.data);
+            window.location.reload();
+
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          })
+      }else{
+        alert("can't")
+      }
+      
     },
+    countComments(com) {
+      console.log("bob");
+      document.getElementById("comment-count").innerHTML = com.length;
+    },
+    hasLiked(){
+      console.log(this.post.Likes);
+      let hl = false;
+      this.post.Likes.forEach(element => {
+        if(element.userID == localStorage.getItem("userId")){
+          hl = true;
+        }
+      });
+      if(hl){
+        return "hasLiked"
+      }
+    }
   },
 };
 </script>
@@ -53,9 +97,6 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-}
-.post {
-  max-height: 200px;
 }
 
 .post-content {
@@ -165,5 +206,18 @@ hr {
 
 .fa-lg {
   color: grey;
+}
+
+.hasLiked{
+  background-color: var(--green-primary);
+  pointer-events: none;
+}
+
+.hasLiked .fa-lg{
+  color: white;
+}
+
+.hasLiked span{
+  color: white;
 }
 </style>

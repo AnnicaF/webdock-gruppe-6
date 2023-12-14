@@ -1,5 +1,5 @@
 @import "./base.css";
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+
 
 header {
   background-color: white;
@@ -13,9 +13,10 @@ nav {
   display: flex;
   flex-direction: row;
   padding: 12px 0;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   align-items: center;
+  justify-content: space-around;
 }
 
 .navigation {
@@ -67,8 +68,6 @@ a:hover {
   align-items: center;
   justify-content: flex-end;
   flex: 0 1 auto;
-
-  margin-left: 1rem;
 }
 
 button {
@@ -111,13 +110,6 @@ button {
 .search-container,
 .logsign {
   flex: 0 1 auto;
-}
-
-.search-container {
-  flex: 0 1 470px; /* flex-grow, flex-shrink, flex-basis */
-  margin-right: auto;
-
-  margin-right: 1rem;
 }
 
 @media (max-width: 768px) {

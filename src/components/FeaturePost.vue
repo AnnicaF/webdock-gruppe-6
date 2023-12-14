@@ -1,10 +1,10 @@
 <template>
   <div class="post-container" :class="getIndexClass(index)">
     <div class="vote">
-      <div class="upvote-container">
-        <button @click="handleUpvote" class="upvote-button">
+      <div class="upvote-container"  :class="hasLiked()">
+        <button class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
-          <span class="upvote-count">{{ upvoteCount }}</span>
+          <span class="upvote-count" >{{ upvoteCount.length }}</span>
         </button>
       </div>
     </div>
@@ -13,35 +13,36 @@
         <h2 class="title">{{ title }}</h2>
         <div class="status-container">
           <div class="status-label" :class="getStatusClass(status)">
-            planned
+            {{ status }}
           </div>
         </div>
         <p class="bodyText">{{ bodyText }}</p>
         <hr />
         <div class="user_date_box">
           <p class="small-text">{{ user }}</p>
-          <p class="small-text">{{ date }}</p>
+          <p class="small-text">
+            {{ new Date(date).toLocaleDateString("en-GB") }}
+          </p>
           <div class="comment-box">
             <font-awesome-icon
               class="comment_icon"
               icon="fa-solid fa-comment"
             />
-            <span class="comment-count">{{ commentCount }}</span>
+            <span class="comment-count">{{ commentCount.length }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
+  <script>
 export default {
   props: {
     title: String,
     bodyText: String,
     description: String,
     upvoteCount: Number,
-    commentCount: Number,
+    commentCount: Array,
     user: String,
     status: String,
     date: String,
@@ -49,7 +50,7 @@ export default {
   },
   methods: {
     handleUpvote() {
-      this.upvoteCount += 1;
+      console.log("+1");
     },
     getStatusClass(status) {
       const statusColorMap = {
@@ -58,17 +59,28 @@ export default {
         completed: "completed-color",
         "in progress": "in-progress-color",
       };
-      return statusColorMap[status] || "default-color";
+      return statusColorMap[status.toLowerCase()] || "default-color";
     },
 
     getIndexClass(index) {
       let i = index % 2;
       return "iswhite-" + i;
     },
+    hasLiked(){
+      console.log(this.upvoteCount);
+      let hl = false;
+      this.upvoteCount.forEach(element => {
+        if(element.userID == localStorage.getItem("userId")){
+          hl = true;
+        }
+      });
+      if(hl){
+        return "hasLiked"
+      }
+    }
   },
 };
 </script>
-
 <style scoped>
 .post-container {
   display: flex;
@@ -82,7 +94,7 @@ export default {
   width: 100%;
 }
 .iswhite-1 {
-  background-color: var(--white);
+  background-color: var(--grey-light);
 }
 
 .title {
@@ -92,6 +104,13 @@ export default {
 
 .bodyText {
   font-size: 16px;
+  font-weight: 100;
+  height: 36px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 hr {
@@ -170,6 +189,7 @@ hr {
   justify-content: center;
   border-radius: 4px;
   border: 1px solid #ccc;
+  z-index: -10;
 }
 
 .upvote-button {
@@ -188,5 +208,18 @@ hr {
 
 .fa-lg {
   color: grey;
+}
+
+.hasLiked{
+  background-color: var(--green-primary);
+  pointer-events: none;
+}
+
+.hasLiked .fa-lg{
+  color: white;
+}
+
+.hasLiked span{
+  color: white;
 }
 </style>

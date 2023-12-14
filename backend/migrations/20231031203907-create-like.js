@@ -10,10 +10,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id"
+        }
       },
       requestID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Requests",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -22,6 +30,26 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      }
+    });
+
+    await queryInterface.addConstraint("Likes", {
+      fields: ["userID"],
+      type: "foreign key",
+      name:"fk_like_user",
+      references: {
+        table: "Users",
+        field: "id"
+      }
+    });
+
+    await queryInterface.addConstraint("Likes", {
+      fields: ["requestID"],
+      type: "foreign key",
+      name:"fk_like_request",
+      references: {
+        table: "Requests",
+        field: "id"
       }
     });
   },

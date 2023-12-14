@@ -22,6 +22,10 @@ module.exports = {
       roleID: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: "Roles",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +34,16 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+      },
+    });
+
+    await queryInterface.addConstraint("Users", {
+      fields: ["roleID"],
+      type: "foreign key",
+      name:"fk_user_role",
+      references: {
+        table: "Roles", // Specify the table name here
+        field: "id"      // Specify the field name here
       },
     });
   },

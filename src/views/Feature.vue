@@ -1,7 +1,6 @@
 <script setup>
 import FilterBar from "../components/FilterBar.vue";
-import MK from "../components/MakeRequest.vue";
-import Nav from "../components/Nav.vue";
+import NavBar from "../components/NavBar.vue";
 import FeaturePost from "../components/FeaturePost.vue";
 import Footer from "../components/Footer.vue";
 
@@ -13,24 +12,44 @@ const requests = ref(null);
 function get() {
   axios
     .get("http://localhost:3000/api/v1/request")
-    .then((response) => (requests.value = response.data))
-    .then(console.log(requests))
-
+    .then((response) => {
+      requests.value = response.data;
+      console.log(response);
+    })
     .catch((err) => {
       console.log("error: " + err);
     });
 }
 
+function category(cat) {
+  if (!cat) {
+    get();
+  } else {
+    axios
+      .get("http://localhost:3000/api/v1/cat", {
+        params: {
+          c: cat,
+        },
+      })
+      .then((response) => (requests.value = response.data))
+      .catch((err) => {
+        console.log("error: " + err);
+      });
+  }
+}
+
 function search(searchQuery) {
   console.log(searchQuery);
   axios
-    .get("http://localhost:3000/api/v1/request/search", {
+    .get("http://localhost:3000/api/v1/search", {
       params: {
         q: searchQuery, // This sends the search term as a query parameter
       },
     })
-    .then((response) => (requests.value = response.data))
-    .then(console.log(requests))
+    .then((response) => {
+      requests.value = response.data;
+      console.log(response);
+    })
     .catch((err) => {
       console.log("error: " + err);
     });
@@ -40,25 +59,26 @@ get();
 </script>
 
 <template>
-  <div class="main-container">
-    <Nav @callsearch="search" />
-    <FilterBar />
-    <div class="content">
-      <div class="box">
-        <button
-          v-for="(request, index) in requests"
-          :key="index"
-          @click="navigateToDetail(request)"
-        >
-          <FeaturePost
-            :title="request.title"
-            :bodyText="request.bodyText"
-            :index="index"
-          />
-        </button>
-      </div>
-    </div>
-    <Footer />
+  <NavBar @callsearch="search" />
+  <FilterBar @callLoad="get" @callCategory="category" />
+  <div class="box">
+    <button
+      v-for="(request, index) in requests"
+      :key="index"
+      @click="navigateToDetail(request)"
+    >
+      <feature-post
+        :roleID="roleID"
+        :title="request.title"
+        :bodyText="request.bodyText"
+        :index="index"
+        :status="request.Status.name"
+        :date="request.createdAt"
+        :commentCount="request.Comments"
+        :user="request.User.name"
+        :upvoteCount="request.Likes"
+      />
+    </button>
   </div>
 </template>
 
@@ -67,6 +87,12 @@ export default {
   components: {
     FeaturePost,
     Footer,
+  },
+  data() {
+    return {
+      // Få brugerens rolle fra din backend eller hvor du har det gemt efter log ind
+      roleID: 1, // 1 betyder admin i dit tilfælde
+    };
   },
   methods: {
     navigateToDetail(request) {
@@ -96,6 +122,7 @@ button {
   background: none;
   text-align: left;
   cursor: pointer;
+  margin: 0px;
 }
 
 .box {
