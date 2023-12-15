@@ -1,16 +1,18 @@
 <script setup>
-  import axios from "axios";
-  import { ref } from "vue";
+import axios from "axios";
+import { mapMutations, mapState } from "vuex";
+import { ref } from "vue";
 
-  const categories = ref(null);
+const categories = ref(null);
 
-  axios.get("http://localhost:3000/api/v1/category")
-    .then((response) => (categories.value = response.data))
-    .then(console.log(categories))
+axios
+  .get("http://lynge.vps.webdock.cloud:3000/api/v1/category")
+  .then((response) => (categories.value = response.data))
+  .then(console.log(categories))
 
-    .catch((err) => {
-      console.log("error: " + err);
-    });
+  .catch((err) => {
+    console.log("error: " + err);
+  });
 </script>
 
 <template>
@@ -27,7 +29,7 @@
             <option class="option_list" value="">Select a category</option>
             <option
               v-for="(category, index) in categories"
-              :value="category.id+','+category.name"
+              :value="category.id + ',' + category.name"
               :key="index"
             >
               {{ category.name }}
@@ -51,10 +53,6 @@
 </template>
 
 <script>
-import axios from "axios";
-import Feature from "../views/Feature.vue";
-import { mapMutations, mapState } from "vuex";
-
 export default {
   name: "Modal",
   methods: {
@@ -67,7 +65,7 @@ export default {
       modal.classList.remove("show");
     },
     ...mapMutations(["setAuthentication"]),
-    
+
     createPost() {
       // Tjek om brugeren er logget ind baseret på local storage
       const isAuthenticated =
@@ -81,17 +79,14 @@ export default {
           bodyText: document.getElementById("description").value,
           userId: userId,
           categoryID: categoryBoth[0],
-          categoryName: categoryBoth[1]
+          categoryName: categoryBoth[1],
         };
 
         axios
-          .post("http://localhost:3000/api/v1/request", data)
+          .post("http://lynge.vps.webdock.cloud:3000/api/v1/request", data)
           .then((response) => {
             console.log("Response:", response.data);
-            // this.setAuthentication({
-            //   isAuthenticated: true,
-            //   userId: response.data.userId,
-            // });
+
             this.$parent.$emit("callLoad");
           })
           .catch((error) => {
@@ -102,7 +97,6 @@ export default {
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
       } else {
-        // Vis en popup eller gør noget andet for at informere brugeren om at logge ind
         alert("Du skal logge ind for at oprette en post");
       }
     },

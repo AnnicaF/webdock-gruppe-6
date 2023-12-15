@@ -1,4 +1,3 @@
-
 <template>
   <div class="section">
     <div class="comment-box" v-if="isAuthenticated">

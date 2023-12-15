@@ -1,9 +1,8 @@
 <script setup>
-import FilterBar from "../components/FilterBar.vue";
-import NavBar from "../components/NavBar.vue";
-import FeaturePost from "../components/FeaturePost.vue";
-import Footer from "../components/Footer.vue";
-
+import FilterBar from "@/components/FilterBar.vue";
+import NavBar from "@/components/NavBar.vue";
+import FeaturePost from "@/components/FeaturePost.vue";
+import Footer from "@/components/Footer.vue";
 import axios from "axios";
 import { ref } from "vue";
 
@@ -11,7 +10,7 @@ const requests = ref(null);
 
 function get() {
   axios
-    .get("http://localhost:3000/api/v1/request")
+    .get("http://lynge.vps.webdock.cloud:3000/api/v1/request")
     .then((response) => {
       requests.value = response.data;
       console.log(response);
@@ -26,7 +25,7 @@ function category(cat) {
     get();
   } else {
     axios
-      .get("http://localhost:3000/api/v1/cat", {
+      .get("http://lynge.vps.webdock.cloud:3000/api/v1/cat", {
         params: {
           c: cat,
         },
@@ -41,9 +40,9 @@ function category(cat) {
 function search(searchQuery) {
   console.log(searchQuery);
   axios
-    .get("http://localhost:3000/api/v1/search", {
+    .get("http://lynge.vps.webdock.cloud:3000/api/v1/search", {
       params: {
-        q: searchQuery, // This sends the search term as a query parameter
+        q: searchQuery,
       },
     })
     .then((response) => {
@@ -80,6 +79,7 @@ get();
       />
     </button>
   </div>
+  <Footer/>
 </template>
 
 <script>
@@ -90,8 +90,7 @@ export default {
   },
   data() {
     return {
-      // Få brugerens rolle fra din backend eller hvor du har det gemt efter log ind
-      roleID: 1, // 1 betyder admin i dit tilfælde
+      roleID: 1,
     };
   },
   methods: {

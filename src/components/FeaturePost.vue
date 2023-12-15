@@ -108,7 +108,7 @@ export default {
   height: 36px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-line-clamp: 2; 
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
