@@ -26,5 +26,10 @@
     "eslint": "^8.53.0",
     "eslint-plugin-vue": "^9.18.1",
     "vite": "^4.5.0"
-  }
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": ".eslintrc.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
