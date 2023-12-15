@@ -209,11 +209,13 @@ exports.deleteRequest = async (req, res) => {
 
   try {
     // Find anmodningen baseret på requestId med tilknyttede kommentarer
-    const request = await Request.findByPk(requestId, { include: Comment });
+    const request = await Request.findByPk(requestId, { include: [Comment, Like] });
 
     if (!request) {
       return res.status(404).json({ error: "Anmodning ikke fundet" });
     }
+     // Delete associated likes
+     await Like.destroy({ where: { requestID: requestId } });
 
     await Comment.destroy({ where: { requestID: requestId } });
 

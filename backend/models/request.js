@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
 
 
       Request.hasMany(models.Comment, { foreignKey: "requestID" });
-      Request.hasMany(models.Like, { foreignKey: "requestID" });
+      Request.hasMany(models.Like, { foreignKey: "requestID",
+      onDelete: "CASCADE", });
 
       Request.hasMany(models.Comment, {
         foreignKey: "requestID",

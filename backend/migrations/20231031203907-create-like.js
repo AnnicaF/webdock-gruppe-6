@@ -40,7 +40,8 @@ module.exports = {
       references: {
         table: "Users",
         field: "id"
-      }
+      },
+      onDelete: "CASCADE",
     });
 
     await queryInterface.addConstraint("Likes", {
@@ -50,7 +51,8 @@ module.exports = {
       references: {
         table: "Requests",
         field: "id"
-      }
+      },
+      onDelete: "CASCADE",
     });
   },
   async down(queryInterface, Sequelize) {
