@@ -1,11 +1,5 @@
 <script setup>
-import {
-  ref,
-  onMounted,
-  getCurrentInstance,
-  defineExpose,
-  computed,
-} from "vue";
+import { ref, onMounted, getCurrentInstance, computed } from "vue";
 import axios from "axios";
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
@@ -112,7 +106,7 @@ export default {
     const fetchPostDetails = async (requestId) => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/request/${requestId}`
+          `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}`
         );
         console.log("Server response:", response.data);
         selectedPost.value = response.data;
