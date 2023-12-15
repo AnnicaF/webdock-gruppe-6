@@ -12,7 +12,7 @@ export default {
 
     async redirectToWebDock() {
       const encodedURL = encodeURIComponent(
-        "http://lynge.vps.webdock.cloud:3000/"
+        "http://lynge.vps.webdock.cloud:5173/"
       );
       const redirectURL = `https://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=${encodedURL}`;
       window.location.href = redirectURL;
