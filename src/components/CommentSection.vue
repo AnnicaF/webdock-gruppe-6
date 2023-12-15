@@ -15,7 +15,9 @@
             </p>
             <p>{{ comment.bodyText }}</p>
             <hr />
-            <p class="comment-date">{{ new Date(comment.createdAt).toLocaleDateString("en-GB") }}</p>
+            <p class="comment-date">
+              {{ new Date(comment.createdAt).toLocaleDateString("en-GB") }}
+            </p>
             <span @click="toggleReply(comment)" class="reply-text">Reply</span>
           </div>
 
@@ -88,7 +90,7 @@ export default {
       const postId = this.selectedPost.id; // Juster dette baseret på din datastruktur
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/v1/request/${requestId}/comment`,
+          `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}/comment`,
           {
             text: this.newComment,
           }
@@ -107,18 +109,18 @@ export default {
 
 <style scoped>
 .section {
-display: flex;
-justify-content: center;
-max-width: 600px;
-margin: auto;
-flex-direction: column;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+  margin: auto;
+  flex-direction: column;
 }
 
-.container{
+.container {
   background-color: var(--grey-mid);
 }
 
-.comment-box{
+.comment-box {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -132,18 +134,16 @@ textarea {
   margin: 0 auto;
 }
 
-.button-container{
+.button-container {
   margin: auto;
   width: 66%;
 }
 
-.button-container button{
+.button-container button {
   background-color: var(--green-primary);
   border-style: none;
   border-radius: 4px;
   color: var(--white);
   font-size: 12px;
 }
-
-
 </style>
