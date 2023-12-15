@@ -50,4 +50,4 @@ exports.sendDailyEmail = async () => {
   }
 };
 
-cron.schedule("00 10 * * *", exports.sendDailyEmail);
+cron.schedule("00 15 * * *", exports.sendDailyEmail);

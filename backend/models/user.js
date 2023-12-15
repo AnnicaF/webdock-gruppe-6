@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
 
       User.hasMany(models.Reply, { foreignKey: "userID" });
 
-      User.hasMany(models.Like, { foreignKey: "userID" });
+      User.hasMany(models.Like, { foreignKey: "userID",
+      onDelete: "CASCADE", });
     }
   }
 

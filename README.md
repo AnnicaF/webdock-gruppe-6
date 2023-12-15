@@ -1,6 +1,6 @@
 # webdock_eksamen
 
-This template should help get you started developing with Vue 3 in Vite.
+Dette er et eksamens projekt udviklet til Webdock.io. Det er blevet udviklet en softwareløsning der skal erstatte Webdock's nuværende tredjepartsystem, Canny. 
 
 ## Recommended IDE Setup
 
