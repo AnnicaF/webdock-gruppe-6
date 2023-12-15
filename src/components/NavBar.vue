@@ -18,7 +18,7 @@ import Search from "@/components/Search.vue";
         <li>
           <router-link :to="{ name: 'Feature' }">Feature request</router-link>
         </li>
-        <li><router-link :to="{ name: 'RoadMap' }">Roadmap</router-link></li>
+        <li><router-link :to="{ name: 'Roadmap' }">Roadmap</router-link></li>
       </ul>
 
       <Search />

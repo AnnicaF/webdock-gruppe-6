@@ -19,8 +19,8 @@ const router = createRouter({
     },
     {
       path: "/roadmap",
-      name: "RoadMap",
-      component: RoadMap,
+      name: "Roadmap",
+      component: Roadmap,
     },
   ],
 });

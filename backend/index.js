@@ -23,20 +23,7 @@ module.exports = { sequelize, connectToDb };
 const app = express();
 const port = 3000;
 
-const allowedOrigins = ["https://webdock-fb627.web.app/"];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  })
-);
-
+app.use(cors());
 
 app.use(express.json());
 app.use("/api", apiRoutes);
