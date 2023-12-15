@@ -1,12 +1,13 @@
 <script setup>
 import Modal from "../components/Modal.vue";
-
 import axios from "axios";
+import { mapState } from "vuex";
 import { ref } from "vue";
 
 const categories = ref(null);
 
-axios.get("http://localhost:3000/api/v1/category")
+axios
+  .get("http://lynge.vps.webdock.cloud:3000/api/v1/category")
   .then((response) => (categories.value = response.data))
   .then(console.log(categories))
 
@@ -64,8 +65,6 @@ axios.get("http://localhost:3000/api/v1/category")
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   data() {
     return {
@@ -91,8 +90,11 @@ export default {
       this.activeTab = tabName;
     },
     selectCategory() {
-      this.$emit("callCategory", document.getElementById("categorySelect").value);
-    }
+      this.$emit(
+        "callCategory",
+        document.getElementById("categorySelect").value
+      );
+    },
   },
 };
 </script>
@@ -138,7 +140,7 @@ button {
   cursor: pointer;
 }
 
-button:hover{
+button:hover {
   background-color: var(--white);
   color: var(--green-primary);
 }

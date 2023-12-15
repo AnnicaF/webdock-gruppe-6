@@ -1,15 +1,10 @@
 <script setup>
-import {
-  ref,
-  onMounted,
-  getCurrentInstance,
-  defineExpose,
-  computed,
-} from "vue";
+import { ref, onMounted, getCurrentInstance, computed } from "vue";
 import axios from "axios";
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
 import NavBar from "@/components/NavBar.vue";
+import Footer from "@/components/Footer.vue";
 import AdminPanel from "@/components/AdminPanel.vue";
 import { useStore } from "vuex";
 
@@ -23,13 +18,12 @@ const loading = ref(true);
 const fetchPostDetails = async (requestId) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/v1/request/${requestId}`
+      `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}`
     );
     selectedPost.value = response.data;
     console.log(selectedPost.value);
   } catch (error) {
     console.error("Error fetching post details:", error);
-    // Håndter fejl (f.eks. omdirigere til en 404-side)
   } finally {
     loading.value = false;
   }
@@ -43,16 +37,14 @@ const doComment = (newComment) => {
   };
   axios
     .post(
-      `http://localhost:3000/api/v1/request/${selectedPost.value.id}/comment`,
+      `http://lynge.vps.webdock.cloud:3000/api/v1/request/${selectedPost.value.id}/comment`,
       data
     )
     .then((response) => {
-      // Handle the success response
       console.log("Response:", response.data);
       fetchPostDetails(selectedPost.value.id);
     })
     .catch((error) => {
-      // Handle the error
       console.error("Error:", error);
     });
 };
@@ -67,14 +59,16 @@ onMounted(() => {
   <div>
     <NavBar />
     <template v-if="loading">
-      <!-- Vis en indlæsningsindikator her -->
       <p>Loading...</p>
     </template>
     <template v-else>
       <!-- Vis PostDetail og CommentSection her -->
       <PostDetail :post="selectedPost" />
       <template v-if="isAdmin && selectedPost">
-        <AdminPanel :requestId="selectedPost.id" :status="selectedPost.StatusId"/>
+        <AdminPanel
+          :requestId="selectedPost.id"
+          :status="selectedPost.StatusId"
+        />
       </template>
       <CommentSection
         :comments="selectedPost.Comments.reverse()"
@@ -83,6 +77,7 @@ onMounted(() => {
       />
     </template>
   </div>
+  <Footer />
 </template>
 
 <script>
@@ -103,7 +98,6 @@ export default {
   },
 
   setup() {
-    // Brug computed for at overvåge brugerens rolle og bestemme, om de er admin
     const isAdmin = computed(() => store.state.roleID === 1);
 
     const selectedPost = ref(null);
@@ -112,13 +106,12 @@ export default {
     const fetchPostDetails = async (requestId) => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/request/${requestId}`
+          `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}`
         );
         console.log("Server response:", response.data);
         selectedPost.value = response.data;
       } catch (error) {
         console.error("Error fetching post details:", error);
-        // Handle error (e.g., redirect to a 404 page)
       } finally {
         loading.value = false;
       }
@@ -134,7 +127,6 @@ export default {
     });
 
     const addReply = ({ comment, replyText }) => {
-      // Add the reply to the 'Replies' array in the respective comment
       comment.Replies = comment.Replies || [];
       comment.Replies.push({
         id: comment.Replies.length + 1,

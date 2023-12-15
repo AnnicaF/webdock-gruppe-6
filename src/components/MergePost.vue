@@ -20,7 +20,7 @@ export default {
       const post1Response = await this.fetchPost(1);
       const post2Response = await this.fetchPost(2);
 
-      // Handle errors or loading state as needed
+    
       if (post1Response.error || post2Response.error) {
         console.error("Failed to fetch posts");
         return;

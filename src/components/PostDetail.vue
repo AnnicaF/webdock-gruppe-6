@@ -9,9 +9,8 @@ import axios from "axios";
         <button @click="handleUpvote()" class="upvote-button">
           <font-awesome-icon class="fa-lg" icon="fa-solid fa-caret-up" />
 
-        <span class="upvote-count"> {{ post.Likes.length }} </span>
-      </button>
-
+          <span class="upvote-count"> {{ post.Likes.length }} </span>
+        </button>
       </div>
     </div>
     <div class="post">
@@ -53,43 +52,41 @@ export default {
     ...mapState(["isAuthenticated"]),
   },
   methods: {
-    handleUpvote(){
-      if(this.isAuthenticated){
+    handleUpvote() {
+      if (this.isAuthenticated) {
         let data = {
           requestId: this.post.id,
-          userId: localStorage.getItem("userId")
-        }
-        axios.post('http://localhost:3000/api/v1/like', data)
+          userId: localStorage.getItem("userId"),
+        };
+        axios
+          .post("http://lynge.vps.webdock.cloud:3000/api/v1/like", data)
           .then((response) => {
             console.log("Response:", response.data);
             this.$router.go();
-
           })
           .catch((error) => {
             console.error("Error:", error);
-          })
-        
-      }else{
-        alert("Du skal logge ind for at upvote en post.")
+          });
+      } else {
+        alert("Du skal logge ind for at upvote en post.");
       }
-      
     },
     countComments(com) {
       console.log("bob");
       document.getElementById("comment-count").innerHTML = com.length;
     },
-    hasLiked(){
+    hasLiked() {
       console.log(this.post.Likes);
       let hl = false;
-      this.post.Likes.forEach(element => {
-        if(element.userID == localStorage.getItem("userId")){
+      this.post.Likes.forEach((element) => {
+        if (element.userID == localStorage.getItem("userId")) {
           hl = true;
         }
       });
-      if(hl){
-        return "hasLiked"
+      if (hl) {
+        return "hasLiked";
       }
-    }
+    },
   },
 };
 </script>
@@ -212,16 +209,16 @@ hr {
   color: grey;
 }
 
-.hasLiked{
+.hasLiked {
   background-color: var(--green-primary);
   pointer-events: none;
 }
 
-.hasLiked .fa-lg{
+.hasLiked .fa-lg {
   color: white;
 }
 
-.hasLiked span{
+.hasLiked span {
   color: white;
 }
 </style>

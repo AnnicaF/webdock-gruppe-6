@@ -11,7 +11,9 @@ export default {
     ...mapMutations(["setAuthentication", "setUserRole"]),
 
     async redirectToWebDock() {
-      const encodedURL = encodeURIComponent("http://localhost:5173");
+      const encodedURL = encodeURIComponent(
+        "http://lynge.vps.webdock.cloud:3000/"
+      );
       const redirectURL = `https://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=${encodedURL}`;
       window.location.href = redirectURL;
     },
@@ -29,7 +31,7 @@ export default {
 
         // Send et POST request til authenticate med ssoToken til vores backend endpoint
         const response = await fetch(
-          "http://localhost:3000/api/v1/authenticate",
+          "http://lynge.vps.webdock.cloud:3000/api/v1/authenticate",
           {
             method: "POST",
             headers: {
@@ -56,7 +58,6 @@ export default {
           roleID: userData.roleID,
         });
 
-        //localStorage.setItem("userId", userData.id);
         console.log("User data sent successfully.");
       } catch (error) {
         console.error("Error fetching data:", error);

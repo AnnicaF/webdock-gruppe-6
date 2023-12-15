@@ -1,15 +1,12 @@
 <script setup>
-  import axios from "axios";
+import axios from "axios";
 </script>
 
 <template>
   <div :class="{ showDropdown: showDropdown }" class="dropdown-container">
     <button @click="toggleDropdown" class="adminButton">
-      {{dropdownItems[status-2] || "Under Reveiw"}}
-      <font-awesome-icon
-        class="fa-cd"
-        icon="fa-solid fa-caret-down"
-      />
+      {{ dropdownItems[status - 2] || "Under Reveiw" }}
+      <font-awesome-icon class="fa-cd" icon="fa-solid fa-caret-down" />
     </button>
     <div
       v-show="showDropdown"
@@ -17,7 +14,11 @@
       class="dropdown-content"
     >
       <ul>
-        <li v-for="(item, index) in dropdownItems" :key="index" @click="doStatus(item, requestId)">
+        <li
+          v-for="(item, index) in dropdownItems"
+          :key="index"
+          @click="doStatus(item, requestId)"
+        >
           {{ item }}
         </li>
       </ul>
@@ -35,7 +36,7 @@ export default {
   },
   props: {
     status: String,
-    requestId: Number
+    requestId: Number,
   },
   mounted() {
     document.addEventListener("click", this.closeDropdownOnOutsideClick);
@@ -48,13 +49,9 @@ export default {
       this.showDropdown = !this.showDropdown;
     },
     handleDropdownItemClick() {
-      // Handle dropdown item click logic here
-      // You can use this method to perform actions when a dropdown item is clicked
-      
-      this.showDropdown = false; // Close the dropdown after an item is clicked
+      this.showDropdown = false;
     },
     closeDropdownOnOutsideClick(event) {
-      // Close dropdown if the click is outside the dropdown
       if (this.showDropdown && !this.$el.contains(event.target)) {
         this.showDropdown = false;
       }
@@ -62,24 +59,22 @@ export default {
     doStatus(status, requestId) {
       const data = {
         status: status,
-        feature_request_id: requestId
-      }
-      axios.post("http://localhost:3000/api/v1/request/status", data)
+        feature_request_id: requestId,
+      };
+      axios
+        .post("http://lynge.vps.webdock.cloud:3000/api/v1/request/status", data)
         .then((res) => {
-          console.log("successful: ", res)
-        }
-        )
+          console.log("successful: ", res);
+        })
         .catch((err) => {
-          console.log("an error as occurred: ", err)
-        }
-        )
-    }
+          console.log("an error as occurred: ", err);
+        });
+    },
   },
 };
 </script>
 
 <style scoped>
-
 div > .showDropdown ul {
   position: relative;
   display: inline-block;
@@ -140,6 +135,6 @@ button:hover {
 }
 
 .dropdown-content li:hover {
-  background-color: #f1f1f1; /* Grey background on hover */
+  background-color: #f1f1f1;
 }
 </style>
