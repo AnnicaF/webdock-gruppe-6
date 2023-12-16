@@ -73,7 +73,7 @@ fetchPostDetails();
       />
     </template>
   </div>
-  <Footer />
+  <!-- <Footer /> -->
 </template>
 
 <script>
