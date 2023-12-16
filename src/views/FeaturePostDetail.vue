@@ -15,7 +15,8 @@ const { proxy } = getCurrentInstance();
 const selectedPost = ref(null);
 const loading = ref(true);
 
-const fetchPostDetails = async (requestId) => {
+const fetchPostDetails = async () => {
+  const requestId = proxy.$route.params.requestId;
   try {
     const response = await axios.get(
       `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}`
@@ -48,11 +49,7 @@ const doComment = (newComment) => {
       console.error("Error:", error);
     });
 };
-
-onMounted(() => {
-  const requestId = proxy.$route.params.requestId;
-  fetchPostDetails(requestId);
-});
+fetchPostDetails();
 </script>
 
 <template>
@@ -71,9 +68,8 @@ onMounted(() => {
         />
       </template>
       <CommentSection
-        :comments="selectedPost.Comments.reverse()"
+        :comments="selectedPost.Comments"
         @addComment="doComment"
-        @Reply="addReply"
       />
     </template>
   </div>
@@ -89,6 +85,7 @@ import { ref, onMounted, computed } from "vue";
 export default {
   props: {
     roleID: Number,
+    requestId: Number
   },
   components: {
     PostDetail,
@@ -97,53 +94,6 @@ export default {
     AdminPanel,
   },
 
-  setup() {
-    const isAdmin = computed(() => store.state.roleID === 1);
-
-    const selectedPost = ref(null);
-    const loading = ref(true);
-
-    const fetchPostDetails = async (requestId) => {
-      try {
-        const response = await axios.get(
-          `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}`
-        );
-        console.log("Server response:", response.data);
-        selectedPost.value = response.data;
-      } catch (error) {
-        console.error("Error fetching post details:", error);
-      } finally {
-        loading.value = false;
-      }
-    };
-
-    onMounted(async () => {
-      try {
-        const requestId = proxy.$route.params.requestId;
-        await fetchPostDetails(requestId);
-      } catch (error) {
-        console.error("Error during component initialization:", error);
-      }
-    });
-
-    const addReply = ({ comment, replyText }) => {
-      comment.Replies = comment.Replies || [];
-      comment.Replies.push({
-        id: comment.Replies.length + 1,
-        user: "Annica Frederiksen",
-        text: replyText,
-        date: new Date().toLocaleDateString(),
-      });
-    };
-
-    return {
-      selectedPost,
-      loading,
-      doComment,
-      addReply,
-      isAdmin,
-    };
-  },
 };
 </script>
 

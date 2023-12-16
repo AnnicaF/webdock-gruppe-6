@@ -18,29 +18,7 @@
             <p class="comment-date">
               {{ new Date(comment.createdAt).toLocaleDateString("en-GB") }}
             </p>
-            <span @click="toggleReply(comment)" class="reply-text">Reply</span>
           </div>
-
-          <div v-if="comment.replyActive" class="reply-box">
-            <textarea
-              v-model="comment.replyText"
-              placeholder="Add a comment"
-            ></textarea>
-            <button @click="sendReply(comment)">Reply</button>
-          </div>
-
-          <ul v-if="comment.Replies && comment.Replies.length > 0">
-            <li v-for="reply in comment.Replies" :key="reply.id">
-              <div class="comment-content">
-                <p>
-                  <strong>{{ reply.user }}</strong>
-                </p>
-                <p>{{ reply.text }}</p>
-                <hr />
-                <p class="comment-date">{{ reply.date }}</p>
-              </div>
-            </li>
-          </ul>
         </li>
       </ul>
       <p v-else>No comments yet.</p>
@@ -74,17 +52,6 @@ export default {
       console.log(this.newComment);
       // Clear the input field
       this.newComment = "";
-    },
-    toggleReply(comment) {
-      comment.replyActive = !comment.replyActive;
-      if (!comment.replyActive) {
-        comment.replyText = "";
-      }
-    },
-    sendReply(comment) {
-      this.$emit("Reply", { comment, replyText: comment.replyText });
-      comment.replyText = "";
-      comment.replyActive = false;
     },
     async handleAddComment() {
       const postId = this.selectedPost.id; // Juster dette baseret på din datastruktur
