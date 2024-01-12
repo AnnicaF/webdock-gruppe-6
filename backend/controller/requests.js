@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const {Request, Comment, User, Status, Like} = require("../models");
+const {Request, Comment, User, Status, Like, Reply} = require("../models");
 const axios = require("axios");
 
 exports.show = async (req, res) => {
@@ -66,7 +66,7 @@ exports.search = async (req, res) => {
     return res.send("Error");
   }
 }
-
+//--------------------------------------------------
 //get one request (+ user + comment)
 exports.showOne = async (req, res) => {
   const request = await Request.findOne({
@@ -79,7 +79,13 @@ exports.showOne = async (req, res) => {
       },
       {
         model: Comment,
-        include: User
+        include: [{
+          model: User
+        },
+        {
+          model: Reply,
+          include: User
+        }]
       },
       {
         model: Like
@@ -203,6 +209,28 @@ exports.createComment = async (req, res) => {
     return res.json(err);
   }
 };
+
+//-----------------------------------------------------
+//create new reply
+exports.createReply = async (req, res) => {
+  const {bodyText, userID, commentID} = req.body
+
+  const newReply = Reply.build({
+    bodyText: bodyText,
+    userID: userID,
+    commentID: commentID,
+  });
+
+  try {
+    await newReply.save();
+
+    return res.status(201).json(newReply);
+  } catch (err) {
+    return res.json(err);
+  }
+}
+
+
 
 exports.deleteRequest = async (req, res) => {
   const requestId = req.params.requestId;

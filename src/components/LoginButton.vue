@@ -12,7 +12,7 @@ export default {
 
     async redirectToWebDock() {
       const encodedURL = encodeURIComponent(
-        "http://lynge.vps.webdock.cloud:5173/"
+        "http://localhost:5173/"
       );
       const redirectURL = `https://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=${encodedURL}`;
       window.location.href = redirectURL;
@@ -31,7 +31,7 @@ export default {
 
         // Send et POST request til authenticate med ssoToken til vores backend endpoint
         const response = await fetch(
-          "http://lynge.vps.webdock.cloud:3000/api/v1/authenticate",
+          "http://localhost:3000/api/v1/authenticate",
           {
             method: "POST",
             headers: {

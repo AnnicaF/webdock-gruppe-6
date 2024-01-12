@@ -12,6 +12,9 @@ router.get("/v1/search", requests.search);
 
 router.post("/v1/request", requests.create);
 router.post("/v1/request/:id/comment", requests.createComment);
+    //--------------------------------------------
+    //create a reply to a specific comment
+router.post("/v1/request/comment/:id/reply", requests.createReply)
 
 router.delete("/v1/request/:requestId", requests.deleteRequest);
 

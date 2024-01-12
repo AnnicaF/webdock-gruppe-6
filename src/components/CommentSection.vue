@@ -1,3 +1,9 @@
+<script setup>
+import Replies from "../components/Replies.vue"
+
+
+</script>
+
 <template>
   <div class="section">
     <div class="comment-box" v-if="isAuthenticated">
@@ -15,9 +21,12 @@
             </p>
             <p>{{ comment.bodyText }}</p>
             <hr />
-            <p class="comment-date">
-              {{ new Date(comment.createdAt).toLocaleDateString("en-GB") }}
-            </p>
+            
+            <Replies
+            :date="comment.createdAt"
+            :replies="comment.Replies"
+            :commentId="comment.id"
+            />
           </div>
         </li>
       </ul>
@@ -57,7 +66,7 @@ export default {
       const postId = this.selectedPost.id; // Juster dette baseret på din datastruktur
       try {
         const response = await axios.post(
-          `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}/comment`,
+          `http://localhost:3000/api/v1/request/${requestId}/comment`,
           {
             text: this.newComment,
           }
@@ -113,4 +122,7 @@ textarea {
   color: var(--white);
   font-size: 12px;
 }
+
+
+
 </style>

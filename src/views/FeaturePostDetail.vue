@@ -1,12 +1,13 @@
 <script setup>
 import { ref, onMounted, getCurrentInstance, computed } from "vue";
-import axios from "axios";
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
 import AdminPanel from "@/components/AdminPanel.vue";
 import { useStore } from "vuex";
+
+import axios from "axios";
 
 const store = useStore();
 const isAdmin = computed(() => store.state.roleID === 1);
@@ -19,7 +20,7 @@ const fetchPostDetails = async () => {
   const requestId = proxy.$route.params.requestId;
   try {
     const response = await axios.get(
-      `http://lynge.vps.webdock.cloud:3000/api/v1/request/${requestId}`
+      `http://localhost:3000/api/v1/request/${requestId}`
     );
     selectedPost.value = response.data;
     console.log(selectedPost.value);
@@ -38,7 +39,7 @@ const doComment = (newComment) => {
   };
   axios
     .post(
-      `http://lynge.vps.webdock.cloud:3000/api/v1/request/${selectedPost.value.id}/comment`,
+      `http://localhost:3000/api/v1/request/${selectedPost.value.id}/comment`,
       data
     )
     .then((response) => {
@@ -70,6 +71,7 @@ fetchPostDetails();
       <CommentSection
         :comments="selectedPost.Comments"
         @addComment="doComment"
+        @callLoad="fetchPostDetails"
       />
     </template>
   </div>
@@ -79,7 +81,6 @@ fetchPostDetails();
 <script>
 import PostDetail from "@/components/PostDetail.vue";
 import CommentSection from "@/components/CommentSection.vue";
-import axios from "axios";
 import { ref, onMounted, computed } from "vue";
 
 export default {
